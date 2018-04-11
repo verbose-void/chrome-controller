@@ -15,30 +15,62 @@ function handleRightThumbstick( horizontalAxis, verticalAxis, controller ) {
 }
 
 function handleLeftThumbstick( horizontalAxis, verticalAxis, controller ) {
+	let horizontalChanged = false;
+
 	// handle infinite polling
 	switch( horizontalAxis ) {
 		case 1: 
-			if ( holdStatus.leftThumbstick == "right" ) {
+			if ( holdStatus.leftThumbstickHorizontal == "right" ) {
 				// console.log( "held right" );
 				return;
 			}
 			// console.log( "pressed right" );
-			holdStatus.leftThumbstick = "right";
+			holdStatus.leftThumbstickHorizontal = "right";
 			currentElement.index++;
+			horizontalChanged = true;
 			break;
 		case -1:
-			if ( holdStatus.leftThumbstick == "left" ) {
+			if ( holdStatus.leftThumbstickHorizontal == "left" ) {
 				// console.log( "held left" );
 				return;
 			}
 			// console.log( "pressed left" );
-			holdStatus.leftThumbstick = "left";
+			holdStatus.leftThumbstickHorizontal = "left";
 			currentElement.index--;
+			horizontalChanged = true;
 			break;
 		default:
-			delete holdStatus.leftThumbstick;
+			delete holdStatus.leftThumbstickHorizontal;
 			// console.log( "released" );
-			return;
+	}
+
+	let vidsPerRow = Math.floor( getContainerWidth( currentElement.element ) / 210 );
+
+	switch( verticalAxis ) {
+		case 1: 
+			if ( holdStatus.leftThumbstickVertical == "down" ) {
+				// console.log( "held down" );
+				return;
+			}
+			// console.log( "pressed down" );
+			holdStatus.leftThumbstickVertical = "down";
+			currentElement.index += vidsPerRow;
+			break;
+		case -1:
+			if ( holdStatus.leftThumbstickVertical == "up" ) {
+				// console.log( "held up" );
+				return;
+			}
+			// console.log( "pressed up" );
+			holdStatus.leftThumbstickVertical = "up";
+			currentElement.index -= vidsPerRow;
+			break;
+		default:
+			delete holdStatus.leftThumbstickVertical;
+			// console.log( "released" );
+			if ( !horizontalChanged ) {
+				return;
+			}
 	}
 
 	let previous = currentElement.element;
@@ -86,4 +118,15 @@ function click( element ) {
 			click( node );
 		}
 	} );
+}
+
+function getContainerWidth( element ) {
+	if ( !element ) {
+		return;
+	}
+
+	if ( element.id == "items" ) {
+		return element.offsetWidth;
+	} 
+	return getContainerWidth( element.parentNode );
 }
