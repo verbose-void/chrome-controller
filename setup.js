@@ -71,20 +71,31 @@ function pollEvents() {
 	  			} );
   			}
 
-  			// Any pressure changes
   			let pressure = new CustomEvent( "lefttriggerpressure", {
-  					detail: {
-	  					current: value,
-	  					previous: controller.previousLeftTrigger,
-			  			controller: controller
-	  				} 
-	  			} );
+  				detail: {
+	  				current: value,
+	  				previous: controller.previousLeftTrigger,
+			  		controller: controller
+	  			} 
+	  		} );
+
+  			window.dispatchEvent( pressure );
 
   			if ( event ) {
   				window.dispatchEvent( event );
   			}
-  			window.dispatchEvent( pressure );
   		}
+
+  		// Dispatch event every poll
+  		let poll = new CustomEvent( "lefttriggerpoll", {
+  				detail: {
+	  				current: value,
+	  				previous: controller.previousLeftTrigger,
+			  		controller: controller
+	  			} 
+	  		} );
+
+  		window.dispatchEvent( poll );
   	}
 
   	{
@@ -113,20 +124,32 @@ function pollEvents() {
 	  			} );
   			}
 
-  			// Any pressure changes
   			let pressure = new CustomEvent( "righttriggerpressure", {
-  					detail: {
-	  					current: value,
-	  					previous: controller.previousRightTrigger,
-			  			controller: controller
-	  				} 
-	  			} );
+  				detail: {
+	  				current: value,
+	  				previous: controller.previousRightTrigger,
+			  		controller: controller
+	  			} 
+	  		} );
+
+  			window.dispatchEvent( pressure );
 
   			if ( event ) {
   				window.dispatchEvent( event );
   			}
-  			window.dispatchEvent( pressure );
   		}
+
+  		// Dispatch event every poll
+  		let poll = new CustomEvent( "righttriggerpoll", {
+  				detail: {
+	  				current: value,
+	  				previous: controller.previousRightTrigger,
+			  		controller: controller
+	  			} 
+	  		} );
+
+  			
+  		window.dispatchEvent( poll );
   	}
   	// ********************* //
 
@@ -186,18 +209,28 @@ function pollEvents() {
 	  		}
 
 	  		let event = new CustomEvent( axisEventNames[i], {
-					detail: {
-			  			previous: controller.previousAxes[i],
-			  			current: controller.axes[i],
-			  			controller: controller
-	  				} 
-	  			} );
+				detail: {
+			  		previous: controller.previousAxes[i],
+			  		current: controller.axes[i],
+			  		controller: controller
+	  			} 
+	  		} );
 
 	  		if ( maxE ) {
 	  			window.dispatchEvent( maxE );
 	  		}
 	  		window.dispatchEvent( event );
   		}
+
+  		let poll = new CustomEvent( axisEventNames[i] + "poll", {
+			detail: {
+			  	previous: controller.previousAxes[i],
+			  	current: controller.axes[i],
+			  	controller: controller
+	  		} 
+	  	} );
+
+	  	window.dispatchEvent( poll );
   	}
   	// ********************* //
 
