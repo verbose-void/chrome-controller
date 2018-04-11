@@ -23,10 +23,6 @@ function removegamepad( gamepad ) {
   delete controllers[gamepad.index];
 }
 
-window.addEventListener( "lefttriggermaxpull", function( e ) {
-	console.log( e );
-} );
-
 function pollEvents() {
   scangamepads();
   
@@ -204,12 +200,6 @@ function pollEvents() {
   		}
   	}
   	// ********************* //
-
-  	handleRightThumbstick( controller.axes[2], controller.axes[3], controller );
-  	handleLeftThumbstick( controller.axes[0], controller.axes[1], controller );
-  	if ( controller.buttons[0].pressed ) {
-  		handleAButton( controller );
-  	}
 
   	// ************************* MUST BE LAST ************************* //
   	for ( let i = 0; i < controller.axes.length; i++ ) {
