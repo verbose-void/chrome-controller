@@ -25,6 +25,10 @@ function updateStatus() {
   for( let k in controllers ) {
   	let controller = controllers[k];
   	handleRightThumbstick( controller.axes[2], controller.axes[3], controller );
+  	handleLeftThumbstick( controller.axes[0], controller.axes[1], controller );
+  	if ( controller.buttons[0].pressed ) {
+  		handleAButton( controller );
+  	}
   }
 
   rAF( updateStatus );
