@@ -21,12 +21,13 @@ chrome.runtime.onMessage.addListener( function( message, sender, sendResponse ) 
 		return;
 	}
 
-	if ( type === "selectbuttonpoll" ) {
-		if ( message.current == 1 && lastInputs.selectButtonLast != message.current ) {
-			closeCurrentTab();
-		}
+	if ( type === "closecurrenttabrequested" ) {
+		closeCurrentTab();
+		return;
+	}
 
-		lastInputs.selectButtonLast = message.current;
+	if ( type === "newtabrequested" ) {
+		openNewTab();
 		return;
 	}
 } );
@@ -53,6 +54,10 @@ function closeCurrentTab() {
 	effectCurrent( function( tab, index, id ) {
 		chrome.tabs.remove( id, function() {} );
 	} );
+}
+
+function openNewTab() {
+	chrome.tabs.create( {}, function() {} );
 }
 
 function effectCurrent( func ) {
