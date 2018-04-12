@@ -6,6 +6,16 @@
 		{
 			"matches": ["<all_urls>"],
 			"js": ["setup.js", "global.js"]
+		},
+		{
+			"matches": ["https://www.youtube.com/tv*"],
+			"js": ["setup.js", "global.js", "ytv.js"]
 		}
+	],
+	"background": {
+		"scripts": ["background.js"]
+	},
+	"permissions": [
+		"tabs"
 	]
 }
