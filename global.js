@@ -26,11 +26,3 @@ window.addEventListener( "leftbumperpressed", function() {
 window.addEventListener( "rightbumperpressed", function() {
 	window.history.forward();
 } );
-
-window.addEventListener( "startbuttonpressed", function() {
-	chrome.runtime.sendMessage( { eventType: "newtabrequested" }  );
-} );
-
-window.addEventListener( "selectbuttonpressed", function() {
-	chrome.runtime.sendMessage( { eventType: "closecurrenttabrequested" }  );
-} );

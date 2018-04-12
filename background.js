@@ -21,13 +21,21 @@ chrome.runtime.onMessage.addListener( function( message, sender, sendResponse ) 
 		return;
 	}
 
-	if ( type === "closecurrenttabrequested" ) {
-		closeCurrentTab();
+	if ( type === "selectbuttonpoll" ) {
+		if ( message.current == 1 && lastInputs.selectButtonLast != message.current ) {
+			closeCurrentTab();
+		}
+
+		lastInputs.selectButtonLast = message.current;
 		return;
 	}
 
-	if ( type === "newtabrequested" ) {
-		openNewTab();
+	if ( type === "startbuttonpoll" ) {
+		if ( message.current == 1 && lastInputs.sstartButtonLast != message.current ) {
+			openNewTab();
+		}
+
+		lastInputs.startButtonLast = message.current;
 		return;
 	}
 } );
