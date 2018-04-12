@@ -259,6 +259,12 @@ function pollEvents() {
   			continue;
   		}
 	  	
+		chrome.runtime.sendMessage( {
+	  				eventType: eventName + "poll",
+	  				controller: controller,
+	  				current: controller.buttons[i].value
+	  			} );
+
 	  	window.dispatchEvent( event );
   	}
   	// ********************* //
