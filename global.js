@@ -17,13 +17,12 @@ window.addEventListener( "rightanalogverticalpoll", function( e ) {
 	window.scrollBy( 0, val * m );
 } );
 
-// Forward / backwards through history
-window.addEventListener( "bbuttonpressed", function( e ) {
-	let leftBumper = e.detail.controller.buttons[4];
-	let rightBumper = e.detail.controller.buttons[5];
-	if ( leftBumper.pressed && !rightBumper.pressed ) {
-		window.history.back();
-	} else if ( rightBumper.pressed && !leftBumper.pressed ) {
-		window.history.forward();
-	}
+// Backward through history
+window.addEventListener( "leftbumperpressed", function() {
+	window.history.back();
+} );
+
+// Forward through history
+window.addEventListener( "rightbumperpressed", function() {
+	window.history.forward();
 } );
