@@ -4,6 +4,12 @@ window.addEventListener( "xbuttonpressed", function() {
 	playButton.trigger( "click" );
 } );
 
+// B toggle theater mode
+window.addEventListener( "bbuttonpressed", function() {
+	let fs = $( ".ytp-size-button" );
+	fs.trigger( "click" );
+} );
+
 // holding Y displays the bar at the bottom
 window.addEventListener( "ybuttonpoll", function() {
 	let vc = $( "div .html5-video-player" );
