@@ -31,12 +31,20 @@ chrome.runtime.onMessage.addListener( function( message, sender, sendResponse ) 
 	}
 
 	if ( type === "startbuttonpoll" ) {
-		if ( message.current == 1 && lastInputs.sstartButtonLast != message.current ) {
+		if ( message.current == 1 && lastInputs.startButtonLast != message.current ) {
 			openNewTab();
 		}
 
 		lastInputs.startButtonLast = message.current;
 		return;
+	}
+
+	if ( type === "requestzoom" ) {
+		effectCurrent( function( tab, index, id ) {
+			chrome.tabs.getZoom( id, function( zoomFactor ) {
+				chrome.tabs.setZoom( id, zoomFactor + message.factor / 50, function() {} )
+			} );
+		} );
 	}
 } );
 
@@ -65,7 +73,10 @@ function closeCurrentTab() {
 }
 
 function openNewTab() {
-	chrome.tabs.create( {}, function() {} );
+	chrome.tabs.create( {
+			url: "https://www.google.com/webhp?hl=en&sa=X&ved=0ahUKEwjnqufjjLTaAhVpx1QKHf2BDSQQPAgD"}, 
+			function() {} 
+		);
 }
 
 function effectCurrent( func ) {
@@ -80,6 +91,7 @@ function effectCurrent( func ) {
 		}
 
 		if ( activeIndex >= 0 ) {
+			// tab, tab index, tab id
 			func( s[activeIndex], activeIndex, s[activeIndex].id );
 		}
 	} );
