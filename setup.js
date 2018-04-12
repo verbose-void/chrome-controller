@@ -60,6 +60,12 @@ function pollEvents() {
 			  			controller: controller
 	  				} 
 	  			} );
+	  			chrome.runtime.sendMessage( {
+	  				eventType: "lefttriggermaxpull",
+	  				current: value, 
+	  				previous: controller.previousLeftTrigger,
+	  				controller: controller
+	  			} );
   			} else if ( value <= 0 ) {
   				// Release
   				event = new CustomEvent( "lefttriggerrelease", {
@@ -68,6 +74,13 @@ function pollEvents() {
 	  					previous: controller.previousLeftTrigger,
 			  			controller: controller
 	  				} 
+	  			} );
+
+	  			chrome.runtime.sendMessage( {
+	  				eventType: "lefttriggerrelease",
+	  				current: value, 
+	  				previous: controller.previousLeftTrigger,
+	  				controller: controller
 	  			} );
   			}
 
@@ -78,6 +91,13 @@ function pollEvents() {
 			  		controller: controller
 	  			} 
 	  		} );
+
+	  		chrome.runtime.sendMessage( {
+	  				eventType: "lefttriggerpressure",
+	  				current: value, 
+	  				previous: controller.previousLeftTrigger,
+	  				controller: controller
+	  			} );
 
   			window.dispatchEvent( pressure );
 
@@ -94,6 +114,13 @@ function pollEvents() {
 			  		controller: controller
 	  			} 
 	  		} );
+
+  		chrome.runtime.sendMessage( {
+	  				eventType: "lefttriggerpoll",
+	  				current: value, 
+	  				previous: controller.previousLeftTrigger,
+	  				controller: controller
+	  			} );
 
   		window.dispatchEvent( poll );
   	}
@@ -113,6 +140,13 @@ function pollEvents() {
 			  			controller: controller
 	  				} 
 	  			} );
+
+	  			chrome.runtime.sendMessage( {
+	  				eventType: "righttriggermaxpull",
+	  				current: value, 
+	  				previous: controller.previousLeftTrigger,
+	  				controller: controller
+	  			} );
   			} else if ( value <= 0 ) {
   				// Release
   				event = new CustomEvent( "righttriggerrelease", {
@@ -121,6 +155,13 @@ function pollEvents() {
 	  					previous: controller.previousRightTrigger,
 			  			controller: controller
 	  				} 
+	  			} );
+
+	  			chrome.runtime.sendMessage( {
+	  				eventType: "righttriggerrelease",
+	  				current: value, 
+	  				previous: controller.previousLeftTrigger,
+	  				controller: controller
 	  			} );
   			}
 
@@ -131,6 +172,13 @@ function pollEvents() {
 			  		controller: controller
 	  			} 
 	  		} );
+
+	  		chrome.runtime.sendMessage( {
+	  				eventType: "righttriggerpressure",
+	  				current: value, 
+	  				previous: controller.previousLeftTrigger,
+	  				controller: controller
+	  			} );
 
   			window.dispatchEvent( pressure );
 
@@ -148,6 +196,12 @@ function pollEvents() {
 	  			} 
 	  		} );
 
+  		chrome.runtime.sendMessage( {
+	  				eventType: "righttriggerpoll",
+	  				current: value, 
+	  				previous: controller.previousLeftTrigger,
+	  				controller: controller
+	  			} );
   			
   		window.dispatchEvent( poll );
   	}
@@ -172,6 +226,11 @@ function pollEvents() {
 		  			controller: controller
 	  			} 
 	  		} );
+
+	  		chrome.runtime.sendMessage( {
+	  				eventType: eventName + "hold",
+	  				controller: controller
+	  			} );
   		} else if ( !controller.buttons[i].pressed && controller.previousPressedButtons[i] ) {
   			// dispatch released
   			event = new CustomEvent( eventName + "released", {
@@ -179,6 +238,11 @@ function pollEvents() {
 		  			controller: controller
 	  			} 
 	  		} );
+
+	  		chrome.runtime.sendMessage( {
+	  				eventType: eventName + "released",
+	  				controller: controller
+	  			} );
   		} else if ( controller.buttons[i].pressed && !controller.previousPressedButtons[i] ) {
   			// dispatch pressed
   			event = new CustomEvent( eventName + "pressed", {
@@ -186,6 +250,11 @@ function pollEvents() {
 		  			controller: controller
 	  			} 
 	  		} );
+
+	  		chrome.runtime.sendMessage( {
+	  				eventType: eventName + "pressed",
+	  				controller: controller
+	  			} );
   		} else {
   			continue;
   		}
@@ -206,6 +275,13 @@ function pollEvents() {
 			  			controller: controller
 	  				} 
 	  			} );
+
+	  			chrome.runtime.sendMessage( {
+	  				eventType: axisEventNames[i] + "max",
+	  				previous: controller.previousAxes[i],
+			  		current: controller.axes[i],
+			  		controller: controller
+	  			} );
 	  		}
 
 	  		let event = new CustomEvent( axisEventNames[i], {
@@ -215,6 +291,13 @@ function pollEvents() {
 			  		controller: controller
 	  			} 
 	  		} );
+
+	  		chrome.runtime.sendMessage( {
+	  				eventType: axisEventNames[i],
+	  				previous: controller.previousAxes[i],
+			  		current: controller.axes[i],
+			  		controller: controller
+	  			} );
 
 	  		if ( maxE ) {
 	  			window.dispatchEvent( maxE );
@@ -229,6 +312,13 @@ function pollEvents() {
 			  	controller: controller
 	  		} 
 	  	} );
+
+	  	chrome.runtime.sendMessage( {
+	  				eventType: axisEventNames[i] + "poll",
+	  				previous: controller.previousAxes[i],
+			  		current: controller.axes[i],
+			  		controller: controller
+	  			} );
 
 	  	window.dispatchEvent( poll );
   	}
