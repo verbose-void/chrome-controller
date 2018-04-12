@@ -1,15 +1,16 @@
 {
 	"manifest_version": 2,
 	"name": "Chrome Controller",
+	"description": "Gives the ability to browse the web using your Xbox / PlayStation ( and many other ) controllers easily and comfortably!",
 	"version": "0.1",
 	"content_scripts": [
 		{
-			"matches": ["<all_urls>"],
+			"matches": ["<all_urls>", "*://*/_/chrome/newtab*"],
 			"js": ["setup.js", "global.js"]
 		},
 		{
-			"matches": ["https://www.youtube.com/tv*"],
-			"js": ["setup.js", "global.js", "ytv.js"]
+			"matches": ["https://www.youtube.com/*"],
+			"js": ["setup.js", "global.js", "youtube.js"]
 		}
 	],
 	"background": {
