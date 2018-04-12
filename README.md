@@ -19,3 +19,6 @@
 - When a Text Box is Clicked: On screen keyboard that can be manipulated with your gamepad as well.
 
 #### Add to your browser [here](https://chrome.google.com/webstore/detail/chrome-controller/nilnjekagachinflbdkanmblmjpaimhl?hl=en-US&gl=US "Chrome Extension Page").
+
+#### Have an idea / bug to report? Create an issue [here](https://github.com/McCrearyD/Chrome_Controller/issues/new "Create a New Issue").
+
