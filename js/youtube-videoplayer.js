@@ -1,9 +1,7 @@
 let selectedVideoIndex = -1;
 
 // Navigate through the avalable videos to watch
-window.addEventListener( "leftanalogverticalmax", handleVertical );
-
-function handleVertical( e ) {
+window.addEventListener( "leftanalogverticalmax", function( e ) {
 	let curr = e.detail.current;
 	let prev = e.detail.previous;
 
@@ -17,9 +15,7 @@ function handleVertical( e ) {
 	} else if ( curr <= -1 ) {
 		selectVideo( selectedVideoIndex - 1 );
 	}
-};
-
-
+}; );
 
 // X pauses and plays the video
 window.addEventListener( "xbuttonpressed", function() {
