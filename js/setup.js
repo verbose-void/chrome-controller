@@ -265,6 +265,13 @@ function pollEvents() {
 	  				current: controller.buttons[i].value
 	  			} );
 
+		poll = new CustomEvent( eventName + "poll", {
+  				detail: {
+		  			controller: controller
+	  			} 
+	  		} );
+
+	  	window.dispatchEvent( poll );
 	  	window.dispatchEvent( event );
   	}
   	// ********************* //
