@@ -35,11 +35,9 @@ window.addEventListener( "rightanaloghorizontalpoll", function( e ) {
 
 	if ( rightValue > 0.2 && leftValue < -0.2 ) {
 		// TODO move function to a utils file
-		console.log( avg );
 		chrome.runtime.sendMessage( {eventType: "requestzoom", factor: avg} );
 	} else if ( rightValue < -0.2 && leftValue > 0.2 ) {
 		// TODO move function to a utils file
-		console.log( avg );
 		chrome.runtime.sendMessage( {eventType: "requestzoom", factor: avg} );
 	}
 } );
