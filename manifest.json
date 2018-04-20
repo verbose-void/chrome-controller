@@ -11,11 +11,13 @@
 		},
 		{
 			"matches": ["https://www.youtube.com/*"],
-			"js": ["js/YouTube/youtube.js"]
+			"js": ["js/YouTube/youtube.js"],
+			"run_at": "document_end"
 		},
 		{
 			"matches": ["https://www.youtube.com/watch?v=*"],
-			"js": ["js/YouTube/youtube-videoplayer.js"]
+			"js": ["js/YouTube/youtube-videoplayer.js"],
+			"run_at": "document_end"
 		}
 	],
 	"background": {
