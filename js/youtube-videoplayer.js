@@ -8,7 +8,6 @@ window.addEventListener( "xbuttonpressed", function() {
 window.addEventListener( "bbuttonpressed", function() {
 	let fs = $( ".ytp-size-button" );
 	fs.trigger( "click" );
-	chrome.runtime.sendMessage( {eventType: "requestsetzoom", zoom: avg} );
 } );
 
 // holding Y displays the bar at the bottom
