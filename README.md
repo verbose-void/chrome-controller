@@ -11,19 +11,12 @@
 - Select Button: Closes the current tab.
 - Start Button: Opens a new tab default to the google search
 
-***Youtube Controls:***
+## Youtube Controls:
 - Left Analog Stick: Now with moving the left stick up and down you're able to select videos.
 - A Button: After you have selected a video, if you press A that video will begin to play.
 - X Button: If a video is playing, the X button will pause and play the video.
 - Y Button: Holding Y will show the video "hud" that shows the remaining time & other menu buttons.
 - B Button: Since YouTube's security doesn't allow for full screen toggling through code, the B button will toggle theater mode.
-
-
-## Controls to be added in the near future:
-- Left Analog Stick: Ability to seek from one clickable item to another.
-- A Button: Ability to click on the selected item.
-- Hold Y While Moving Left Analog: Go specifically from one search bar to another.
-- When a Text Box is Clicked: On screen keyboard that can be manipulated with your gamepad as well.
 
 #### Add to your browser [here](https://chrome.google.com/webstore/detail/chrome-controller/nilnjekagachinflbdkanmblmjpaimhl?hl=en-US&gl=US "Chrome Extension Page").
 
