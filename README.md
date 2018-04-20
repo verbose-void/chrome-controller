@@ -19,5 +19,4 @@
 - B Button: Since YouTube's security doesn't allow for full screen toggling through code, the B button will toggle theater mode.
 
 #### Add to your browser [here](https://chrome.google.com/webstore/detail/chrome-controller/nilnjekagachinflbdkanmblmjpaimhl?hl=en-US&gl=US "Chrome Extension Page").
-
 #### Have an idea / bug to report? Create an issue [here](https://github.com/McCrearyD/Chrome_Controller/issues/new "Create a New Issue").
