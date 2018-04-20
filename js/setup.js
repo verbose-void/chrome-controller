@@ -9,9 +9,15 @@ var rAF = window.mozRequestAnimationFrame ||
   window.requestAnimationFrame;
 
 function connecthandler( e ) {
-  controllers[e.gamepad.index] = e.gamepad;
-  rAF( pollEvents );
-  console.log( e.gamepad.id + " connected." );
+	if ( e.gamepad.axes.length < 4 || e.gamepad.buttons.length < 17 ) {
+		console.log( "Could not load " + e.gamepad.id + "." );
+		console.log( "Reason: Insufficient button / axis count." );
+		return;
+	}
+
+	controllers[e.gamepad.index] = e.gamepad;
+	rAF( pollEvents );
+	console.log( e.gamepad.id + " connected." );
 }
 
 function disconnecthandler( e ) {
@@ -27,7 +33,7 @@ function pollEvents() {
   scangamepads();
   
   for( let k in controllers ) {
-  // ************************* MUST BE FIRST ************************* //
+  	// ************************* MUST BE FIRST ************************* //
   	let controller = controllers[k];
 
   	if ( !controller.previousAxes ) {
@@ -356,7 +362,11 @@ function scangamepads() {
   var gamepads = navigator.getGamepads();
   for ( var i = 0; i < gamepads.length; i++ ) {
     if ( gamepads[i] ) {
-      controllers[gamepads[i].index] = gamepads[i];
+    	if ( gamepads[i].axes.length < 4 || gamepads[i].buttons.length < 17 ) {
+			continue;
+		}
+
+    	controllers[gamepads[i].index] = gamepads[i];
     }
   }
 }
