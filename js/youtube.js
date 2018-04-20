@@ -6,9 +6,8 @@ window.addEventListener( "abuttonpressed", function() {
 		return;
 	}
 
-	$( "ytd-thumbnail" ).get( selectedVideoIndex ).children[0].click();
+	window.location.href = $( "ytd-thumbnail" ).get( selectedVideoIndex ).children[0].href;
 	deselectAll();
-	location.reload();
 } );
 
 // Navigate horizontally through the avalable videos to watch
