@@ -11,11 +11,11 @@
 		},
 		{
 			"matches": ["https://www.youtube.com/*"],
-			"js": ["js/youtube.js"]
+			"js": ["js/YouTube/youtube.js"]
 		},
 		{
 			"matches": ["https://www.youtube.com/watch?v=*"],
-			"js": ["js/youtube-videoplayer.js"]
+			"js": ["js/YouTube/youtube-videoplayer.js"]
 		}
 	],
 	"background": {
