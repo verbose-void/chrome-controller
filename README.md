@@ -3,7 +3,7 @@
 
 ###### Note: All buttons will be referred to in respect to the Xbox One Controller.
 
-### Global Controls:
+## Global Controls:
 - RB/LB: Seeks forwards and backwards through history.
 - RT/LT: Focuses the right / left tab respectively.
 - Right Analog Stick: Scroll up and down, Will also "sprint" if you click the stick downwards while scrolling.
