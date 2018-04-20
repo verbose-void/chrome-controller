@@ -3,13 +3,13 @@
 
 ###### Note: All buttons will be referred to in respect to the Xbox One Controller.
 
-## Global Controls:
-- RB/LB: Seeks forwards and backwards through history ( simulates pressing the back and forward arrows in the top left corner )
+### Global Controls:
+- RB/LB: Seeks forwards and backwards through history.
 - RT/LT: Focuses the right / left tab respectively.
-- Right Analog Stick: Uses the vertical axis to simulate scrolling up and down. Will also "sprint" ( increase scroll speed by a factor of 2 ) if you click the stick downwards while scrolling.
-- Combination of Right & Left Analog Sticks: When pinching inwards or pulling outwards ( like you would on a smart phone ) the focused tab will zoom in and out.
+- Right Analog Stick: Scroll up and down, Will also "sprint" if you click the stick downwards while scrolling.
 - Select Button: Closes the current tab.
-- Start Button: Opens a new tab default to the google search
+- Start Button: Opens a new tab default to the google search page.
+- Combination of Right & Left Analog Sticks: When pinching inwards or pulling outwards ( like you would on a smart phone ) the focused tab will zoom in and out.
 
 ## Youtube Controls:
 - Left Analog Stick: Now with moving the left stick up and down you're able to select videos.
