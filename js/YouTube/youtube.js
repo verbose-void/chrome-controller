@@ -1,5 +1,6 @@
 var selectedVideo;
 var sideBarIndex = -1;
+var deselectTimeout;
 
 // A Button "clicks" on the video
 window.addEventListener( "abuttonpressed", function() {
@@ -30,8 +31,13 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 		return;
 	}
 
+	scheduleDeselectTimeout();
+
 	if ( !isValidVideo( selectedVideo ) ) {
 		forceSelectVideo( getFirstVideoOnScreen() );
+	} else if ( !isSelectedMarked() ) {
+		forceSelectVideo( selectedVideo );
+		return;
 	}
 
 	let contentContainer = $( "#contentContainer" ).get( 0 );
@@ -78,6 +84,8 @@ window.addEventListener( "leftanalogverticalmax", function( e ) {
 		return;
 	}
 
+	scheduleDeselectTimeout();
+
 	if ( isSidebarOpen() ) {
 		if ( curr >= 1 ) {
 			selectSidebar( sideBarIndex + 1 );
@@ -90,6 +98,9 @@ window.addEventListener( "leftanalogverticalmax", function( e ) {
 
 	if ( !isValidVideo( selectedVideo ) ) {
 		forceSelectVideo( getFirstVideoOnScreen() );
+	} else if ( !isSelectedMarked() ) {
+		forceSelectVideo( selectedVideo );
+		return;
 	}
 
 	if ( curr >= 1 ) {
@@ -98,6 +109,38 @@ window.addEventListener( "leftanalogverticalmax", function( e ) {
 		selectVideo( getVideoToTop( selectedVideo ) );
 	}
 } );
+
+function isSelectedMarked() {
+	if ( !selectedVideo ) {
+		return null;
+	}
+
+	let bs = selectedVideo.style["border-style"];
+
+	if ( !bs ) {
+		return false;
+	}
+
+	return bs === "solid";
+}
+
+function scheduleDeselectTimeout() {
+	if ( deselectTimeout ) {
+		window.clearTimeout( deselectTimeout );
+	}
+
+	deselectTimeout = setTimeout( function() {
+		if ( selectedVideo ) {
+			deselectVideo( selectedVideo );
+		}
+
+		if ( isSidebarOpen() ) {
+			toggleSidebarView();
+		}
+
+		deselectTimeout = undefined;
+	}, 20000 ); // TODO make changeable in drop-down settings
+}
 
 function isValidVideo( elem ) {
 	if ( !elem ) {
