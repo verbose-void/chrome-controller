@@ -1,6 +1,5 @@
 var selectedVideoIndex = -1;
 var sideBarIndex = -1;
-var inContentContainer = false;
 
 // A Button "clicks" on the video
 window.addEventListener( "abuttonpressed", function() {
@@ -8,7 +7,7 @@ window.addEventListener( "abuttonpressed", function() {
 		return;
 	}
 
-	if ( inContentContainer ) {
+	if ( isSidebarOpen() ) {
 		if ( sideBarIndex < 0 ) {
 			return;
 		}
@@ -34,16 +33,12 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 	let scrim = $( "#scrim" ).get( 0 );
 	let appDrawer = $( "app-drawer#guide" ).get( 0 );
 	if ( contentContainer ) {
-		if ( inContentContainer ) {
+		if ( isSidebarOpen() ) {
 			if ( curr <= -1 ) {
 				return;
 			} else if ( curr >= 1 ) {
-				inContentContainer = false;
-
-				scrim.classList.remove( "visible" );
-				contentContainer.removeAttribute( "opened" );
-				appDrawer.removeAttribute( "opened" );
 				// TODO Set currently selected to closest video
+				toggleSidebarView();
 				forceSelectVideo( selectedVideoIndex );
 				return;
 			}
@@ -53,12 +48,8 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 				let currentSelection = $( "ytd-thumbnail" ).get( selectedVideoIndex );
 
 				if ( selectedVideoIndex == 0 ) {
-					inContentContainer = true;
-
-					scrim.classList.add( "visible" );
-					contentContainer.setAttribute( "opened", "" );
-					appDrawer.setAttribute( "opened", "" );
 					deselectVideo( selectedVideoIndex );
+					toggleSidebarView();
 					forceSelectSidebar( sideBarIndex );
 					// TODO set current contentContainerIndex (needs to be created) to top index
 					return;
@@ -85,7 +76,7 @@ window.addEventListener( "leftanalogverticalmax", function( e ) {
 		return;
 	}
 
-	if ( inContentContainer ) {
+	if ( isSidebarOpen() ) {
 		if ( curr >= 1 ) {
 			selectSidebar( sideBarIndex + 1 );
 		} else if ( curr <= -1 ) {
@@ -112,6 +103,10 @@ window.addEventListener( "leftanalogverticalmax", function( e ) {
 	}
 } );
 
+function toggleSidebarView() {
+	$( "#guide-icon" ).click();
+}
+
 // TODO add to a utils file
 function scrollToVisible( elm ) {
 	if ( !elm ) {
@@ -128,18 +123,22 @@ function scrollToVisible( elm ) {
 	let tOff = rect.top - topBarHeight;
 
 	if ( bOff > 0 ) {
-		if ( inContentContainer ) {
+		if ( isSidebarOpen() ) {
 			$( "div#guide-inner-content" ).get( 0 ).scrollBy( 0, bOff + 25 );
 		} else {
 			window.scrollBy( 0, bOff + 50 );
 		}
 	} else if ( tOff < 0 ) {
-		if ( inContentContainer ) {
+		if ( isSidebarOpen() ) {
 			$( "div#guide-inner-content" ).get( 0 ).scrollBy( 0, tOff - rect.height + 40 );
 		} else {
 			window.scrollBy( 0, tOff - rect.height + 40 );
 		}
 	}
+}
+
+function isSidebarOpen() {
+	return $( "#contentContainer" ).get( 0 ).getAttribute( "opened" ) != null;
 }
 
 function forceSelectVideo( toSelect ) {
@@ -244,6 +243,8 @@ function deselectAll() {
 	let thumbnails = $( "ytd-thumbnail" );
 
 	for ( let elem in thumbnails ) {
-		thumbnails[elem].style["border-style"] = "none";
+		if ( thumbnails[elem].style ) {
+			thumbnails[elem].style["border-style"] = "none";
+		}
 	}
 }
