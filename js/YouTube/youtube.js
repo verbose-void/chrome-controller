@@ -1,9 +1,9 @@
-var selectedVideoIndex = -1;
+var selectedVideo;
 var sideBarIndex = -1;
 
 // A Button "clicks" on the video
 window.addEventListener( "abuttonpressed", function() {
-	if ( selectedVideoIndex < 0 ) {
+	if ( !selectedVideo ) {
 		return;
 	}
 
@@ -15,7 +15,8 @@ window.addEventListener( "abuttonpressed", function() {
 		window.location.href = $( "a#endpoint" ).get( sideBarIndex ).children[0].click();
 		return;
 	}
-	window.location.href = $( "ytd-thumbnail" ).get( selectedVideoIndex ).children[0].href;
+
+	window.location.href = selectedVideo.children[0].href;
 	deselectAll();
 } );
 
@@ -39,16 +40,13 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 			} else if ( curr >= 1 ) {
 				// TODO Set currently selected to closest video
 				toggleSidebarView();
-				forceSelectVideo( selectedVideoIndex );
+				forceSelectVideo( selectedVideo );
 				return;
 			}
 		} else {
 			if ( curr <= -1 ) {
-				// TODO check if selected is far left
-				let currentSelection = $( "ytd-thumbnail" ).get( selectedVideoIndex );
-
-				if ( selectedVideoIndex == 0 ) {
-					deselectVideo( selectedVideoIndex );
+				if ( isFarLeft( selectedVideo ) ) {
+					deselectVideo( selectedVideo );
 					toggleSidebarView();
 					forceSelectSidebar( sideBarIndex );
 					// TODO set current contentContainerIndex (needs to be created) to top index
@@ -60,17 +58,93 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 
 	// TODO test for no more videos
 	if ( curr >= 1 ) {
-		selectVideo( selectedVideoIndex + 1 );
+		selectVideo( getVideoToRight( selectedVideo ) );
 	} else if ( curr <= -1 ) {
-		selectVideo( selectedVideoIndex - 1 );
+		selectVideo( getVideoToLeft( selectedVideo ) );
 	}
 } );
+
+function getVideoTo( elem, side, modifierx, modifiery ) {
+	if ( !modifierx ) {
+		modifierx = 0;
+	}
+
+	if ( !modifiery ) {
+		modifiery = 0;
+	}
+
+	if ( elem ) {
+		let rect = elem.getBoundingClientRect();
+		let x = 0;
+		let y = 0;
+
+		if ( side === "left" ) {
+			x = -rect.width;
+		} else if ( side === "right" ) {
+			x = rect.width;
+		} else if ( side === "up" ) {
+			y = -rect.height;
+		} else if ( side === "down" ) {
+			y = rect.height;
+		}
+
+		let ex = ( rect.x + rect.width / 2 ) + x + modifierx;
+		let ey = ( rect.y + rect.height / 2 ) + y + ( y * .5 ) + modifiery;
+
+		if ( ex > window.innerWidth || ex < 0 ) {
+			window.scrollBy( ex, 0 );
+		}
+
+		if ( ey > window.innerHeight || ey < 0 ) {
+			window.scrollBy( 0, ( ey + ey * .4 ) - window.innerHeight );
+		}
+
+		let elems = document.elementsFromPoint( ex, ey );
+
+		for ( let i in elems ) {
+			if ( elems[i].tagName === "YTD-THUMBNAIL" ) {
+				return elems[i];
+			}
+		}
+	}
+}
+
+function getVideoToLeft( elem ) {
+	return getVideoTo( elem, "left" );
+}
+
+function getVideoToRight( elem ) {
+	return getVideoTo( elem, "right" );
+}
+
+function getVideoToTop( elem ) {
+	let up = getVideoTo( elem, "up" );
+
+	if ( !up ) {
+		up = getVideoTo( elem, "up", 0, -100 );
+	}
+
+	return up;
+}
+
+function getVideoToBottom( elem ) {
+	let down = getVideoTo( elem, "down" );
+
+	if ( !down ) {
+		down = getVideoTo( elem, "down", 0, 100 );
+	}
+
+	return down;
+}
+
+function isFarLeft( elem ) {
+	return !getVideoToLeft( elem );
+}
 
 // Navigate vertically through the avalable videos to watch
 window.addEventListener( "leftanalogverticalmax", function( e ) {
 	let curr = e.detail.current;
 	let prev = e.detail.previous;
-	let ct;
 
 	if ( prev == curr ) {
 		return;
@@ -86,20 +160,14 @@ window.addEventListener( "leftanalogverticalmax", function( e ) {
 		return;
 	}
 
-	if ( selectedVideoIndex != -1 ) {
-		ct = $( "ytd-thumbnail" ).get( selectedVideoIndex ).parentElement.parentElement.parentElement;
-	}
-
-	let changeBy = 1;
-
-	if ( ct && ct.id == "items" ) {
-		changeBy = Math.floor( ct.offsetWidth / 210 );
+	if ( !selectedVideo ) {
+		selectedVideo = $( "ytd-thumbnail" ).get( 0 );
 	}
 
 	if ( curr >= 1 ) {
-		selectVideo( selectedVideoIndex + changeBy );
+		selectVideo( getVideoToBottom( selectedVideo ) );
 	} else if ( curr <= -1 ) {
-		selectVideo( selectedVideoIndex - changeBy );
+		selectVideo( getVideoToTop( selectedVideo ) );
 	}
 } );
 
@@ -181,6 +249,10 @@ function selectSidebar( toSelect, b ) {
 		return;
 	}
 
+	if ( !b ) {
+		deselectSidebar( sideBarIndex );
+	}
+
 	let item = sideBarItems.get( toSelect );
 
 	scrollToVisible( item );
@@ -188,9 +260,6 @@ function selectSidebar( toSelect, b ) {
 	item.style["border-color"] = "red";
 	item.style["border-width"] = "2px";
 
-	if ( !b ) {
-		deselectSidebar( sideBarIndex );
-	}
 	sideBarIndex = toSelect;
 }
 
@@ -217,26 +286,26 @@ function deselectSidebar( toDeselect ) {
 }
 
 function selectVideo( toSelect, b ) {
-	let thumbnail = $( "ytd-thumbnail" ).get( toSelect );
-
-	if ( !thumbnail ) {
+	if ( !toSelect ) {
 		return;
 	}
 
-	scrollToVisible( thumbnail );
-	thumbnail.style["border-style"] = "solid";
-	thumbnail.style["border-color"] = "red";
-	thumbnail.style["border-width"] = "2px";
-
 	if ( !b ) {
-		deselectVideo( selectedVideoIndex );
+		if ( selectedVideo ) {
+			deselectVideo( selectedVideo );
+		}
 	}
-	selectedVideoIndex = toSelect;
+
+	scrollToVisible( toSelect );
+	toSelect.style["border-style"] = "solid";
+	toSelect.style["border-color"] = "red";
+	toSelect.style["border-width"] = "2px";
+
+	selectedVideo = toSelect;
 }
 
 function deselectVideo( toDeselect ) {
-	let thumbnail = $( "ytd-thumbnail" ).get( toDeselect );
-	thumbnail.style["border-style"] = "none";
+	toDeselect.style["border-style"] = "none";
 }
 
 function deselectAll() {
