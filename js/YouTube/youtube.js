@@ -30,6 +30,10 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 		return;
 	}
 
+	if ( !isValidVideo( selectedVideo ) ) {
+		forceSelectVideo( getFirstVideoOnScreen() );
+	}
+
 	let contentContainer = $( "#contentContainer" ).get( 0 );
 	let scrim = $( "#scrim" ).get( 0 );
 	let appDrawer = $( "app-drawer#guide" ).get( 0 );
@@ -40,6 +44,7 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 			} else if ( curr >= 1 ) {
 				// TODO Set currently selected to closest video
 				toggleSidebarView();
+
 				forceSelectVideo( selectedVideo );
 				return;
 			}
@@ -63,6 +68,82 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 		selectVideo( getVideoToLeft( selectedVideo ) );
 	}
 } );
+
+// Navigate vertically through the avalable videos to watch
+window.addEventListener( "leftanalogverticalmax", function( e ) {
+	let curr = e.detail.current;
+	let prev = e.detail.previous;
+
+	if ( prev == curr ) {
+		return;
+	}
+
+	if ( isSidebarOpen() ) {
+		if ( curr >= 1 ) {
+			selectSidebar( sideBarIndex + 1 );
+		} else if ( curr <= -1 ) {
+			selectSidebar( sideBarIndex - 1 );
+		}
+
+		return;
+	}
+
+	if ( !isValidVideo( selectedVideo ) ) {
+		forceSelectVideo( getFirstVideoOnScreen() );
+	}
+
+	if ( curr >= 1 ) {
+		selectVideo( getVideoToBottom( selectedVideo ) );
+	} else if ( curr <= -1 ) {
+		selectVideo( getVideoToTop( selectedVideo ) );
+	}
+} );
+
+function isValidVideo( elem ) {
+	if ( !elem ) {
+		return false;
+	}
+
+	let rect = elem.getBoundingClientRect();
+
+	for ( let i in rect ) {
+		if ( typeof rect[i] == typeof( 0 ) && rect[i] !== 0 ) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+function getFirstVideoOnScreen() {
+	for ( let y = 0; y <= window.innerHeight; y += 100 ) {
+		for ( let x = 0; x <= window.innerWidth; x += 100 ) {
+			let v = getVideoAt( x, y );
+
+			if ( v ) {
+				return v;
+			}
+		}
+	}
+
+	let p = $( "ytd-thumbnail" ).get( 0 );
+
+	if ( p ) {
+		return p;
+	}
+
+	return null;
+}
+
+function getVideoAt( x, y ) {
+	let elems = document.elementsFromPoint( x, y );
+
+	for ( let i in elems ) {
+		if ( elems[i].tagName === "YTD-THUMBNAIL" ) {
+			return elems[i];
+		}
+	}
+}
 
 function getVideoTo( elem, side, modifierx, modifiery ) {
 	if ( !modifierx ) {
@@ -91,21 +172,19 @@ function getVideoTo( elem, side, modifierx, modifiery ) {
 		let ex = ( rect.x + rect.width / 2 ) + x + modifierx;
 		let ey = ( rect.y + rect.height / 2 ) + y + ( y * .5 ) + modifiery;
 
-		if ( ex > window.innerWidth || ex < 0 ) {
+		if ( ex > window.innerWidth ) {
+			window.scrollBy( ( ex + ex * .4 ) - window.innerWidth, 0 );
+		} else if ( ex < 0 ) {
 			window.scrollBy( ex, 0 );
 		}
 
-		if ( ey > window.innerHeight || ey < 0 ) {
+		if ( ey > window.innerHeight ) {
 			window.scrollBy( 0, ( ey + ey * .4 ) - window.innerHeight );
+		} else if ( ey < 0 ) {
+			window.scrollBy( 0, ey );
 		}
 
-		let elems = document.elementsFromPoint( ex, ey );
-
-		for ( let i in elems ) {
-			if ( elems[i].tagName === "YTD-THUMBNAIL" ) {
-				return elems[i];
-			}
-		}
+		return getVideoAt( ex, ey );
 	}
 }
 
@@ -140,36 +219,6 @@ function getVideoToBottom( elem ) {
 function isFarLeft( elem ) {
 	return !getVideoToLeft( elem );
 }
-
-// Navigate vertically through the avalable videos to watch
-window.addEventListener( "leftanalogverticalmax", function( e ) {
-	let curr = e.detail.current;
-	let prev = e.detail.previous;
-
-	if ( prev == curr ) {
-		return;
-	}
-
-	if ( isSidebarOpen() ) {
-		if ( curr >= 1 ) {
-			selectSidebar( sideBarIndex + 1 );
-		} else if ( curr <= -1 ) {
-			selectSidebar( sideBarIndex - 1 );
-		}
-
-		return;
-	}
-
-	if ( !selectedVideo ) {
-		selectedVideo = $( "ytd-thumbnail" ).get( 0 );
-	}
-
-	if ( curr >= 1 ) {
-		selectVideo( getVideoToBottom( selectedVideo ) );
-	} else if ( curr <= -1 ) {
-		selectVideo( getVideoToTop( selectedVideo ) );
-	}
-} );
 
 function toggleSidebarView() {
 	$( "#guide-icon" ).click();
@@ -291,7 +340,7 @@ function selectVideo( toSelect, b ) {
 	}
 
 	if ( !b ) {
-		if ( selectedVideo ) {
+		if ( isValidVideo( selectedVideo ) ) {
 			deselectVideo( selectedVideo );
 		}
 	}
