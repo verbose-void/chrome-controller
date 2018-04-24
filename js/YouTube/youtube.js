@@ -1,6 +1,7 @@
 var selectedVideo;
 var sideBarIndex = -1;
 var deselectTimeout;
+var topBarHeight = $( "div#container.ytd-masthead" ).get( 0 ).getBoundingClientRect().height;
 
 // A Button "clicks" on the video
 window.addEventListener( "abuttonpressed", function() {
@@ -36,6 +37,7 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 	if ( !isSidebarOpen() ) {
 		if ( !isValidVideo( selectedVideo ) ) {
 			forceSelectVideo( getFirstVideoOnScreen() );
+			return;
 		} else if ( !isSelectedMarked() ) {
 			forceSelectVideo( selectedVideo );
 			return;
@@ -100,6 +102,7 @@ window.addEventListener( "leftanalogverticalmax", function( e ) {
 
 	if ( !isValidVideo( selectedVideo ) ) {
 		forceSelectVideo( getFirstVideoOnScreen() );
+		return;
 	} else if ( !isSelectedMarked() ) {
 		forceSelectVideo( selectedVideo );
 		return;
@@ -161,14 +164,27 @@ function isValidVideo( elem ) {
 }
 
 function getFirstVideoOnScreen() {
-	for ( let y = 0; y <= window.innerHeight; y += 100 ) {
+	let temp;
+
+	for ( let y = topBarHeight; y <= window.innerHeight; y += 100 ) {
 		for ( let x = 0; x <= window.innerWidth; x += 100 ) {
 			let v = getVideoAt( x, y );
 
 			if ( v ) {
-				return v;
+				let rect = v.getBoundingClientRect();
+				// Make sure the video is all the way on screen
+				if ( isOnScreen( v ) ) {
+					return v;
+				} else if ( !temp ) {
+					// Log first one found so that if no fully-on-screen items are found, it will return the first.
+					temp = v;
+				}
 			}
 		}
+	}
+
+	if ( temp ) {
+		return temp;
 	}
 
 	let p = $( "ytd-thumbnail" ).get( 0 );
@@ -178,6 +194,12 @@ function getFirstVideoOnScreen() {
 	}
 
 	return null;
+}
+
+function isOnScreen( elem ) {
+	let rect = elem.getBoundingClientRect();
+	return ( rect.x >= 0 && rect.x + rect.width <= window.innerWidth ) &&
+		   ( rect.y >= topBarHeight && rect.y + rect.height <= window.innerHeight );
 }
 
 function getVideoAt( x, y ) {
