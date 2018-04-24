@@ -69,9 +69,9 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 
 	// TODO test for no more videos
 	if ( curr >= 1 ) {
-		selectVideo( getVideoToRight( selectedVideo ) );
+		selectVideo( getVideoToSide( selectedVideo, "right" ) );
 	} else if ( curr <= -1 ) {
-		selectVideo( getVideoToLeft( selectedVideo ) );
+		selectVideo( getVideoToSide( selectedVideo, "left" ) );
 	}
 } );
 
@@ -104,9 +104,9 @@ window.addEventListener( "leftanalogverticalmax", function( e ) {
 	}
 
 	if ( curr >= 1 ) {
-		selectVideo( getVideoToBottom( selectedVideo ) );
+		selectVideo( getVideoToSide( selectedVideo, "bottom" ) );
 	} else if ( curr <= -1 ) {
-		selectVideo( getVideoToTop( selectedVideo ) );
+		selectVideo( getVideoToSide( selectedVideo, "top" ) );
 	}
 } );
 
@@ -188,79 +188,111 @@ function getVideoAt( x, y ) {
 	}
 }
 
-function getVideoTo( elem, side, modifierx, modifiery ) {
-	if ( !modifierx ) {
-		modifierx = 0;
+function getVideoToSide( elem, side, foo ) {
+	if ( side !== "left" && side !== "right" && side !== "top" && side !== "bottom" ) {
+		console.error( "Side must be left, right, top, or bottom." );
+		return;
 	}
 
-	if ( !modifiery ) {
-		modifiery = 0;
-	}
+	const rect = elem.getBoundingClientRect();
+	const mod = { x: rect.width * 0.8, y: rect.height * 0.8 };
+	const center = { x: rect.x + ( rect.width / 2 ) , y: rect.y + ( rect.height / 2 ) };
 
-	if ( elem ) {
-		let rect = elem.getBoundingClientRect();
-		let x = 0;
-		let y = 0;
-
+	var scanX = function( y ) {
 		if ( side === "left" ) {
-			x = -rect.width;
+			for ( let x = center.x - mod.x; x >= 0; x -= mod.x ) {
+				let potn = getVideoAt( x, y );
+
+				if ( potn ) {
+					return potn;
+				}
+			}
 		} else if ( side === "right" ) {
-			x = rect.width;
-		} else if ( side === "up" ) {
-			y = -rect.height;
-		} else if ( side === "down" ) {
-			y = rect.height;
+			for ( let x = center.x + mod.x; x <= window.innerWidth; x += mod.x ) {
+				let potn = getVideoAt( x, y );
+
+				if ( potn ) {
+					return potn;
+				}
+			}
 		}
 
-		let ex = ( rect.x + rect.width / 2 ) + x + modifierx;
-		let ey = ( rect.y + rect.height / 2 ) + y + ( y * .5 ) + modifiery;
+		return null;
+	}
 
-		if ( ex > window.innerWidth ) {
-			window.scrollBy( ( ex + ex * .4 ) - window.innerWidth, 0 );
-		} else if ( ex < 0 ) {
-			window.scrollBy( ex, 0 );
+	var scanY = function( x ) {
+		if ( side === "top" ) {
+			for ( let y = center.y - mod.y; y >= 0; y -= mod.y ) {
+				let potn = getVideoAt( x, y );
+
+				if ( potn ) {
+					return potn;
+				}
+			}
+		} else if ( side === "bottom" ) {
+			for ( let y = center.y + mod.y; y <= window.innerHeight; y += mod.y ) {
+				let potn = getVideoAt( x, y );
+
+				if ( potn ) {
+					return potn;
+				}
+			}
+		}
+	}
+
+	if ( side === "right" || side === "left" ) {
+		for ( let y = center.y; y >= 0; y -= mod.y ) {
+			let potn = scanX( y );
+
+			if ( potn ) {
+				return potn;
+			}
 		}
 
-		if ( ey > window.innerHeight ) {
-			window.scrollBy( 0, ( ey + ey * .4 ) - window.innerHeight );
-		} else if ( ey < 0 ) {
-			window.scrollBy( 0, ey );
+		for ( let y = center.y + mod.y; y <= window.innerHeight; y += mod.y ) {
+			let potn = scanX( y );
+
+			if ( potn ) {
+				return potn;
+			}
+		}
+	} else {
+		for ( let x = center.x; x >= 0; x -= mod.x ) {
+			let potn = scanY( x );
+
+			if ( potn ) {
+				return potn;
+			}
 		}
 
-		return getVideoAt( ex, ey );
-	}
-}
+		for ( let x = center.x + mod.x; x <= window.innerWidth; x += mod.x ) {
+			let potn = scanY( x );
 
-function getVideoToLeft( elem ) {
-	return getVideoTo( elem, "left" );
-}
-
-function getVideoToRight( elem ) {
-	return getVideoTo( elem, "right" );
-}
-
-function getVideoToTop( elem ) {
-	let up = getVideoTo( elem, "up" );
-
-	if ( !up ) {
-		up = getVideoTo( elem, "up", 0, -100 );
+			if ( potn ) {
+				return potn;
+			}
+		}
 	}
 
-	return up;
-}
-
-function getVideoToBottom( elem ) {
-	let down = getVideoTo( elem, "down" );
-
-	if ( !down ) {
-		down = getVideoTo( elem, "down", 0, 100 );
+	if ( side === "right" || side === "left" ) {
+		return null;
 	}
 
-	return down;
+	if ( foo !== "12341234" ) {
+		if ( side === "top" ) {
+			window.scrollBy( 0, mod.y * -2.5 );
+		} else {
+			window.scrollBy( 0, mod.y * 2.5 );
+		}
+		console.log( "test" );
+		return getVideoToSide( elem, side, "12341234" );
+	}
+
+	return null;
 }
 
 function isFarLeft( elem ) {
-	return !getVideoToLeft( elem );
+	return !getVideoToSide( elem, "left" );
 }
 
 function toggleSidebarView() {
