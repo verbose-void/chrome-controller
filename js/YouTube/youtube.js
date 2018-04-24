@@ -35,7 +35,7 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 	scheduleDeselectTimeout();
 
 	if ( !isSidebarOpen() ) {
-		if ( !isValidVideo( selectedVideo ) ) {
+		if ( !isValidVideo( selectedVideo ) || !isOnScreen( selectedVideo ) ) {
 			forceSelectVideo( getFirstVideoOnScreen() );
 			return;
 		} else if ( !isSelectedMarked() ) {
@@ -100,7 +100,7 @@ window.addEventListener( "leftanalogverticalmax", function( e ) {
 		return;
 	}
 
-	if ( !isValidVideo( selectedVideo ) ) {
+	if ( !isValidVideo( selectedVideo ) || !isOnScreen( selectedVideo ) ) {
 		forceSelectVideo( getFirstVideoOnScreen() );
 		return;
 	} else if ( !isSelectedMarked() ) {
@@ -174,6 +174,7 @@ function getFirstVideoOnScreen() {
 				let rect = v.getBoundingClientRect();
 				// Make sure the video is all the way on screen
 				if ( isOnScreen( v ) ) {
+					console.log( rect );
 					return v;
 				} else if ( !temp ) {
 					// Log first one found so that if no fully-on-screen items are found, it will return the first.
