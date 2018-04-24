@@ -500,7 +500,14 @@ function selectClickable( toSelect, b ) {
 
 	scrollToVisible( toSelect );
 	toSelect.style["border-style"] = "solid";
-	toSelect.style["border-color"] = "red";
+
+	let color = "red";
+
+	if ( $( toSelect ).attr( "aria-label" ) === "Subscribe to this channel." ) {
+		color = "white";
+	}
+
+	toSelect.style["border-color"] = color;
 	toSelect.style["border-width"] = "2px";
 
 	selectedClickable = toSelect;
