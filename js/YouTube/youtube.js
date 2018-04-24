@@ -1,7 +1,7 @@
 var selectedClickable;
 var sideBarIndex = -1;
 var deselectTimeout;
-var topBarHeight = $( "div#container.ytd-masthead" ).get( 0 ).getBoundingClientRect().height;
+const topBarHeight = 55;
 
 // A Button "clicks" on the video
 window.addEventListener( "abuttonpressed", function() {
@@ -253,7 +253,7 @@ function getArrowButtonToSide( elem, side ) {
 	if ( !elem ) {
 		return;
 	}
-	
+
 	if ( side !== "right" && side !== "left" ) {
 		console.error( "Side must be right or left." );
 		return;
@@ -440,7 +440,7 @@ function selectSidebar( toSelect, b ) {
 
 		setTimeout( function() {
 			selectSidebar( toSelect );
-		}, 100 );
+		}, 10 * ___c );
 
 		___c ++;
 		return;
