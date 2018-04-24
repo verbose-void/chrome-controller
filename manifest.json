@@ -25,5 +25,8 @@
 	},
 	"permissions": [
 		"tabs"
-	]
+	],
+	"icons": {
+		"128": "assets/cc-128.png"
+	}
 }
