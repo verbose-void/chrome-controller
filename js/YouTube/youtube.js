@@ -36,7 +36,7 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 
 	if ( !isSidebarOpen() ) {
 		if ( !isValidVideo( selectedVideo ) || !isOnScreen( selectedVideo ) ) {
-			forceSelectVideo( getFirstVideoOnScreen() );
+			selectVideo( getFirstVideoOnScreen() );
 			return;
 		} else if ( !isSelectedMarked() ) {
 			forceSelectVideo( selectedVideo );
@@ -101,7 +101,7 @@ window.addEventListener( "leftanalogverticalmax", function( e ) {
 	}
 
 	if ( !isValidVideo( selectedVideo ) || !isOnScreen( selectedVideo ) ) {
-		forceSelectVideo( getFirstVideoOnScreen() );
+		selectVideo( getFirstVideoOnScreen() );
 		return;
 	} else if ( !isSelectedMarked() ) {
 		forceSelectVideo( selectedVideo );
