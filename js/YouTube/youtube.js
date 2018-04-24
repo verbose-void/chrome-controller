@@ -1,11 +1,11 @@
-var selectedVideo;
+var selectedClickable;
 var sideBarIndex = -1;
 var deselectTimeout;
 var topBarHeight = $( "div#container.ytd-masthead" ).get( 0 ).getBoundingClientRect().height;
 
 // A Button "clicks" on the video
 window.addEventListener( "abuttonpressed", function() {
-	if ( !selectedVideo ) {
+	if ( !selectedClickable ) {
 		return;
 	}
 
@@ -18,7 +18,14 @@ window.addEventListener( "abuttonpressed", function() {
 		return;
 	}
 
-	window.location.href = selectedVideo.children[0].href;
+	let href = selectedClickable.children[0].href;
+
+	if ( !href ) {
+		selectedClickable.click();
+		return;
+	}
+
+	window.location.href = selectedClickable.children[0].href;
 	deselectAll();
 } );
 
@@ -35,25 +42,25 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 	scheduleDeselectTimeout();
 
 	if ( !isSidebarOpen() ) {
-		if ( !isValidVideo( selectedVideo ) || !isOnScreen( selectedVideo ) ) {
-			selectVideo( getFirstVideoOnScreen() );
+		if ( !isValidElement( selectedClickable ) || !isOnScreen( selectedClickable ) ) {
+			selectClickable( getFirstClickableOnScreen() );
 			return;
 		} else if ( !isSelectedMarked() ) {
-			forceSelectVideo( selectedVideo );
+			forceSelectClickable( selectedClickable );
 			return;
 		}
 	}
 
 	
 	if ( curr >= 1 ) {
-		let arrow = getArrowButtonToSide( selectedVideo, "right" );
+		let arrow = getArrowButtonToSide( selectedClickable, "right" );
 
 		if ( arrow ) {
 			arrow.click();
 			return;
 		}
 	} else if ( curr <= -1 ) {
-		let arrow = getArrowButtonToSide( selectedVideo, "left" );
+		let arrow = getArrowButtonToSide( selectedClickable, "left" );
 
 		if ( arrow ) {
 			arrow.click();
@@ -74,13 +81,13 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 				// TODO Set currently selected to closest video
 				toggleSidebarView();
 
-				forceSelectVideo( selectedVideo );
+				forceSelectClickable( selectedClickable );
 				return;
 			}
 		} else {
 			if ( curr <= -1 ) {
-				if ( isFarLeft( selectedVideo ) ) {
-					deselectVideo( selectedVideo );
+				if ( isFarLeft( selectedClickable ) ) {
+					deselectVideo( selectedClickable );
 					toggleSidebarView();
 					forceSelectSidebar( sideBarIndex );
 					// TODO set current contentContainerIndex (needs to be created) to top index
@@ -92,9 +99,9 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 
 	// TODO test for no more videos
 	if ( curr >= 1 ) {
-		selectVideo( getVideoToSide( selectedVideo, "right" ) );
+		selectClickable( getClickableToSide( selectedClickable, "right" ) );
 	} else if ( curr <= -1 ) {
-		selectVideo( getVideoToSide( selectedVideo, "left" ) );
+		selectClickable( getClickableToSide( selectedClickable, "left" ) );
 	}
 } );
 
@@ -119,27 +126,27 @@ window.addEventListener( "leftanalogverticalmax", function( e ) {
 		return;
 	}
 
-	if ( !isValidVideo( selectedVideo ) || !isOnScreen( selectedVideo ) ) {
-		selectVideo( getFirstVideoOnScreen() );
+	if ( !isValidElement( selectedClickable ) || !isOnScreen( selectedClickable ) ) {
+		selectClickable( getFirstClickableOnScreen() );
 		return;
 	} else if ( !isSelectedMarked() ) {
-		forceSelectVideo( selectedVideo );
+		forceSelectClickable( selectedClickable );
 		return;
 	}
 
 	if ( curr >= 1 ) {
-		selectVideo( getVideoToSide( selectedVideo, "bottom" ) );
+		selectClickable( getClickableToSide( selectedClickable, "bottom" ) );
 	} else if ( curr <= -1 ) {
-		selectVideo( getVideoToSide( selectedVideo, "top" ) );
+		selectClickable( getClickableToSide( selectedClickable, "top" ) );
 	}
 } );
 
 function isSelectedMarked() {
-	if ( !selectedVideo ) {
+	if ( !selectedClickable ) {
 		return null;
 	}
 
-	let bs = selectedVideo.style["border-style"];
+	let bs = selectedClickable.style["border-style"];
 
 	if ( !bs ) {
 		return false;
@@ -154,8 +161,8 @@ function scheduleDeselectTimeout() {
 	}
 
 	deselectTimeout = setTimeout( function() {
-		if ( selectedVideo ) {
-			deselectVideo( selectedVideo );
+		if ( selectedClickable ) {
+			deselectVideo( selectedClickable );
 		}
 
 		if ( isSidebarOpen() ) {
@@ -166,7 +173,7 @@ function scheduleDeselectTimeout() {
 	}, 20000 ); // TODO make changeable in drop-down settings
 }
 
-function isValidVideo( elem ) {
+function isValidElement( elem ) {
 	if ( !elem ) {
 		return false;
 	}
@@ -182,12 +189,12 @@ function isValidVideo( elem ) {
 	return false;
 }
 
-function getFirstVideoOnScreen() {
+function getFirstClickableOnScreen() {
 	let temp;
 
-	for ( let y = topBarHeight; y <= window.innerHeight; y += 100 ) {
-		for ( let x = 0; x <= window.innerWidth; x += 100 ) {
-			let v = getVideoAt( x, y );
+	for ( let y = topBarHeight; y <= window.innerHeight; y += 20 ) {
+		for ( let x = 0; x <= window.innerWidth; x += 20 ) {
+			let v = getClickableAt( x, y );
 
 			if ( v ) {
 				let rect = v.getBoundingClientRect();
@@ -221,11 +228,22 @@ function isOnScreen( elem ) {
 		   ( rect.y >= topBarHeight && rect.y + rect.height <= window.innerHeight );
 }
 
-function getVideoAt( x, y ) {
+function getClickableAt( x, y ) {
 	let elems = document.elementsFromPoint( x, y );
 
 	for ( let i in elems ) {
-		if ( elems[i].tagName === "YTD-THUMBNAIL" ) {
+		let cur = elems[i];
+		let tag = cur.tagName;
+		let aria =  $( cur ).attr( "aria-label" );
+
+		let hc = function( c ) {
+			return $( cur ).hasClass( c );
+		};
+
+		if ( tag === "YTD-THUMBNAIL" || 
+		   ( tag === "PAPER-BUTTON" && aria === "Subscribe to this channel." ) ||
+		   ( tag === "A" && hc( "ytd-shelf-renderer" ) ) ||
+		   ( tag === "PAPER-TAB" ) && hc( "ytd-c4-tabbed-header-renderer" ) ) {
 			return elems[i];
 		}
 	}
@@ -254,28 +272,28 @@ function getArrowButtonToSide( elem, side ) {
 	return null;
 }
 
-function getVideoToSide( elem, side, foo ) {
+function getClickableToSide( elem, side ) {
 	if ( side !== "left" && side !== "right" && side !== "top" && side !== "bottom" ) {
 		console.error( "Side must be left, right, top, or bottom." );
 		return;
 	}
 
 	const rect = elem.getBoundingClientRect();
-	const mod = { x: rect.width * 0.8, y: rect.height * 0.8 };
-	const center = { x: rect.x + ( rect.width / 2 ) , y: rect.y + ( rect.height / 2 ) };
+	const mod = { x: 140, y: 10 };
+	const center = { x: rect.x + ( rect.width / 2 ), y: rect.y + ( rect.height / 2 ) };
 
 	var scanX = function( y ) {
 		if ( side === "left" ) {
-			for ( let x = center.x - mod.x; x >= 0; x -= mod.x ) {
-				let potn = getVideoAt( x, y );
+			for ( let x = center.x - ( rect.width * 0.6 ); x >= 0; x -= mod.x ) {
+				let potn = getClickableAt( x, y );
 
 				if ( potn ) {
 					return potn;
 				}
 			}
 		} else if ( side === "right" ) {
-			for ( let x = center.x + mod.x; x <= window.innerWidth; x += mod.x ) {
-				let potn = getVideoAt( x, y );
+			for ( let x = center.x + ( rect.width * 0.6 ); x <= window.innerWidth; x += mod.x ) {
+				let potn = getClickableAt( x, y );
 
 				if ( potn ) {
 					return potn;
@@ -288,16 +306,16 @@ function getVideoToSide( elem, side, foo ) {
 
 	var scanY = function( x ) {
 		if ( side === "top" ) {
-			for ( let y = center.y - mod.y; y >= 0; y -= mod.y ) {
-				let potn = getVideoAt( x, y );
+			for ( let y = center.y - ( rect.height * 0.6 ); y >= 0; y -= mod.y ) {
+				let potn = getClickableAt( x, y );
 
 				if ( potn ) {
 					return potn;
 				}
 			}
 		} else if ( side === "bottom" ) {
-			for ( let y = center.y + mod.y; y <= window.innerHeight; y += mod.y ) {
-				let potn = getVideoAt( x, y );
+			for ( let y = center.y + ( rect.height * 0.6 ); y <= window.innerHeight; y += mod.y ) {
+				let potn = getClickableAt( x, y );
 
 				if ( potn ) {
 					return potn;
@@ -315,7 +333,7 @@ function getVideoToSide( elem, side, foo ) {
 			}
 		}
 
-		for ( let y = center.y + mod.y; y <= window.innerHeight; y += mod.y ) {
+		for ( let y = center.y + ( rect.height * 0.6 ); y <= window.innerHeight; y += mod.y ) {
 			let potn = scanX( y );
 
 			if ( potn ) {
@@ -323,7 +341,7 @@ function getVideoToSide( elem, side, foo ) {
 			}
 		}
 	} else {
-		for ( let x = center.x; x >= 0; x -= mod.x ) {
+		for ( let x = center.x - 50; x >= 0; x -= mod.x ) {
 			let potn = scanY( x );
 
 			if ( potn ) {
@@ -331,7 +349,7 @@ function getVideoToSide( elem, side, foo ) {
 			}
 		}
 
-		for ( let x = center.x + mod.x; x <= window.innerWidth; x += mod.x ) {
+		for ( let x = center.x + 50; x <= window.innerWidth; x += mod.x ) {
 			let potn = scanY( x );
 
 			if ( potn ) {
@@ -344,21 +362,11 @@ function getVideoToSide( elem, side, foo ) {
 		return null;
 	}
 
-	if ( foo !== "12341234" ) {
-		if ( side === "top" ) {
-			window.scrollBy( 0, mod.y * -2.5 );
-		} else {
-			window.scrollBy( 0, mod.y * 2.5 );
-		}
-
-		return getVideoToSide( elem, side, "12341234" );
-	}
-
 	return null;
 }
 
 function isFarLeft( elem ) {
-	return !getVideoToSide( elem, "left" );
+	return !getClickableToSide( elem, "left" );
 }
 
 function toggleSidebarView() {
@@ -396,11 +404,11 @@ function scrollToVisible( elm ) {
 }
 
 function isSidebarOpen() {
-	return $( "#contentContainer" ).get( 0 ).getAttribute( "opened" ) != null;
+	return $( "div#contentContainer.app-drawer" ).get( 0 ).getAttribute( "opened" ) != null;
 }
 
-function forceSelectVideo( toSelect ) {
-	selectVideo( toSelect, true );
+function forceSelectClickable( toSelect ) {
+	selectClickable( toSelect, true );
 }
 
 var ___c = 0;
@@ -475,14 +483,14 @@ function deselectSidebar( toDeselect ) {
 	item.style["border-style"] = "none";
 }
 
-function selectVideo( toSelect, b ) {
+function selectClickable( toSelect, b ) {
 	if ( !toSelect ) {
 		return;
 	}
 
 	if ( !b ) {
-		if ( isValidVideo( selectedVideo ) ) {
-			deselectVideo( selectedVideo );
+		if ( isValidElement( selectedClickable ) ) {
+			deselectVideo( selectedClickable );
 		}
 	}
 
@@ -491,7 +499,7 @@ function selectVideo( toSelect, b ) {
 	toSelect.style["border-color"] = "red";
 	toSelect.style["border-width"] = "2px";
 
-	selectedVideo = toSelect;
+	selectedClickable = toSelect;
 }
 
 function deselectVideo( toDeselect ) {
