@@ -284,7 +284,7 @@ function getVideoToSide( elem, side, foo ) {
 		} else {
 			window.scrollBy( 0, mod.y * 2.5 );
 		}
-		console.log( "test" );
+		
 		return getVideoToSide( elem, side, "12341234" );
 	}
 
