@@ -243,7 +243,8 @@ function getClickableAt( x, y ) {
 		if ( tag === "YTD-THUMBNAIL" || 
 		   ( tag === "PAPER-BUTTON" && aria === "Subscribe to this channel." ) ||
 		   ( tag === "A" && hc( "ytd-shelf-renderer" ) ) ||
-		   ( tag === "PAPER-TAB" ) && hc( "ytd-c4-tabbed-header-renderer" ) ) {
+		   ( tag === "PAPER-TAB" ) && hc( "ytd-c4-tabbed-header-renderer" )  ||
+		   ( tag === "YTD-TOGGLE-BUTTON-RENDERER" ) && cur.parentElement.id === "top-level-buttons" ) {
 			return elems[i];
 		}
 	}
@@ -283,7 +284,7 @@ function getClickableToSide( elem, side ) {
 	}
 
 	const rect = elem.getBoundingClientRect();
-	const mod = { x: 140, y: 10 };
+	const mod = { x: 60, y: 10 };
 	const center = { x: rect.x + ( rect.width / 2 ), y: rect.y + ( rect.height / 2 ) };
 
 	var scanX = function( y ) {
