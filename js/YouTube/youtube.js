@@ -44,6 +44,25 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 		}
 	}
 
+	
+	if ( curr >= 1 ) {
+		let arrow = getArrowButtonToSide( selectedVideo, "right" );
+
+		if ( arrow ) {
+			arrow.click();
+			return;
+		}
+	} else if ( curr <= -1 ) {
+		let arrow = getArrowButtonToSide( selectedVideo, "left" );
+
+		if ( arrow ) {
+			arrow.click();
+			return;
+		}
+	}
+	
+
+
 	let contentContainer = $( "#contentContainer" ).get( 0 );
 	let scrim = $( "#scrim" ).get( 0 );
 	let appDrawer = $( "app-drawer#guide" ).get( 0 );
@@ -211,6 +230,29 @@ function getVideoAt( x, y ) {
 			return elems[i];
 		}
 	}
+}
+
+function getArrowButtonToSide( elem, side ) {
+	if ( side !== "right" && side !== "left" ) {
+		console.error( "Side must be right or left." );
+		return;
+	}
+
+	let rect = elem.getBoundingClientRect();
+	let center = { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 };
+
+	let potn = document.elementsFromPoint( side === "right" ? center.x + rect.width / 2 : center.x - rect.width / 2, center.y );
+
+	for ( let i in potn ) {
+		if ( potn[i].tagName === "YT-ICON-BUTTON" ) {
+			let child = potn[i].children[0];
+			if ( child && $( child ).attr( "aria-label" ) === side === "right" ? "Next" : "Previous" ) {
+				return potn[i];
+			}
+		}
+	}
+
+	return null;
 }
 
 function getVideoToSide( elem, side, foo ) {
