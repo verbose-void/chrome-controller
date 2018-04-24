@@ -250,6 +250,10 @@ function getClickableAt( x, y ) {
 }
 
 function getArrowButtonToSide( elem, side ) {
+	if ( !elem ) {
+		return;
+	}
+	
 	if ( side !== "right" && side !== "left" ) {
 		console.error( "Side must be right or left." );
 		return;
