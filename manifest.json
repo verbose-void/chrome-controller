@@ -2,11 +2,10 @@
 	"manifest_version": 2,
 	"name": "Chrome Controller",
 	"description": "Gives the ability to browse the web using your Xbox / PlayStation ( and many other ) controllers easily and comfortably!",
-	"version": "0.4.3",
+	"version": "0.4.4",
 	"content_scripts": [
 		{
 			"matches": ["<all_urls>"],
-			"css": ["css/osk.css"],
 			"js": ["js/jquery.js", "js/setup.js", "js/global.js"],
 			"run_at": "document_start"
 		},
