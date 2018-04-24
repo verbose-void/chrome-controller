@@ -33,11 +33,13 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 
 	scheduleDeselectTimeout();
 
-	if ( !isValidVideo( selectedVideo ) ) {
-		forceSelectVideo( getFirstVideoOnScreen() );
-	} else if ( !isSelectedMarked() ) {
-		forceSelectVideo( selectedVideo );
-		return;
+	if ( !isSidebarOpen() ) {
+		if ( !isValidVideo( selectedVideo ) ) {
+			forceSelectVideo( getFirstVideoOnScreen() );
+		} else if ( !isSelectedMarked() ) {
+			forceSelectVideo( selectedVideo );
+			return;
+		}
 	}
 
 	let contentContainer = $( "#contentContainer" ).get( 0 );
@@ -284,7 +286,7 @@ function getVideoToSide( elem, side, foo ) {
 		} else {
 			window.scrollBy( 0, mod.y * 2.5 );
 		}
-		
+
 		return getVideoToSide( elem, side, "12341234" );
 	}
 
