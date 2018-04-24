@@ -1,6 +1,7 @@
 # Chrome Controller
 ##### An open source project that will allow you to control Google Chrome from your bed, couch, floor: really anywhere that isn't your desk using your Xbox / PlayStation ( and many other ) controllers!
 
+###### Like Chrome Controller? Consider [donating](https://www.paypal.com/donate/?token=MZkLx-QKhs0oDm_DTkbRGgQCgtXnoGCORu8_EQ1VC5zdDhSyx0y5TNIkBdS60PAVwFa7LW&country.x=US&locale.x=US)!
 ###### Note: All buttons will be referred to in respect to the Xbox One Controller.
 
 ## Global Controls:
