@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+	<link rel="stylesheet" href="settings-style.css">
+	<script src="../js/jquery.js"></script>
+	<script src="settings-script.js"></script>
+</head>
+<body>
+	<div class="sliders-container">
+		<div class="slider-container">
+			<h2 class="slider-header" aria-label="Scroll Speed: %s"></h2>
+			<input id="scroll-sensitivity" step="1" type="range" min="1" max="25" value="13" class="slider">
+		</div>
+
+		<div class="slider-container">
+			<h2 class="slider-header" aria-label="Scroll Sprint: %sx"></h2>
+			<input id="scroll-sprint" step="0.1" type="range" min="1" max="5" value="2" class="slider">
+		</div>
+
+		<div class="slider-container">
+			<h2 class="slider-header" aria-label="Select Time: %s"></h2>
+			<input id="select-time" step="1" type="range" min="5" max="61" value="20" class="slider">
+		</div>
+	</div>
+	<div class="bottom-bar">
+		<button class="submit">Submit</button>
+	</div>
+</body>
