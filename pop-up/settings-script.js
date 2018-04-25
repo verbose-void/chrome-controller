@@ -58,5 +58,11 @@ function updateSettings() {
 		}
 	}
 
-	chrome.storage.sync.set( settings );
+	chrome.storage.sync.set( settings, function() {
+		chrome.tabs.query( {}, function( tabs ) {
+		    for ( var i = 0; i < tabs.length; i++ ) {
+		        chrome.tabs.sendMessage( tabs[i].id, { type: "settings-updated" } );
+		    }
+		} );
+	} );
 }
