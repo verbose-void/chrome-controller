@@ -2,9 +2,27 @@
  *	Contains all features that are not site-specific.
  */
 
-// TODO make these options changeable in the extension button drop-down
-let scrollMultiplier = 13;
-let scrollSprintMultiplier = 2;
+var scrollMultiplier;
+var scrollSprintMultiplier;
+
+updateSettings();
+
+function updateSettings() {
+	chrome.storage.sync.get( ["scroll-sensitivity", "scroll-sprint"], function( results ) {
+		scrollMultiplier = results["scroll-sensitivity"] ? results["scroll-sensitivity"] : scrollMultiplier;
+		scrollSprintMultiplier = results["scroll-sprint"] ? results["scroll-sprint"] : scrollSprintMultiplier;
+	} );
+};
+
+chrome.runtime.onMessage.addListener( function( req ) {
+	// Repeat code because updateSettings can't be used.
+	if ( req.type === "settings-updated" ) {
+		chrome.storage.sync.get( ["scroll-sensitivity", "scroll-sprint"], function( results ) {
+			scrollMultiplier = results["scroll-sensitivity"] ? results["scroll-sensitivity"] : scrollMultiplier;
+			scrollSprintMultiplier = results["scroll-sprint"] ? results["scroll-sprint"] : scrollSprintMultiplier;
+		} );
+	}
+} );
 
 // Scrolling
 window.addEventListener( "rightanalogverticalpoll", function( e ) {

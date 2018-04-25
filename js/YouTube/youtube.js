@@ -1,7 +1,27 @@
 var selectedClickable;
 var sideBarIndex = -1;
 var deselectTimeout;
+var deselectTiming;
 const topBarHeight = 55;
+
+updateSettings();
+
+function updateSettings() {
+	chrome.storage.sync.get( ["select-time"], function( results ) {
+		if ( results["select-time"] === "never" ) {
+			deselectTiming = "never";
+			return;
+		}
+
+		deselectTiming = results["select-time"] ? results["select-time"] * 1000 : deselectTiming;
+	} );
+}
+
+chrome.runtime.onMessage.addListener( function( req ) {
+	if ( req.type === "settings-updated" ) {
+		updateSettings();
+	}
+} );
 
 // A Button "clicks" on the video
 window.addEventListener( "abuttonpressed", function() {
@@ -157,17 +177,19 @@ function scheduleDeselectTimeout() {
 		window.clearTimeout( deselectTimeout );
 	}
 
-	deselectTimeout = setTimeout( function() {
-		if ( selectedClickable ) {
-			deselectVideo( selectedClickable );
-		}
+	if ( deselectTiming !== "never" ) {
+		deselectTimeout = setTimeout( function() {
+			if ( selectedClickable ) {
+				deselectVideo( selectedClickable );
+			}
 
-		if ( isSidebarOpen() ) {
-			toggleSidebarView();
-		}
+			if ( isSidebarOpen() ) {
+				toggleSidebarView();
+			}
 
-		deselectTimeout = undefined;
-	}, 20000 );
+			deselectTimeout = undefined;
+		}, deselectTiming );
+	}
 }
 
 function isValidElement( elem ) {
