@@ -78,7 +78,6 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 			if ( curr <= -1 ) {
 				return;
 			} else if ( curr >= 1 ) {
-				// TODO Set currently selected to closest video
 				toggleSidebarView();
 
 				forceSelectClickable( selectedClickable );
@@ -90,14 +89,12 @@ window.addEventListener( "leftanaloghorizontalmax", function( e ) {
 					deselectVideo( selectedClickable );
 					toggleSidebarView();
 					forceSelectSidebar( sideBarIndex );
-					// TODO set current contentContainerIndex (needs to be created) to top index
 					return;
 				}
 			}
 		}
 	}
 
-	// TODO test for no more videos
 	if ( curr >= 1 ) {
 		selectClickable( getClickableToSide( selectedClickable, "right" ) );
 	} else if ( curr <= -1 ) {
@@ -170,7 +167,7 @@ function scheduleDeselectTimeout() {
 		}
 
 		deselectTimeout = undefined;
-	}, 20000 ); // TODO make changeable in drop-down settings
+	}, 20000 );
 }
 
 function isValidElement( elem ) {
