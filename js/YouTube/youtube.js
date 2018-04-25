@@ -8,8 +8,8 @@ updateSettings();
 
 function updateSettings() {
 	chrome.storage.sync.get( ["select-time"], function( results ) {
-		if ( results["select-time"] === "never" ) {
-			deselectTiming = "never";
+		if ( results["select-time"] === "forever" ) {
+			deselectTiming = "forever";
 			return;
 		}
 
@@ -177,7 +177,7 @@ function scheduleDeselectTimeout() {
 		window.clearTimeout( deselectTimeout );
 	}
 
-	if ( deselectTiming !== "never" ) {
+	if ( deselectTiming !== "forever" ) {
 		deselectTimeout = setTimeout( function() {
 			if ( selectedClickable ) {
 				deselectVideo( selectedClickable );

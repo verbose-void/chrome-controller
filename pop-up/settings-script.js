@@ -23,7 +23,7 @@ function setH2( slider ) {
 
 		if ( $( slider ).attr( "id" ) === "select-time" ) {
 			if  ( val == 61 ) {
-				val = "never";
+				val = "forever";
 			} else {
 				val += "s";
 			}
@@ -54,7 +54,7 @@ function updateSettings() {
 
 	if ( settings["select-time"] ) {
 		if ( settings["select-time"] == 61 ) {
-			settings["select-time"] = "never";
+			settings["select-time"] = "forever";
 		}
 	}
 
