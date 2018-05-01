@@ -30,6 +30,10 @@ function removegamepad( gamepad ) {
 }
 
 function pollEvents() {
+  if ( !document.hasFocus() ) {
+  	return;
+  }
+
   scangamepads();
   
   for( let k in controllers ) {
