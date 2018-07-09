@@ -1,14 +1,17 @@
 let sliders;
 
 $( function() {
+
 	$( ".submit" ).click( updateSettings );
 	sliders = Array.from( $( ".slider" ) );
+	
 	loadSettings();
 
 	for ( let i in sliders ) {
 		setH2( sliders[i] );
 		sliders[i].oninput = setH2;
 	}
+
 } );
 
 function setH2( slider ) {
