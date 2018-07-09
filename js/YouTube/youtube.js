@@ -1,7 +1,7 @@
 var selectedClickable;
 var sideBarIndex = -1;
 var deselectTimeout;
-var deselectTiming;
+var deselectTiming = 20000;
 const topBarHeight = 55;
 
 updateSettings();
