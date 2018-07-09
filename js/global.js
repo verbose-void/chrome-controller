@@ -2,8 +2,8 @@
  *	Contains all features that are not site-specific.
  */
 
-var scrollMultiplier;
-var scrollSprintMultiplier;
+var scrollMultiplier = 13;
+var scrollSprintMultiplier = 2;
 
 updateSettings();
 
