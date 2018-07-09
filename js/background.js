@@ -89,7 +89,6 @@ function effectCurrent( func ) {
 				break;
 			}
 		}
-
 		if ( activeIndex >= 0 ) {
 			// tab, tab index, tab id
 			func( s[activeIndex], activeIndex, s[activeIndex].id );
