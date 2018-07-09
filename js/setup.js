@@ -9,11 +9,11 @@ var rAF = window.mozRequestAnimationFrame ||
   window.requestAnimationFrame;
 
 function connecthandler( e ) {
-	if ( e.gamepad.axes.length < 4 || e.gamepad.buttons.length < 17 ) {
+	/*if ( e.gamepad.axes.length < 4 || e.gamepad.buttons.length < 17 ) {
 		console.log( "Could not load " + e.gamepad.id + "." );
 		console.log( "Reason: Insufficient button / axis count." );
 		return;
-	}
+	}*/
 
 	controllers[e.gamepad.index] = e.gamepad;
 	rAF( pollEvents );
