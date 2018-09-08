@@ -50,8 +50,8 @@ window.addEventListener( "abuttonpressed", function() {
 } );
 
 // Hide selection if using cursor
-window.addEventListener( "leftanalogverticalmax", leftAnalog );
-window.addEventListener( "leftanaloghorizontalmax", leftAnalog );
+window.addEventListener( "leftanalogvertical", leftAnalog );
+window.addEventListener( "leftanaloghorizontal", leftAnalog );
 
 function leftAnalog( e ) {
 	if ( selectedClickable ) {
