@@ -49,18 +49,23 @@ window.addEventListener( "abuttonpressed", function() {
 	deselectAll();
 } );
 
+// Hide selection if using cursor
+window.addEventListener( "leftanalogverticalmax", leftAnalog );
+window.addEventListener( "leftanaloghorizontalmax", leftAnalog );
+
+function leftAnalog( e ) {
+	if ( selectedClickable ) {
+		deselectVideo( selectedClickable );
+	}
+}
+
 // Navigate horizontally through the avalable videos to watch
 window.addEventListener( "dpadrightreleased", horizDpad );
 window.addEventListener( "dpadleftreleased", horizDpad );
 
 function horizDpad( e ) {
-	let curr = e.detail.current;
-	let prev = e.detail.previous;
+	let curr = e.type == "dpadrightreleased" ? "right" : "left";
 	let ct;
-
-	if ( prev == curr ) {
-		return;
-	}
 
 	scheduleDeselectTimeout();
 
@@ -75,14 +80,14 @@ function horizDpad( e ) {
 	}
 
 	
-	if ( curr >= 1 ) {
+	if ( curr == "right" ) {
 		let arrow = getArrowButtonToSide( selectedClickable, "right" );
 
 		if ( arrow ) {
 			arrow.click();
 			return;
 		}
-	} else if ( curr <= -1 ) {
+	} else if ( curr == "left" ) {
 		let arrow = getArrowButtonToSide( selectedClickable, "left" );
 
 		if ( arrow ) {
@@ -98,16 +103,16 @@ function horizDpad( e ) {
 	let appDrawer = $( "app-drawer#guide" ).get( 0 );
 	if ( contentContainer ) {
 		if ( isSidebarOpen() ) {
-			if ( curr <= -1 ) {
+			if ( curr == "left" ) {
 				return;
-			} else if ( curr >= 1 ) {
+			} else {
 				toggleSidebarView();
 
 				forceSelectClickable( selectedClickable );
 				return;
 			}
 		} else {
-			if ( curr <= -1 ) {
+			if ( curr == "left" ) {
 				if ( isFarLeft( selectedClickable ) ) {
 					deselectVideo( selectedClickable );
 					toggleSidebarView();
@@ -118,28 +123,26 @@ function horizDpad( e ) {
 		}
 	}
 
-	if ( curr >= 1 ) {
+	if ( curr == "right" ) {
 		selectClickable( getClickableToSide( selectedClickable, "right" ) );
-	} else if ( curr <= -1 ) {
+	} else {
 		selectClickable( getClickableToSide( selectedClickable, "left" ) );
 	}
 };
 
 // Navigate vertically through the avalable videos to watch
-window.addEventListener( "leftanalogverticalmax", function( e ) {
-	let curr = e.detail.current;
-	let prev = e.detail.previous;
+window.addEventListener( "dpadupreleased", vertDpad );
+window.addEventListener( "dpaddownreleased", vertDpad );
 
-	if ( prev == curr ) {
-		return;
-	}
+function vertDpad( e ) {
+	let curr = e.type == "dpadupreleased" ? "up" : "down";
 
 	scheduleDeselectTimeout();
 
 	if ( isSidebarOpen() ) {
-		if ( curr >= 1 ) {
+		if ( curr == "down" ) {
 			selectSidebar( sideBarIndex + 1 );
-		} else if ( curr <= -1 ) {
+		} else {
 			selectSidebar( sideBarIndex - 1 );
 		}
 
@@ -154,12 +157,12 @@ window.addEventListener( "leftanalogverticalmax", function( e ) {
 		return;
 	}
 
-	if ( curr >= 1 ) {
+	if ( curr == "down" ) {
 		selectClickable( getClickableToSide( selectedClickable, "bottom" ) );
-	} else if ( curr <= -1 ) {
+	} else {
 		selectClickable( getClickableToSide( selectedClickable, "top" ) );
 	}
-} );
+}
 
 function isSelectedMarked() {
 	if ( !selectedClickable ) {

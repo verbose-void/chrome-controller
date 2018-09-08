@@ -24,6 +24,11 @@
 			"run_at": "document_start",
 			"matches": ["https://www.youtube.com/watch?v=*"],
 			"js": ["js/YouTube/youtube-videoplayer.js"]
+		},
+		{
+			"run_at": "document_end",
+			"matches": ["https://www.youtube.com/*"],
+			"js": ["js/YouTube/youtube-dpadcontrols.js"]
 		}
 	],
 	"background": {
