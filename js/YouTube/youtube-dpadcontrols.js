@@ -25,7 +25,7 @@ chrome.runtime.onMessage.addListener( function( req ) {
 
 // A Button "clicks" on the video
 window.addEventListener( "abuttonpressed", function() {
-	if ( !selectedClickable ) {
+	if ( !selectedClickable || !isSelectedMarked() ) {
 		return;
 	}
 
