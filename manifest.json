@@ -21,7 +21,7 @@
       		"css": ["js/cursor.css"]
 		},
 		{
-			"run_at": "document_end",
+			"run_at": "document_start",
 			"matches": ["https://www.youtube.com/watch?v=*"],
 			"js": ["js/YouTube/youtube-videoplayer.js"]
 		}
