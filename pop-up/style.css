@@ -1,3 +1,13 @@
+body {
+	min-width: 500px;
+}
+
 .slider {
 	width: 100%;
+}
+
+#settings-container {
+	max-height: 250px;
+	overflow-y: auto;
+	overflow-x: hidden;
 }

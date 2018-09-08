@@ -2,20 +2,27 @@
 var canvas;
 var cursor;
 
+var horizontalSpeed = 10;
+var verticalSpeed = 10;
+var idleHideMiliseconds = 5000;
+
 updateSettings();
 
 function updateSettings() {
-	chrome.storage.sync.get( ["select-time"], function( results ) {
-		scrollSprintMultiplier = results["scroll-sprint"] ? results["scroll-sprint"] : scrollSprintMultiplier;
+	chrome.storage.sync.get( ["horizontal-cursor-sensitivity", "vertical-cursor-sensitivity", "idle-cursor-timer"], function( results ) {
+		horizontalSpeed = results["horizontal-cursor-sensitivity"] ? results["horizontal-cursor-sensitivity"] : horizontalSpeed;
+		verticalSpeed = results["vertical-cursor-sensitivity"] ? results["vertical-cursor-sensitivity"] : verticalSpeed;
+		idleHideMiliseconds = results["idle-cursor-timer"] ? results["idle-cursor-timer"] : idleHideMiliseconds;
 	} );
 };
 
 chrome.runtime.onMessage.addListener( function( req ) {
 	// Repeat code because updateSettings can't be used.
 	if ( req.type === "settings-updated" ) {
-		chrome.storage.sync.get( ["scroll-sensitivity", "scroll-sprint"], function( results ) {
-			scrollMultiplier = results["scroll-sensitivity"] ? results["scroll-sensitivity"] : scrollMultiplier;
-			scrollSprintMultiplier = results["scroll-sprint"] ? results["scroll-sprint"] : scrollSprintMultiplier;
+		chrome.storage.sync.get( ["horizontal-cursor-sensitivity", "vertical-cursor-sensitivity", "idle-cursor-timer"], function( results ) {
+			horizontalSpeed = results["horizontal-cursor-sensitivity"] ? results["horizontal-cursor-sensitivity"] : horizontalSpeed;
+			verticalSpeed = results["vertical-cursor-sensitivity"] ? results["vertical-cursor-sensitivity"] : verticalSpeed;
+			idleHideMiliseconds = results["idle-cursor-timer"] ? results["idle-cursor-timer"] : idleHideMiliseconds;
 		} );
 	}
 } );
@@ -110,8 +117,7 @@ Cursor.prototype.update = function() {
 			if ( this.moved ) {
 				this.lastIdle = new Date();
 			} else {
-				// TODO make idle time a setting
-				if ( new Date().getTime() - this.lastIdle.getTime() > 5000 ) {
+				if ( new Date().getTime() - this.lastIdle.getTime() > idleHideMiliseconds ) {
 					this.hide();
 				}
 			}
@@ -134,9 +140,7 @@ window.addEventListener( "leftanaloghorizontalpoll", function( e ) {
 		return;
 	}
 
-	// TODO make cursor speed configurable
-	const speed = 10;
-	let modX = ( e.detail.current < -0.1 || e.detail.current > 0.1 ? e.detail.current : 0 ) * speed;
+	let modX = ( e.detail.current < -0.1 || e.detail.current > 0.1 ? e.detail.current : 0 ) * horizontalSpeed;
 	cursor.x += modX;
 
 	// Clamp X
@@ -152,9 +156,7 @@ window.addEventListener( "leftanalogverticalpoll", function( e ) {
 		return;
 	}
 
-	// TODO make cursor speed configurable
-	const speed = 10;
-	let modY = ( e.detail.current < -0.1 || e.detail.current > 0.1 ? e.detail.current : 0 ) * speed;
+	let modY = ( e.detail.current < -0.1 || e.detail.current > 0.1 ? e.detail.current : 0 ) * verticalSpeed;
 	cursor.y += modY;
 
 	// Clamp Y
