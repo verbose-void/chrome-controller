@@ -1,40 +1,8 @@
-let sliders;
-
 $( function() {
-
-	$( ".submit" ).click( updateSettings );
+	$( "#submit" ).click( updateSettings );
 	sliders = Array.from( $( ".slider" ) );
-	
 	loadSettings();
-
-	for ( let i in sliders ) {
-		setH2( sliders[i] );
-		sliders[i].oninput = setH2;
-	}
-
 } );
-
-function setH2( slider ) {
-	let t = slider.currentTarget;
-	if ( t ) {
-		slider = this;
-	}
-
-	let h2 = $( slider.parentElement ).children( "h2" );
-	if ( h2 ) {
-		let val = slider.value;
-
-		if ( $( slider ).attr( "id" ) === "select-time" ) {
-			if  ( val == 61 ) {
-				val = "forever";
-			} else {
-				val += "s";
-			}
-		}
-
-		h2.text( h2.attr( "aria-label" ).replace( "%s", val )  );
-	}
-}
 
 function loadSettings() {
 	for ( let i in sliders ) {
@@ -42,7 +10,6 @@ function loadSettings() {
 		let id = sl.getAttribute( "id" );
 		chrome.storage.sync.get( [id], function( result ) {
 			sl.value = result[id];
-			setH2( sl );
 		} );
 	}
 }

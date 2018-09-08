@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body style="min-width: 500px;">
+        
+        <div class="text-center">
+            <h1 class="display-4 pr-5 pl-5">Settings</h1>
+        </div>
+        
+        <div class="row pr-5 pl-5">
+            <div class="col">
+                <form>
+                    <div class="form-group">
+                        <label for="formControlRange">Scroll Speed</label>
+                        <input id="scroll-sensitivity" step="1" type="range" min="1" max="25" value="13" class="slider">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="formControlRange">Scroll Sprint</label>
+                        <input id="scroll-sprint" step="0.1" type="range" min="1" max="5" value="2" class="slider">
+                    </div>
+                </form>
+            </div>
+            <div class="col">
+                <form>
+                    <div class="form-group">
+                        <label for="formControlRange">Selection Duration</label>
+                        <input id="select-time" step="1" type="range" min="5" max="61" value="20" class="slider">
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="text-center pt-2 mb-2">
+            <button id="submit" class="btn btn-dark">Submit</button>
+        </div>
+        
+        <script src="../js/jquery.min.js"></script>
+        <script src="script.js"></script>
+    </body>
+</html>

@@ -5,7 +5,7 @@
 	"description": "Gives the ability to browse the web using your Xbox / PlayStation ( and many other ) controllers easily and comfortably!",
 	"version": "0.5.2",
 	"browser_action": {
-		"default_popup": "pop-up/settings.html",
+		"default_popup": "pop-up/index.html",
 		"default_title": "Chrome Controller Settings"
 	},
 	"content_scripts": [
