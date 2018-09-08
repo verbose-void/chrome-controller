@@ -97,9 +97,9 @@ Cursor.prototype.hide = function( curs ) {
 
 Cursor.prototype.update = function() {
 	ellipse( this.x, this.y, 3, 3 );
-	fill( 0, 0, 0, this.opacity );
-	ellipse( this.x, this.y, this.viewRadius, this.viewRadius );
 	fill( 255, 0, 0, this.opacity );
+	ellipse( this.x, this.y, this.viewRadius, this.viewRadius );
+	fill( 0, 0, 0, this.opacity * 10 );
 	noStroke();
 
 	// if position was changed from last poll
@@ -181,3 +181,15 @@ window.addEventListener( "abuttonreleased", function( e ) {
 
 	window.location.href = cursor.currentElement.href;
 } );
+
+// Hide cursor if using auto selection
+window.addEventListener( "dpadrightreleased", dpadHandler );
+window.addEventListener( "dpadleftreleased", dpadHandler );
+window.addEventListener( "dpaddownreleased", dpadHandler );
+window.addEventListener( "dpadupreleased", dpadHandler );
+
+function dpadHandler( e ) {
+	if ( cursor && cursor.opacity > 0 ) {
+		cursor.hide();
+	}
+}
