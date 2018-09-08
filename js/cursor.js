@@ -180,6 +180,7 @@ window.addEventListener( "abuttonreleased", function( e ) {
 	}
 
 	window.location.href = cursor.currentElement.href;
+	window.location.reload();
 } );
 
 // Hide cursor if using auto selection

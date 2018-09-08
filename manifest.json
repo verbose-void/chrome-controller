@@ -22,7 +22,7 @@
 		},
 		{
 			"run_at": "document_start",
-			"matches": ["https://www.youtube.com/watch?v=*"],
+			"matches": ["https://www.youtube.com/*"],
 			"js": ["js/YouTube/youtube-videoplayer.js"]
 		},
 		{
