@@ -2,6 +2,24 @@
 var canvas;
 var cursor;
 
+updateSettings();
+
+function updateSettings() {
+	chrome.storage.sync.get( ["select-time"], function( results ) {
+		scrollSprintMultiplier = results["scroll-sprint"] ? results["scroll-sprint"] : scrollSprintMultiplier;
+	} );
+};
+
+chrome.runtime.onMessage.addListener( function( req ) {
+	// Repeat code because updateSettings can't be used.
+	if ( req.type === "settings-updated" ) {
+		chrome.storage.sync.get( ["scroll-sensitivity", "scroll-sprint"], function( results ) {
+			scrollMultiplier = results["scroll-sensitivity"] ? results["scroll-sensitivity"] : scrollMultiplier;
+			scrollSprintMultiplier = results["scroll-sprint"] ? results["scroll-sprint"] : scrollSprintMultiplier;
+		} );
+	}
+} );
+
 function setup() {
  	canvas = createCanvas( windowWidth, windowHeight );
 	$( "#defaultCanvas0" ).addClass( "cursor-canvas" );
@@ -23,24 +41,82 @@ function Cursor() {
 
 	// TODO make radius a setting
 	this.radius = 15;
+	this.viewRadius = 3;
+
+	// TODO make setting
+	this.maxOpacity = 100;
+	this.opacity = 0;
+}
+
+Cursor.prototype.show = function( curs ) {
+	if ( !curs ) {
+		curs = this;
+	}
+
+	if ( curs.viewRadius < curs.radius ) {
+		curs.viewRadius = curs.viewRadius == 0 ? 3 : curs.viewRadius * 1.1;
+	} else {
+		curs.viewRadius = curs.radius;
+	}
+
+	if ( curs.opacity < curs.maxOpacity ) {
+		curs.opacity = curs.opacity == 0 ? 5 : curs.opacity * 1.2;
+		setTimeout( function() { curs.show() }, 10 );
+	} else {
+		curs.opacity = curs.maxOpacity;
+	}
+}
+
+Cursor.prototype.hide = function( curs ) {
+	if ( !curs ) {
+		curs = this;
+	}
+
+	curs.lastIdle = null;
+
+	if ( curs.viewRadius > 5 ) {
+		curs.viewRadius *= 0.9;
+	} else {
+		curs.viewRadius = 3;
+	}
+
+	if ( curs.opacity > 10 ) {
+		curs.opacity *= 0.8;
+		setTimeout( function() { curs.hide() }, 10 );
+	} else {
+		curs.opacity = 0;
+	}
 }
 
 Cursor.prototype.update = function() {
-	if ( this.isHidden !== undefined && this.isHidden ) {
-		// TODO hide cursor;
-		return;
-	}
-
 	ellipse( this.x, this.y, 3, 3 );
-	fill( 0, 0, 0, 100 );
-	ellipse( this.x, this.y, this.radius, this.radius );
-	fill( 255, 0, 0, 100 );
+	fill( 0, 0, 0, this.opacity );
+	ellipse( this.x, this.y, this.viewRadius, this.viewRadius );
+	fill( 255, 0, 0, this.opacity );
 	noStroke();
 
 	// if position was changed from last poll
-	if (   ( this.previousX && Math.abs( this.previousX - this.x ) > 0.1 )
-		&& ( this.previousY && Math.abs( this.previousY - this.y ) > 0.1 ) ) {
+	if (   ( this.previousX && Math.abs( this.previousX - this.x ) > 0.01 )
+		&& ( this.previousY && Math.abs( this.previousY - this.y ) > 0.01 ) ) {
 		this.currentElement = document.elementFromPoint( this.x, this.y );
+		if ( this.opacity < 1 ) {
+			this.show();
+		}
+
+		this.moved = true;
+	} else {
+		// cursor is idle
+		if ( this.opacity >= this.maxOpacity ) {
+			if ( this.moved ) {
+				this.lastIdle = new Date();
+			} else {
+				// TODO make idle time a setting
+				if ( new Date().getTime() - this.lastIdle.getTime() > 5000 ) {
+					this.hide();
+				}
+			}
+			this.moved = false;
+		}
 	}
 
 	this.previousX = this.x;
