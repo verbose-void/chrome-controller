@@ -12,18 +12,18 @@
 		{
       		"run_at": "document_start",
 			"matches": ["<all_urls>"],
-			"js": ["js/jquery.min.js", "js/setup.js", "js/global.js"],
-			"run_at": "document_start"
+			"js": ["js/jquery.min.js", "js/setup.js", "js/global.js"]
 		},
 		{
-			"matches": ["https://www.youtube.com/*"],
-			"js": ["js/YouTube/youtube.js"],
-			"run_at": "document_end"
+      		"run_at": "document_end",
+			"matches": ["<all_urls>"],
+			"js": ["js/p5.min.js", "js/cursor.js"],
+      		"css": ["js/cursor.css"]
 		},
 		{
+			"run_at": "document_end",
 			"matches": ["https://www.youtube.com/watch?v=*"],
-			"js": ["js/YouTube/youtube-videoplayer.js"],
-			"run_at": "document_end"
+			"js": ["js/YouTube/youtube-videoplayer.js"]
 		}
 	],
 	"background": {
