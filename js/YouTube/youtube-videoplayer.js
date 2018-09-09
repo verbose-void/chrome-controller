@@ -22,3 +22,12 @@ window.addEventListener( "ybuttonreleased", function() {
 		vc.addClass( "ytp-autohide" );
 	}
 } );
+
+window.addEventListener( "leftanaloghorizontal", function initializer() {
+	window.removeEventListener( "leftanaloghorizontal", initializer );
+	let info = $( "body div#info-contents" );
+
+	info.prepend( "<div><div class='xbox-y'><p class='b-label'>HUD</p></div></div>" );
+	info.prepend( "<div><div class='xbox-b'><p class='b-label'>THEATER</p></div></div>" );
+	info.prepend( "<div><div class='xbox-x'><p class='b-label'>PLAY/PAUSE</p></div></div>" );
+} );
