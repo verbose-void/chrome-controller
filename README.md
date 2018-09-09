@@ -6,6 +6,7 @@
 ## Global Controls:
 - Left Analog Stick: Controls your controller specific cursor.
 - Right Analog Stick: Scroll up and down, Will also "sprint" if you click the stick downwards while scrolling.
+- A Button: Simulate click where the cursor is.
 - RB/LB: Seeks forwards and backwards through history.
 - RT/LT: Focuses the right / left tab respectively.
 - Select Button: Closes the current tab.
