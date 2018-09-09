@@ -21,9 +21,10 @@
       		"css": ["js/cursor.css"]
 		},
 		{
-			"run_at": "document_start",
+			"run_at": "document_end",
 			"matches": ["https://www.youtube.com/watch?v=*"],
-			"js": ["js/YouTube/youtube-videoplayer.js"]
+			"js": ["js/YouTube/youtube-videoplayer.js"],
+			"css": ["js/YouTube/youtube-videoplayer.css"]
 		},
 		{
 			"run_at": "document_end",
