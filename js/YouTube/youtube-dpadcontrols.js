@@ -64,6 +64,10 @@ window.addEventListener( "dpadrightreleased", horizDpad );
 window.addEventListener( "dpadleftreleased", horizDpad );
 
 function horizDpad( e ) {
+	if ( $( "#osk-overlay" )[0] ) {
+		return;
+	}
+
 	let curr = e.type == "dpadrightreleased" ? "right" : "left";
 	let ct;
 
@@ -135,6 +139,10 @@ window.addEventListener( "dpadupreleased", vertDpad );
 window.addEventListener( "dpaddownreleased", vertDpad );
 
 function vertDpad( e ) {
+	if ( $( "#osk-overlay" )[0] ) {
+		return;
+	}
+
 	let curr = e.type == "dpadupreleased" ? "up" : "down";
 
 	scheduleDeselectTimeout();

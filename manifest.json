@@ -18,7 +18,7 @@
       		"run_at": "document_end",
 			"matches": ["<all_urls>"],
 			"js": ["js/p5.min.js", "js/cursor.js"],
-      		"css": ["js/cursor.css"]
+      		"css": ["js/bootstrap.min.css", "js/cursor.css"]
 		},
 		{
 			"run_at": "document_end",
