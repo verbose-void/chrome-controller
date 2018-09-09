@@ -23,12 +23,16 @@
 }
 
 #osk-text {
+	text-align: center;
     resize: none;
     width: 60%;
     margin: auto;
     min-height: 100px;
     height: 25%;
 	font-size: 20px;
+	border: solid 1px #ccc;
+	background-color: #343434;
+    color: white;
 }
 
 #keyboard {
@@ -40,7 +44,8 @@
 }
 
 .key {
-	background-color: white;
+    color: white;
+	background-color: #555;
     padding: 15px 25px;
     margin: 3px;
     border: solid 1px rgba( 0, 0, 0, 0.1 );
@@ -68,8 +73,9 @@
     margin: auto;
 }
 
-.key.selected {
-    background: #e66465;
+body .key.selected {
+   background: #e66465;
+   outline: solid 1px #e66465;
 }
 
 /* Small OSK */
