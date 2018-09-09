@@ -5,24 +5,33 @@ var cursor;
 var horizontalSpeed = 10;
 var verticalSpeed = 10;
 var idleHideMiliseconds = 5000;
+var outerColor = "#000000";
+var innerColor = "#f45342";
+var outerColor = convertHex( outerColor );
+var innerColor = convertHex( innerColor );
 
 updateSettings();
 
 function updateSettings() {
-	chrome.storage.sync.get( ["horizontal-cursor-sensitivity", "vertical-cursor-sensitivity", "idle-cursor-timer"], function( results ) {
+	chrome.storage.sync.get( ["outer-color", "horizontal-cursor-sensitivity", "vertical-cursor-sensitivity", "idle-cursor-timer"], function( results ) {
 		horizontalSpeed = results["horizontal-cursor-sensitivity"] ? results["horizontal-cursor-sensitivity"] : horizontalSpeed;
 		verticalSpeed = results["vertical-cursor-sensitivity"] ? results["vertical-cursor-sensitivity"] : verticalSpeed;
 		idleHideMiliseconds = results["idle-cursor-timer"] ? results["idle-cursor-timer"] : idleHideMiliseconds;
+		outerColor = results["outer-color"] ? convertHex( results["outer-color"] ) : outerColor;
+		innerColor = results["inner-color"] ? convertHex( results["inner-color"] ) : innerColor;
 	} );
 };
 
 chrome.runtime.onMessage.addListener( function( req ) {
 	// Repeat code because updateSettings can't be used.
 	if ( req.type === "settings-updated" ) {
-		chrome.storage.sync.get( ["horizontal-cursor-sensitivity", "vertical-cursor-sensitivity", "idle-cursor-timer"], function( results ) {
+		chrome.storage.sync.get( ["outer-color", "horizontal-cursor-sensitivity", "vertical-cursor-sensitivity", "idle-cursor-timer"], function( results ) {
 			horizontalSpeed = results["horizontal-cursor-sensitivity"] ? results["horizontal-cursor-sensitivity"] : horizontalSpeed;
 			verticalSpeed = results["vertical-cursor-sensitivity"] ? results["vertical-cursor-sensitivity"] : verticalSpeed;
 			idleHideMiliseconds = results["idle-cursor-timer"] ? results["idle-cursor-timer"] : idleHideMiliseconds;
+			outerColor = results["outer-color"] ? convertHex( results["outer-color"] ) : outerColor;
+			innerColor = results["inner-color"] ? convertHex( results["inner-color"] ) : innerColor;
+			console.log( outerColor );
 		} );
 	}
 } );
@@ -97,9 +106,9 @@ Cursor.prototype.hide = function( curs ) {
 
 Cursor.prototype.update = function() {
 	ellipse( this.x, this.y, 3, 3 );
-	fill( 255, 0, 0, this.opacity );
+	fill( outerColor[0], outerColor[1], outerColor[2], this.opacity );
 	ellipse( this.x, this.y, this.viewRadius, this.viewRadius );
-	fill( 0, 0, 0, this.opacity * 10 );
+	fill( innerColor[0], innerColor[1], innerColor[2], this.opacity );
 	noStroke();
 
 	// if position was changed from last poll
@@ -193,4 +202,11 @@ function dpadHandler( e ) {
 	if ( cursor && cursor.opacity > 0 ) {
 		cursor.hide();
 	}
+}
+
+function convertHex(hex){
+    hex = hex.replace('#','');
+    // R, G, B
+    let output = [parseInt(hex.substring(0,2), 16), parseInt(hex.substring(2,4), 16), parseInt(hex.substring(4,6), 16)];
+    return output;
 }

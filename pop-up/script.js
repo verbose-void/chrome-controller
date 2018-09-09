@@ -1,6 +1,7 @@
 $( function() {
 	$( "#submit" ).click( updateSettings );
 	sliders = Array.from( $( ".slider" ) );
+	sliders = sliders.concat( Array.from( $( ".color-picker" ) ) );
 	loadSettings();
 } );
 
