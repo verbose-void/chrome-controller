@@ -5,6 +5,9 @@
 }
 
 #keyboard {
+    left: 50%;
+    transform: translate( -50% );
+    position: absolute;
     min-width: 980px;
     min-height: 310px;
 }
