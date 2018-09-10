@@ -3,7 +3,7 @@
 	"name": "Chrome Controller",
 	"short_name": "ChromeCtrler",
 	"description": "Gives the ability to browse the web using your Xbox / PlayStation ( and many other ) controllers easily and comfortably!",
-	"version": "0.7.5",
+	"version": "0.7.7",
 	"permissions": [
         "tabs",
 		"storage"
