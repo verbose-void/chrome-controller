@@ -60,7 +60,12 @@ input.color-picker {
     box-shadow: 0 0 5px rgba( 0, 0, 0, 0.2 );
 }
 
-.cursor-dot {
+#cursor-dot {
+    margin: auto;
+    margin-bottom: 10px;
     background-color: #000;
     border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    opacity: 0.8;
 }

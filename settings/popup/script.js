@@ -3,10 +3,16 @@ $( function() {
 	sliders = Array.from( $( ".slider" ) );
 	sliders = sliders.concat( Array.from( $( ".color-picker" ) ) );
     
-    $( "#cursor-color" )[0].onchange = function( e ) {
-        console.log( e );
-    };
+    const $dot = $( "#cursor-dot" );
     
+    $( "#cursor-color" ).on( "change", function( e ) {
+        $dot.css( "background-color", e.target.value );
+    } );
+    
+    $( "#cursor-radius" ).on( "change", ( e ) => {
+        $dot.css( "width", e.target.value * 2 );
+        $dot.css( "height", e.target.value * 2 );
+    } );
     $( ".slider" ).on( "change", e => updateSliderDisplay( e.currentTarget ) );
     $( ".slider" ).each( ( i, e ) => updateSliderDisplay( e ) );
     
@@ -16,6 +22,9 @@ $( function() {
 function updateSliderDisplay( elem ) {
     const $this = $( elem );
     const $lb = $this.prev();
+    if ( !$lb.hasClass( "range-display" ) ) {
+        return;
+    }
     const fm = $this.attr( "format-mult" );
     const val = fm == null ? $this[0].value : ( $this[0].value * Number.parseFloat( fm ) ).toFixed( 1 );
     const form = $this.attr( "format" );
@@ -28,8 +37,14 @@ function loadSettings() {
 		let id = sl.getAttribute( "id" );
 		chrome.storage.sync.get( [id], function( result ) {
 			sl.value = result[id];
+            updateSliderDisplay( sl );
 		} );
 	}
+    
+    $( () => {
+        $( "#cursor-color" ).trigger( "change" );
+        $( "#cursor-radius" ).trigger( "change" );
+    } );
 }
 
 function updateSettings() {

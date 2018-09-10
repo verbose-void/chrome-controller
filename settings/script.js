@@ -12,6 +12,7 @@ function CCSettings() {
 	this.scroll.sprintMultiplier = 2;
 
 	// Cursor
+	this.cursor.radius = 15;
 	this.cursor.horizontalSpeed = 10;
 	this.cursor.verticalSpeed = 10;
 	this.cursor.idleHideMiliseconds = 5000;
@@ -26,6 +27,7 @@ CCSettings.prototype.updateSettings = function( req ) {
 				"scroll-sprint", 
 
 				// Cursor
+				"cursor-radius",
 				"horizontal-cursor-sensitivity", 
 				"vertical-cursor-sensitivity", 
 				"idle-cursor-timer",
@@ -38,6 +40,7 @@ CCSettings.prototype.updateSettings = function( req ) {
 				ccSettings.scroll.sprintMultiplier = results["scroll-sprint"] ? results["scroll-sprint"] : ccSettings.scrollSprintMultiplier;
 
 				// Cursor
+				ccSettings.cursor.radius = results["cursor-radius"] ? results["cursor-radius"] : ccSettings.cursor.radius;
 				ccSettings.cursor.horizontalSpeed = results["horizontal-cursor-sensitivity"] ? results["horizontal-cursor-sensitivity"] : ccSettings.cursor.horizontalSpeed;
 				ccSettings.cursor.verticalSpeed = results["vertical-cursor-sensitivity"] ? results["vertical-cursor-sensitivity"] : ccSettings.cursor.verticalSpeed;
 				ccSettings.cursor.idleHideMiliseconds = results["idle-cursor-timer"] ? results["idle-cursor-timer"] : ccSettings.cursor.idleHideMiliseconds;
