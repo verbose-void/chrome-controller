@@ -3,8 +3,25 @@ body {
     font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
 }
 
+#submit {
+    text-transform: uppercase;
+    height: 50px;
+    width: 480px;
+    transition: 0.5s ease-in-out;
+}
+
+#submit:hover {
+    transform: translate( 0, -1px );
+}
+
 .slider {
 	width: 100%;
+}
+
+input.color-picker {
+    cursor: pointer;
+    border: none;
+    height: 26px;
 }
 
 #settings-container {
@@ -44,5 +61,6 @@ body {
 }
 
 .cursor-dot {
-    
+    background-color: #000;
+    border-radius: 50%;
 }
