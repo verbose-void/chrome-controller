@@ -28,7 +28,6 @@ function Cursor( x, y ) {
 	this.x = x;
 	this.y = y;
 
-	this.radius = 15;
 	this.viewRadius = 0;
 
 	this.maxOpacity = 200;
@@ -40,10 +39,10 @@ Cursor.prototype.show = function( curs ) {
 		curs = this;
 	}
 
-	if ( curs.viewRadius < curs.radius ) {
+	if ( curs.viewRadius < ccSettings.cursor.radius ) {
 		curs.viewRadius = curs.viewRadius == 0 ? 3 : curs.viewRadius * 1.1;
 	} else {
-		curs.viewRadius = curs.radius;
+		curs.viewRadius = ccSettings.cursor.radius;
 	}
 
 	if ( curs.opacity < curs.maxOpacity ) {
@@ -113,20 +112,20 @@ Cursor.prototype.updatePos = function( x, y ) {
 	}
 
 	// Clamp X
-	if ( this.x - this.radius < 0 ) {
-		this.x = this.radius;
+	if ( this.x - ccSettings.cursor.radius < 0 ) {
+		this.x = ccSettings.cursor.radius;
 		this.isCentered = false;
-	} else if ( this.x + this.radius > windowWidth ) {
-		this.x = windowWidth - this.radius
+	} else if ( this.x + ccSettings.cursor.radius > windowWidth ) {
+		this.x = windowWidth - ccSettings.cursor.radius;
 		this.isCentered = false;
 	}
 
 	// Clamp Y
-	if ( this.y - this.radius < 0 ) {
-		this.y = this.radius;
+	if ( this.y - ccSettings.cursor.radius < 0 ) {
+		this.y = ccSettings.cursor.radius;
 		this.isCentered = false;
-	} else if ( this.y + this.radius > windowHeight ) {
-		this.y = windowHeight - this.radius;
+	} else if ( this.y + ccSettings.cursor.radius > windowHeight ) {
+		this.y = windowHeight - ccSettings.cursor.radius;
 		this.isCentered = false;
 	}
 }
@@ -168,3 +167,11 @@ Cursor.prototype.click = function() {
 		}
 	}
 }
+
+// Show cursor when settings are updated
+chrome.runtime.onMessage.addListener( ( req ) => {
+    if ( req.type === "settings-updated" ) {
+        cursor.hide();
+        setTimeout( cursor.show, 100 );
+    }
+} );
