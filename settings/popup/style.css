@@ -1,5 +1,6 @@
 body {
 	min-width: 500px;
+    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
 }
 
 .slider {
@@ -10,4 +11,38 @@ body {
 	max-height: 250px;
 	overflow-y: auto;
 	overflow-x: hidden;
+}
+
+#title {
+    text-transform: uppercase;
+    font-size: 60px;
+    box-shadow: 0 0 5px #000;
+}
+
+.section-title {
+    text-transform: uppercase;
+    font-size: 40px;
+}
+
+.setting-label {
+    text-transform: uppercase;
+}
+
+.range-display {
+    margin-top: -15px;
+    color: grey;
+    font-size: 12px;
+}
+
+.sec-div {
+    text-align: center;
+    border: solid 1px #e5e5e5;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 0 0 5px rgba( 0, 0, 0, 0.2 );
+}
+
+.cursor-dot {
+    
 }

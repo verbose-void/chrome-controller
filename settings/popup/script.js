@@ -2,8 +2,25 @@ $( function() {
 	$( "#submit" ).click( updateSettings );
 	sliders = Array.from( $( ".slider" ) );
 	sliders = sliders.concat( Array.from( $( ".color-picker" ) ) );
+    
+    $( "#cursor-color" )[0].onchange = function( e ) {
+        console.log( e );
+    };
+    
+    $( ".slider" ).on( "change", e => updateSliderDisplay( e.currentTarget ) );
+    $( ".slider" ).each( ( i, e ) => updateSliderDisplay( e ) );
+    
 	loadSettings();
 } );
+
+function updateSliderDisplay( elem ) {
+    const $this = $( elem );
+    const $lb = $this.prev();
+    const fm = $this.attr( "format-mult" );
+    const val = fm == null ? $this[0].value : ( $this[0].value * Number.parseFloat( fm ) ).toFixed( 1 );
+    const form = $this.attr( "format" );
+    $lb.text( form ? form.replace( "%val%", val ) : val );
+}
 
 function loadSettings() {
 	for ( let i in sliders ) {
