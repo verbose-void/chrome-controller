@@ -1,5 +1,5 @@
 $( function() {
-	$( "#submit" ).click( updateSettings );
+	$( "#submit" ).click( () => { updateSettings(); window.close() } );
 	sliders = Array.from( $( ".slider" ) );
 	sliders = sliders.concat( Array.from( $( ".color-picker" ) ) );
     
