@@ -4,40 +4,34 @@
 	"short_name": "ChromeCtrler",
 	"description": "Gives the ability to browse the web using your Xbox / PlayStation ( and many other ) controllers easily and comfortably!",
 	"version": "0.7",
+	"permissions": [
+        "tabs",
+		"storage"
+     ],
 	"browser_action": {
-		"default_popup": "pop-up/index.html",
+		"default_popup": "settings/popup/index.html",
 		"default_title": "Chrome Controller Settings"
+	},
+	"background": {
+		"scripts": ["background.js"]
 	},
 	"content_scripts": [
 		{
       		"run_at": "document_start",
 			"matches": ["<all_urls>"],
-			"js": ["js/jquery.min.js", "js/setup.js", "js/global.js"]
+			"js": ["lib/jquery.min.js", "content_scripts/setup.js", "settings/script.js", "content_scripts/general_controls.js"]
 		},
 		{
-      		"run_at": "document_end",
+			"run_at": "document_idle",
 			"matches": ["<all_urls>"],
-			"js": ["js/p5.min.js", "js/cursor.js"],
-      		"css": ["js/bootstrap.min.css", "js/cursor.css"]
+			"js": ["lib/jquery.min.js", "lib/p5.min.js", "keyboard/script.js", "cursor/script.js"],
+			"css": ["cursor/style.css", "keyboard/style.css"]
 		},
 		{
-			"run_at": "document_end",
-			"matches": ["https://www.youtube.com/watch?v=*"],
-			"js": ["js/YouTube/youtube-videoplayer.js"],
-			"css": ["js/YouTube/youtube-videoplayer.css"]
-		},
-		{
-			"run_at": "document_end",
+			"run_at": "document_idle",
 			"matches": ["https://www.youtube.com/*"],
-			"js": ["js/YouTube/youtube-dpadcontrols.js"]
+			"js": ["lib/jquery.min.js", "cursor/script.js", "youtube/controls.js", "youtube/player_controls.js"]
 		}
-	],
-	"background": {
-		"scripts": ["js/background.js"]
-	},
-	"permissions": [
-		"tabs",
-		"storage"
 	],
 	"icons": {
 		"128": "assets/cc-128.png"

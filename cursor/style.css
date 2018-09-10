@@ -1,0 +1,10 @@
+.cctrl-canvas {
+	position: fixed; 
+	left: 0px; 
+	top: 0px;
+	min-width: 100vw;
+	min-height: 100vh;
+	z-index: 99999;
+	pointer-events: none;
+	background-color: transparent;
+}
