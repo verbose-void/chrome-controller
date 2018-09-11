@@ -172,5 +172,6 @@ Cursor.prototype.click = function() {
 chrome.runtime.onMessage.addListener( ( req ) => {
     if ( req.type === "settings-updated" ) {
         cursor.hide();
+        console.log( ccSettings );
     }
 } );
