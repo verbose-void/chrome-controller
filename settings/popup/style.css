@@ -27,7 +27,7 @@ input.color-picker {
 #settings-container {
 	max-height: 250px;
 	overflow-y: auto;
-	overflow-x: hidden;
+	overflow-x: none;
 }
 
 #title {
@@ -68,4 +68,13 @@ input.color-picker {
     width: 10px;
     height: 10px;
     opacity: 0.8;
+    transition: transform 0.5s ease-in;
+}
+
+#cursor-dot.right {
+    transform: translate( 180px );
+}
+
+#cursor-dot.left {
+    transform: translate( -180px );
 }

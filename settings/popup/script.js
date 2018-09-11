@@ -1,8 +1,11 @@
+var animInst;
+
 $( function() {
 	$( "#submit" ).click( () => { updateSettings(); window.close() } );
 	sliders = Array.from( $( ".slider" ) );
 	sliders = sliders.concat( Array.from( $( ".color-picker" ) ) );
     
+
     const $dot = $( "#cursor-dot" );
     
     $( "#cursor-color" ).on( "change", function( e ) {
@@ -13,9 +16,11 @@ $( function() {
         $dot.css( "width", e.target.value * 2 );
         $dot.css( "height", e.target.value * 2 );
     } );
+    
     $( ".slider" ).on( "change", e => updateSliderDisplay( e.currentTarget ) );
     $( ".slider" ).each( ( i, e ) => updateSliderDisplay( e ) );
     
+    setTimeout( cycleDotAnim, 4000 );
 	loadSettings();
 } );
 
@@ -72,4 +77,22 @@ function updateSettings() {
 	} );
 
 	alert( "Settings Updated!" );
+}
+
+var dotAnim = {
+    right: false
+};
+
+function cycleDotAnim() {
+    $( "#cursor-dot" ).css( "transition", "transform " + 5 / $( "#horizontal-cursor-sensitivity" )[0].value + "s ease-in" );
+    
+    if ( dotAnim.right ) {
+        $( "#cursor-dot" ).addClass( "right" );
+        setTimeout( () => $( "#cursor-dot" ).removeClass( "right" ), 1000 );
+    } else {
+        $( "#cursor-dot" ).addClass( "left" );
+        setTimeout( () => $( "#cursor-dot" ).removeClass( "left" ), 1000 );
+    }
+    
+    setTimeout( cycleDotAnim, 4000 );
 }
