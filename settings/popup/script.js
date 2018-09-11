@@ -40,11 +40,13 @@ function loadSettings() {
             updateSliderDisplay( sl );
 		} );
 	}
-    
-    $( () => {
-        $( "#cursor-color" ).trigger( "change" );
-        $( "#cursor-radius" ).trigger( "change" );
-    } );
+
+	chrome.storage.sync.get( ["cursor-color", "cursor-radius"], function( result ) {
+		const $dot = $( "#cursor-dot" );
+        $dot.css( "background-color", result["cursor-color"] );
+        $dot.css( "height", Number( result["cursor-radius"] ) * 2 );
+        $dot.css( "width", Number( result["cursor-radius"] ) * 2 );
+	} );
 }
 
 function updateSettings() {
