@@ -3,6 +3,8 @@ function Keyboard( inp ) {
 		return;
 	}
 
+	chrome.runtime.sendMessage( { eventType: "openkeyboard" } );
+
 	this.$text = $( inp )[0];
 	const _this = this;
 
@@ -91,32 +93,17 @@ function Keyboard( inp ) {
 		}
 	}
 
+	window.addEventListener( "selectbuttonreleased", () => oskText.value = "" );
+	window.addEventListener( "startbuttonreleased", sb );
 	window.addEventListener( "xbuttonreleased", xb );
 	window.addEventListener( "ybuttonreleased", yb );
 	window.addEventListener( "bbuttonreleased", bb );
-
-	/*window.addEventListener( "dpadupreleased", dur );
-	window.addEventListener( "dpaddownreleased", ddr );
-	window.addEventListener( "dpadrightreleased", drr );
-	window.addEventListener( "dpadleftreleased", dlr );
-
-	const close = function() {
-		window.removeEventListener( "dpadrightreleased", drr );
-		window.removeEventListener( "dpadleftreleased", dlr );
-		window.removeEventListener( "dpadupreleased", dur );
-		window.removeEventListener( "dpaddownreleased", ddr );
-		window.removeEventListener( "abuttonreleased", abr );
-		window.removeEventListener( "xbuttonrelease", xb );
-		window.removeEventListener( "xbuttonrelease", xb );
-		window.removeEventListener( "ybuttonrelease", yb );
-		window.removeEventListener( "bbuttonrelease", bb );
-		window.removeEventListener( "selectbuttonrelease", sb );
-		$( "#osk-overlay" ).remove();
-	}*/
 }
 
 Keyboard.prototype.close = function() {
 	$( "#ccosk-container" ).remove();
 	cursor.keyboard = null;
+	chrome.runtime.sendMessage( { eventType: "closekeyboard" } );
 }
 
+window.addEventListener( "unload", () => chrome.runtime.sendMessage( { eventType: "closekeyboard" } ) );

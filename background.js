@@ -1,5 +1,6 @@
 let cooldowns = {};
 const ACTION_COOLDOWN_TIME = 200;
+var keyboardOpen = false;
 
 chrome.runtime.onMessage.addListener( function( message, sender, sendResponse ) {
 	if ( isValid( message, "righttriggerpressed" ) ) {
@@ -11,12 +12,19 @@ chrome.runtime.onMessage.addListener( function( message, sender, sendResponse ) 
 	}
 
 	else if ( isValid( message, "startbuttonreleased" ) ) {
-		console.log( "test", message );
 		openNewTab();
 	}
 
 	else if ( isValid( message, "selectbuttonreleased" ) ) {
 		closeCurrentTab();
+	}
+
+	else if ( message.eventType === "openkeyboard" ) {
+		keyboardOpen = true;
+	}
+
+	else if ( message.eventType === "closekeyboard" ) {
+		keyboardOpen = false;
 	}
 } );
 
@@ -35,6 +43,9 @@ function isOnCooldown( action ) {
 }
 
 function isValid( message, type ) {
+	if ( keyboardOpen ) {
+		return false;
+	}
 	return message.eventType === type && !isOnCooldown( message.eventType );
 }
 
