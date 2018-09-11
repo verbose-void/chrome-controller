@@ -36,14 +36,14 @@ CCSettings.prototype.updateSettings = function( req ) {
 
 			function( results ) {
 				// Scroll
-				ccSettings.scroll.multiplier = results["scroll-sensitivity"] ? results["scroll-sensitivity"] : ccSettings.scrollMultiplier;
-				ccSettings.scroll.sprintMultiplier = results["scroll-sprint"] ? results["scroll-sprint"] : ccSettings.scrollSprintMultiplier;
+				ccSettings.scroll.multiplier = results["scroll-sensitivity"] ? Number( results["scroll-sensitivity"] ) : ccSettings.scrollMultiplier;
+				ccSettings.scroll.sprintMultiplier = results["scroll-sprint"] ? Number( results["scroll-sprint"] ) : ccSettings.scrollSprintMultiplier;
 
 				// Cursor
-				ccSettings.cursor.radius = results["cursor-radius"] ? results["cursor-radius"] : ccSettings.cursor.radius;
-				ccSettings.cursor.horizontalSpeed = results["horizontal-cursor-sensitivity"] ? results["horizontal-cursor-sensitivity"] : ccSettings.cursor.horizontalSpeed;
-				ccSettings.cursor.verticalSpeed = results["vertical-cursor-sensitivity"] ? results["vertical-cursor-sensitivity"] : ccSettings.cursor.verticalSpeed;
-				ccSettings.cursor.idleHideMiliseconds = results["idle-cursor-timer"] ? results["idle-cursor-timer"] : ccSettings.cursor.idleHideMiliseconds;
+				ccSettings.cursor.radius = results["cursor-radius"] ? Number( results["cursor-radius"] ) :  ccSettings.cursor.radius;
+				ccSettings.cursor.horizontalSpeed = results["horizontal-cursor-sensitivity"] ? Number( results["horizontal-cursor-sensitivity"] ) : ccSettings.cursor.horizontalSpeed;
+				ccSettings.cursor.verticalSpeed = results["vertical-cursor-sensitivity"] ? Number( results["vertical-cursor-sensitivity"] ) : ccSettings.cursor.verticalSpeed;
+				ccSettings.cursor.idleHideMiliseconds = results["idle-cursor-timer"] ? Number( results["idle-cursor-timer"] ) : ccSettings.cursor.idleHideMiliseconds;
 				ccSettings.cursor.color = results["cursor-color"] ? convertHex( results["cursor-color"] ) : ccSettings.cursor.color;
 			} );
 	}
