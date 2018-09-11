@@ -3,12 +3,11 @@ const ACTION_COOLDOWN_TIME = 200;
 
 chrome.runtime.onMessage.addListener( function( message, sender, sendResponse ) {
 	if ( isValid( message, "righttriggerpressed" ) ) {
-		moveTabBy( 1 );
+		moveTabBy( 1, sender.tab.windowId );
 	}
 
 	else if ( isValid( message, "lefttriggerpressed" ) ) {
-	console.log( "tab moved" )
-		moveTabBy( -1 );
+		moveTabBy( -1, sender.tab.windowId );
 	}
 
 	else if ( isValid( message, "startbuttonreleased" ) ) {
@@ -39,8 +38,8 @@ function isValid( message, type ) {
 	return message.eventType === type && !isOnCooldown( message.eventType );
 }
 
-function moveTabBy( amount ) {
-	chrome.tabs.query( {}, function( s ) { 
+function moveTabBy( amount, windowID ) {
+	chrome.tabs.query( { windowId: windowID }, function( s ) { 
 		let activeIndex = -1;
 
 		for( let i = 0; i < s.length; i++ ) {
