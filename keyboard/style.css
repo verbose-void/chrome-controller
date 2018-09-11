@@ -38,6 +38,7 @@
     box-shadow: 0px 0px 5px 0.25px #000;
     transition: ease-in 0.05s;
     text-align: center;
+    cursor: pointer;
 }
 
 .ccosk-key.space-key {

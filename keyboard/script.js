@@ -51,7 +51,7 @@ function Keyboard( inp ) {
 		}
 
 		else if ( txt == "shift" ) {
-			$( ".key" ).each( function( i, e ) {
+			$( ".ccosk-key" ).each( function( i, e ) {
 				let shift = $( e ).attr( "shift" );
 
 				if ( shift ) {
