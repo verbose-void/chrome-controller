@@ -84,6 +84,7 @@ var dotAnim = {
 };
 
 function cycleDotAnim() {
+    dotAnim.right = !dotAnim.right;
     $( "#cursor-dot" ).css( "transition", "transform " + 5 / $( "#horizontal-cursor-sensitivity" )[0].value + "s ease-in" );
     
     if ( dotAnim.right ) {
