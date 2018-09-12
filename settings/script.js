@@ -4,6 +4,7 @@ $( () => ccSettings.updateSettings() );
 function CCSettings() {
 	this.cursor = {};
 	this.scroll = {};
+    this.hud = {};
 
 	/* Default Settings */
 
@@ -17,6 +18,11 @@ function CCSettings() {
 	this.cursor.verticalSpeed = 10;
 	this.cursor.idleHideMiliseconds = 5000;
 	this.cursor.color = convertHex( "#000000" );
+    
+    // Hud
+    this.hud.hidden = false;
+    this.hud.size = 32;
+    this.hud.position = "TOP";
 }
 
 CCSettings.prototype.updateSettings = function( req ) {
@@ -31,7 +37,12 @@ CCSettings.prototype.updateSettings = function( req ) {
 				"horizontal-cursor-sensitivity", 
 				"vertical-cursor-sensitivity", 
 				"idle-cursor-timer",
-				"cursor-color"
+				"cursor-color",
+            
+                // Hud
+                "hud-hidden",
+                "hud-size",
+                "hud-position"
 			], 
 
 			function( results ) {
@@ -45,6 +56,11 @@ CCSettings.prototype.updateSettings = function( req ) {
 				ccSettings.cursor.verticalSpeed = results["vertical-cursor-sensitivity"] ? Number( results["vertical-cursor-sensitivity"] ) : ccSettings.cursor.verticalSpeed;
 				ccSettings.cursor.idleHideMiliseconds = results["idle-cursor-timer"] ? Number( results["idle-cursor-timer"] ) : ccSettings.cursor.idleHideMiliseconds;
 				ccSettings.cursor.color = results["cursor-color"] ? convertHex( results["cursor-color"] ) : ccSettings.cursor.color;
+            
+                // Hud
+                ccSettings.hud.hidden = results["hud-hidden"] !== undefined ? Boolean( results["hud-hidden"] ) : ccSettings.hud.hidden;
+                ccSettings.hud.size = results["hud-size"] ? Number( results["hud-size"] ) : ccSettings.hud.size;
+                ccSettings.hud.position = results["hud-position"] ? results["hud-position"] : ccSettings.hud.position;
 			} );
 	}
 };

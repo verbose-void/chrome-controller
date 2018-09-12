@@ -2,8 +2,7 @@ var animInst;
 
 $( function() {
 	$( "#submit" ).click( () => { updateSettings(); window.close() } );
-	sliders = Array.from( $( ".slider" ) );
-	sliders = sliders.concat( Array.from( $( ".color-picker" ) ) );
+	settingModders = Array.from( $( ".setting-modifier" ) );
     
 
     const $dot = $( "#cursor-dot" );
@@ -37,11 +36,21 @@ function updateSliderDisplay( elem ) {
 }
 
 function loadSettings() {
-	for ( let i in sliders ) {
-		let sl = sliders[i];
+	for ( let i in settingModders ) {
+		let sl = settingModders[i];
 		let id = sl.getAttribute( "id" );
+        
 		chrome.storage.sync.get( [id], function( result ) {
-			sl.value = result[id];
+            if ( $( sl ).is( "[type=checkbox]" ) ) {
+                if ( Boolean( result[id] ) ) {
+                    $( sl ).attr( "checked", "" );
+                }
+            } else {
+                if ( result[id] !== undefined ) {
+                    sl.value = result[id];
+                }
+            }
+            
             updateSliderDisplay( sl );
 		} );
 	}
@@ -57,15 +66,15 @@ function loadSettings() {
 function updateSettings() {
 	let settings = {};
 
-	for ( let i in sliders ) {
-		let sl = sliders[i];
-		settings[sl.getAttribute( "id" )] = sl.value;
-	}
-
-	if ( settings["select-time"] ) {
-		if ( settings["select-time"] == 61 ) {
-			settings["select-time"] = "forever";
-		}
+	for ( let i in settingModders ) {
+		let sl = settingModders[i];
+        let val = sl.value;
+        
+        if ( $( sl ).is( "[type=checkbox]" ) ) {
+            val = $( sl ).is( ":checked" );
+        }
+        
+		settings[sl.getAttribute( "id" )] = val;
 	}
 
 	chrome.storage.sync.set( settings, function() {
@@ -76,7 +85,7 @@ function updateSettings() {
 		} );
 	} );
 
-	alert( "Settings Updated!" );
+	alert( "Settings Updated!\n\n\nIf your settings don't immediately update: try submitting again, or refresh the page!" );
 }
 
 var dotAnim = {
