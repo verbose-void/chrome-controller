@@ -14,8 +14,8 @@ function CCSettings() {
 
 	// Cursor
 	this.cursor.radius = 15;
-	this.cursor.horizontalSpeed = 10;
-	this.cursor.verticalSpeed = 10;
+	this.cursor.horizontalSpeed = 5;
+	this.cursor.verticalSpeed = 5;
 	this.cursor.idleHideMiliseconds = 5000;
 	this.cursor.color = convertHex( "#000000" );
     
@@ -52,8 +52,8 @@ CCSettings.prototype.updateSettings = function( req ) {
 
 				// Cursor
 				ccSettings.cursor.radius = results["cursor-radius"] ? Number( results["cursor-radius"] ) :  ccSettings.cursor.radius;
-				ccSettings.cursor.horizontalSpeed = results["horizontal-cursor-sensitivity"] ? Number( results["horizontal-cursor-sensitivity"] ) : ccSettings.cursor.horizontalSpeed;
-				ccSettings.cursor.verticalSpeed = results["vertical-cursor-sensitivity"] ? Number( results["vertical-cursor-sensitivity"] ) : ccSettings.cursor.verticalSpeed;
+				ccSettings.cursor.horizontalSpeed = results["horizontal-cursor-sensitivity"] ? Number( results["horizontal-cursor-sensitivity"] ) / 3 : ccSettings.cursor.horizontalSpeed;
+				ccSettings.cursor.verticalSpeed = results["vertical-cursor-sensitivity"] ? Number( results["vertical-cursor-sensitivity"] ) / 3 : ccSettings.cursor.verticalSpeed;
 				ccSettings.cursor.idleHideMiliseconds = results["idle-cursor-timer"] ? Number( results["idle-cursor-timer"] ) : ccSettings.cursor.idleHideMiliseconds;
 				ccSettings.cursor.color = results["cursor-color"] ? convertHex( results["cursor-color"] ) : ccSettings.cursor.color;
             

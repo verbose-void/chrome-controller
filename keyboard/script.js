@@ -16,7 +16,8 @@ function Keyboard( inp ) {
 	    setTimeout( () => $this.removeClass( "ccosk-selected" ), 100 );
 	} );
 
-	cursor.hide();
+	hide( cursor );
+	hide( hud );
 
 	$( "#ccosk-text" )[0].value = this.$text.value;
 
