@@ -111,12 +111,7 @@ Keyboard.prototype.close = function() {
 	$( "#ccosk-container" ).remove();
 	cursor.keyboard = null;
 	chrome.runtime.sendMessage( { eventType: "closekeyboard" } );
-
-	if ( buttons.controllerType() === "PS" ) {
-		buttons.currentScheme = buttons.schemes.global.ps;
-	} else {
-		buttons.currentScheme = buttons.schemes.global.xbox;
-	}
+	buttons.updateControllerScheme();
 }
 
 window.addEventListener( "unload", () => chrome.runtime.sendMessage( { eventType: "closekeyboard" } ) );

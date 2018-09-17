@@ -182,3 +182,28 @@ buttons.controllerType = function() {
 	const id = controllers[0].id.toLowerCase();
 	return id.match( /playstation/ ) ? "PS" : "XBOX";
 }
+
+buttons.updateControllerScheme = function() {
+	const href = window.location.href.toLowerCase();
+	const type = buttons.controllerType;
+
+	// Keyboard Open
+	if ( $( "#ccosk-container" )[0] ) {
+		buttons.currentScheme = type === "PS" ? buttons.schemes.keyboard.ps : buttons.schemes.keyboard.xbox;
+	}
+	
+	// Youtube Player
+	else if ( href.match( /.*?youtube.com\/watch\?.*/ ) ) {
+		buttons.currentScheme = type === "PS" ? buttons.schemes.youtube_player.ps : buttons.schemes.youtube_player.xbox;
+	}
+
+	// Youtube Global
+	else if ( href.match( /.*?youtube.com.*?/ ) ) {
+		buttons.currentScheme = type === "PS" ? buttons.schemes.youtube.ps : buttons.schemes.youtube.xbox;
+	}
+
+	// Global
+	else {
+		buttons.currentScheme = type === "PS" ? buttons.schemes.global.ps : buttons.schemes.global.xbox;
+	}
+}

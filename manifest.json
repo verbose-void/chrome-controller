@@ -30,12 +30,7 @@
 		{
 			"run_at": "document_idle",
 			"matches": ["https://www.youtube.com/*"],
-			"js": ["lib/jquery.min.js", "cursor/script.js", "youtube/controls.js"]
-		},
-		{
-			"run_at": "document_idle",
-			"matches": ["https://www.youtube.com/watch?*"],
-			"js": ["youtube/player_controls.js"]
+			"js": ["lib/jquery.min.js", "cursor/script.js", "youtube/controls.js", "youtube/player_controls.js"]
 		}
 	],
 	"icons": {

@@ -39,6 +39,10 @@ function draw() {
 		cursor.draw();
 		hud.draw();
 	}
+
+	if ( frameCount % 60 === 0 ) {
+		buttons.updateControllerScheme();
+	}
 }
 
 function Cursor( x, y ) {
