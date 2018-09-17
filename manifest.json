@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "Chrome Controller",
 	"short_name": "ChromeCtrler",
-	"description": "Gives the ability to browse the web using your Xbox / PlayStation ( and many other ) controllers easily and comfortably!",
+	"description": "A Google Chrome Extension that allows you to browse the web from your Xbox/PlayStation Controllers! Utilizes content and background scripting in order to bring the relaxation of the console environment straight to your Mac/PC.",
 	"version": "0.8.2",
 	"permissions": [
         "tabs",
