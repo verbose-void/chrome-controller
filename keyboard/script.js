@@ -3,6 +3,12 @@ function Keyboard( inp ) {
 		return;
 	}
 
+	if ( buttons.controllerType() === "PS" ) {
+		buttons.currentScheme = buttons.schemes.keyboard.ps;
+	} else {
+		buttons.currentScheme = buttons.schemes.keyboard.xbox;
+	}
+
 	chrome.runtime.sendMessage( { eventType: "openkeyboard" } );
 
 	this.$text = $( inp )[0];
@@ -105,6 +111,12 @@ Keyboard.prototype.close = function() {
 	$( "#ccosk-container" ).remove();
 	cursor.keyboard = null;
 	chrome.runtime.sendMessage( { eventType: "closekeyboard" } );
+
+	if ( buttons.controllerType() === "PS" ) {
+		buttons.currentScheme = buttons.schemes.global.ps;
+	} else {
+		buttons.currentScheme = buttons.schemes.global.xbox;
+	}
 }
 
 window.addEventListener( "unload", () => chrome.runtime.sendMessage( { eventType: "closekeyboard" } ) );
