@@ -21,7 +21,7 @@ function CCSettings() {
     
     // Hud
     this.hud.hidden = false;
-    this.hud.size = 32;
+    this.hud.size = 64;
     this.hud.position = "TOP";
 }
 
