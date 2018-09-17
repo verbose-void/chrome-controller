@@ -99,6 +99,7 @@ buttons.loadSchemes = function() {
 		buttons.xbox.y,
 		buttons.xbox.x,
 		buttons.xbox.menu,
+		buttons.global.rs.neutral,
 		buttons.global.dpad.neutral
 	];
 
@@ -109,6 +110,7 @@ buttons.loadSchemes = function() {
 		buttons.ps.triangle,
 		buttons.ps.square,
 		buttons.ps.option,
+		buttons.global.rs.neutral,
 		buttons.global.dpad.neutral
 	];
 
