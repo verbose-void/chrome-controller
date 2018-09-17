@@ -24,3 +24,15 @@ function press( sel ) {
 		$s.click();
 	}
 }
+
+$( function loader() {
+	if ( !buttons.loaded ) {
+		setTimeout( loader, 100 );
+	}
+
+	if ( buttons.controllerType() === "PS" ) {
+		buttons.currentScheme = buttons.schemes.youtube_player.ps;
+	} else {
+		buttons.currentScheme = buttons.schemes.youtube_player.xbox;
+	}
+} );

@@ -11,6 +11,18 @@ window.addEventListener( "dpadleftreleased", dpadHoriz );
 window.addEventListener( "dpadupreleased", dpadVert );
 window.addEventListener( "dpaddownreleased", dpadVert );
 
+$( function loader() {
+	if ( !buttons.loaded ) {
+		setTimeout( loader, 100 );
+	}
+
+	if ( buttons.controllerType() === "PS" ) {
+		buttons.currentScheme = buttons.schemes.youtube.ps;
+	} else {
+		buttons.currentScheme = buttons.schemes.youtube.xbox;
+	}
+} );
+
 function isSelectable( elem ) {
 	return !elem ? false : selectables.find( e => elem.is( e ) ) != null;
 }
