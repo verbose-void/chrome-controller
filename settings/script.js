@@ -47,20 +47,20 @@ CCSettings.prototype.updateSettings = function( req ) {
 
 			function( results ) {
 				// Scroll
-				ccSettings.scroll.multiplier = results["scroll-sensitivity"] ? Number( results["scroll-sensitivity"] ) : ccSettings.scrollMultiplier;
-				ccSettings.scroll.sprintMultiplier = results["scroll-sprint"] ? Number( results["scroll-sprint"] ) : ccSettings.scrollSprintMultiplier;
+				ccSettings.scroll.multiplier = results["scroll-sensitivity"] !== undefined ? Number( results["scroll-sensitivity"] ) : ccSettings.scroll.multiplier;
+				ccSettings.scroll.sprintMultiplier = results["scroll-sprint"] !== undefined ? Number( results["scroll-sprint"] ) : ccSettings.scroll.sprintMultiplier;
 
 				// Cursor
-				ccSettings.cursor.radius = results["cursor-radius"] ? Number( results["cursor-radius"] ) :  ccSettings.cursor.radius;
-				ccSettings.cursor.horizontalSpeed = results["horizontal-cursor-sensitivity"] ? Number( results["horizontal-cursor-sensitivity"] ) / 3 : ccSettings.cursor.horizontalSpeed;
-				ccSettings.cursor.verticalSpeed = results["vertical-cursor-sensitivity"] ? Number( results["vertical-cursor-sensitivity"] ) / 3 : ccSettings.cursor.verticalSpeed;
-				ccSettings.cursor.idleHideMiliseconds = results["idle-cursor-timer"] ? Number( results["idle-cursor-timer"] ) : ccSettings.cursor.idleHideMiliseconds;
-				ccSettings.cursor.color = results["cursor-color"] ? convertHex( results["cursor-color"] ) : ccSettings.cursor.color;
+				ccSettings.cursor.radius = results["cursor-radius"] !== undefined ? Number( results["cursor-radius"] ) :  ccSettings.cursor.radius;
+				ccSettings.cursor.horizontalSpeed = results["horizontal-cursor-sensitivity"] !== undefined ? Number( results["horizontal-cursor-sensitivity"] ) / 3 : ccSettings.cursor.horizontalSpeed;
+				ccSettings.cursor.verticalSpeed = results["vertical-cursor-sensitivity"] !== undefined ? Number( results["vertical-cursor-sensitivity"] ) / 3 : ccSettings.cursor.verticalSpeed;
+				ccSettings.cursor.idleHideMiliseconds = results["idle-cursor-timer"] !== undefined ? Number( results["idle-cursor-timer"] ) : ccSettings.cursor.idleHideMiliseconds;
+				ccSettings.cursor.color = results["cursor-color"] !== undefined ? convertHex( results["cursor-color"] ) : ccSettings.cursor.color;
             
                 // Hud
                 ccSettings.hud.hidden = results["hud-hidden"] !== undefined ? Boolean( results["hud-hidden"] ) : ccSettings.hud.hidden;
-                ccSettings.hud.size = results["hud-size"] ? Number( results["hud-size"] ) : ccSettings.hud.size;
-                ccSettings.hud.position = results["hud-position"] ? results["hud-position"] : ccSettings.hud.position;
+                ccSettings.hud.size = results["hud-size"] !== undefined ? Number( results["hud-size"] ) : ccSettings.hud.size;
+                ccSettings.hud.position = results["hud-position"] !== undefined ? results["hud-position"] : ccSettings.hud.position;
 			} );
 	}
 };
