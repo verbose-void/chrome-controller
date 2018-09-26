@@ -18,6 +18,12 @@ $( function() {
     
     $( ".slider" ).on( "change", e => updateSliderDisplay( e.currentTarget ) );
     $( ".slider" ).each( ( i, e ) => updateSliderDisplay( e ) );
+    $( "#rating-container" ).click( () => {
+        chrome.tabs.create( {
+                url: 'https://chrome.google.com/webstore/detail/chrome-controller/nilnjekagachinflbdkanmblmjpaimhl?hl=en-US'
+            }
+        );
+    } );
     
     setTimeout( cycleDotAnim, 4000 );
 	loadSettings();

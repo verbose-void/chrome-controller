@@ -3,6 +3,17 @@ body {
     font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
 }
 
+.star {
+    width: 16px;
+    height: 16px;
+    background-image: url( "../../assets/star.png" );
+    background-position: center;
+    background-color: transparent;
+    background-size: contain;
+    margin: auto;
+    display: inline-block;
+}
+
 #submit {
     text-transform: uppercase;
     height: 50px;
@@ -25,15 +36,26 @@ input.color-picker {
 }
 
 #settings-container {
-	max-height: 450px;
+	max-height: 430px;
 	overflow-y: auto;
 	overflow-x: none;
 }
 
+#rating-container {
+    width: 100%;
+    margin-top: -5px;
+    cursor: pointer;
+}
+
 #title {
+    padding-bottom: 10px;
+    box-shadow: 0 0 5px #000;
+}
+
+.title-text {
+    margin: 0px;
     text-transform: uppercase;
     font-size: 60px;
-    box-shadow: 0 0 5px #000;
 }
 
 .section-title {
