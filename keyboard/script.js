@@ -14,7 +14,7 @@ function Keyboard( inp ) {
 	this.$text = $( inp )[0];
 	const _this = this;
 
-	$( "body" ).prepend( '<div id="ccosk-container"> <div id="ccosk-text-container"> <textarea readonly id="ccosk-text"></textarea> </div> <div id="ccosk-keyboard"> <div class="ccosk-key-row"> <div class="ccosk-key" shift="~">`</div> <div class="ccosk-key" shift="!">1</div> <div class="ccosk-key" shift="@">2</div> <div class="ccosk-key" shift="#">3</div> <div class="ccosk-key" shift="$">4</div> <div class="ccosk-key" shift="%">5</div> <div class="ccosk-key" shift="^">6</div> <div class="ccosk-key" shift="&">7</div> <div class="ccosk-key" shift="*">8</div> <div class="ccosk-key" shift="(">9</div> <div class="ccosk-key" shift=")">0</div> <div class="ccosk-key" shift="_">-</div> <div class="ccosk-key" shift="+">=</div> <div class="ccosk-key">backspace</div> </div> <div class="ccosk-key-row"> <div class="ccosk-key">q</div> <div class="ccosk-key">w</div> <div class="ccosk-key">e</div> <div class="ccosk-key">r</div> <div class="ccosk-key">t</div> <div class="ccosk-key">y</div> <div class="ccosk-key">u</div> <div class="ccosk-key">i</div> <div class="ccosk-key">o</div> <div class="ccosk-key">p</div> <div class="ccosk-key" shift="{">[</div> <div class="ccosk-key" shift="}">]</div> <div class="ccosk-key" shift="|">\\</div> </div> <div class="ccosk-key-row"> <div class="ccosk-key">a</div> <div class="ccosk-key">s</div> <div class="ccosk-key">d</div> <div class="ccosk-key">f</div> <div class="ccosk-key">g</div> <div class="ccosk-key">h</div> <div class="ccosk-key">j</div> <div class="ccosk-key">k</div> <div class="ccosk-key">l</div> <div class="ccosk-key" shift=":">;</div> <div class="ccosk-key" shift=\'"\'>\'</div> <div class="ccosk-key">enter</div> </div> <div class="ccosk-key-row"> <div class="ccosk-key">shift</div> <div class="ccosk-key">z</div> <div class="ccosk-key">x</div> <div class="ccosk-key">c</div> <div class="ccosk-key">v</div> <div class="ccosk-key">b</div> <div class="ccosk-key">n</div> <div class="ccosk-key">m</div> <div class="ccosk-key" shift="<">,</div> <div class="ccosk-key" shift=">">.</div> <div class="ccosk-key" shift="?">/</div> <div class="ccosk-key">clear</div> <div class="ccosk-key">close</div> </div> <div class="ccosk-key-row"> <div class="ccosk-key space-key">______</div> </div> </div> </div>' );
+	$( "body" ).prepend( '<div id="ccosk-container"> <div id="ccosk-text-container"> <textarea readonly id="ccosk-text"></textarea> </div> <div id="ccosk-keyboard"> <div class="ccosk-key-row"> <div class="ccosk-key" shift="~">`</div> <div class="ccosk-key" shift="!">1</div> <div class="ccosk-key" shift="@">2</div> <div class="ccosk-key" shift="#">3</div> <div class="ccosk-key" shift="$">4</div> <div class="ccosk-key" shift="%">5</div> <div class="ccosk-key" shift="^">6</div> <div class="ccosk-key" shift="&">7</div> <div class="ccosk-key" shift="*">8</div> <div class="ccosk-key" shift="(">9</div> <div class="ccosk-key" shift=")">0</div> <div class="ccosk-key" shift="_">-</div> <div class="ccosk-key" shift="+">=</div> <div class="ccosk-key">backspace</div> </div> <div class="ccosk-key-row"> <div class="ccosk-key">q</div> <div class="ccosk-key">w</div> <div class="ccosk-key">e</div> <div class="ccosk-key">r</div> <div class="ccosk-key">t</div> <div class="ccosk-key">y</div> <div class="ccosk-key">u</div> <div class="ccosk-key">i</div> <div class="ccosk-key">o</div> <div class="ccosk-key">p</div> <div class="ccosk-key" shift="{">[</div> <div class="ccosk-key" shift="}">]</div> <div class="ccosk-key" shift="|">\\</div> </div> <div class="ccosk-key-row"> <div class="ccosk-key">a</div> <div class="ccosk-key">s</div> <div class="ccosk-key">d</div> <div class="ccosk-key">f</div> <div class="ccosk-key">g</div> <div class="ccosk-key" id="center-key">h</div> <div class="ccosk-key">j</div> <div class="ccosk-key">k</div> <div class="ccosk-key">l</div> <div class="ccosk-key" shift=":">;</div> <div class="ccosk-key" shift=\'"\'>\'</div> <div class="ccosk-key">enter</div> </div> <div class="ccosk-key-row"> <div class="ccosk-key">shift</div> <div class="ccosk-key">z</div> <div class="ccosk-key">x</div> <div class="ccosk-key">c</div> <div class="ccosk-key">v</div> <div class="ccosk-key">b</div> <div class="ccosk-key">n</div> <div class="ccosk-key">m</div> <div class="ccosk-key" shift="<">,</div> <div class="ccosk-key" shift=">">.</div> <div class="ccosk-key" shift="?">/</div> <div class="ccosk-key">clear</div> <div class="ccosk-key">close</div> </div> <div class="ccosk-key-row"> <div class="ccosk-key space-key">______</div> </div> </div> </div>' );
 
 	$( ".ccosk-key" ).click( function( e ) {
 		let $this = $( this );
@@ -100,11 +100,88 @@ function Keyboard( inp ) {
 		}
 	}
 
+	// Dpad Controls
+	const dph = function( searchMax, searchStep, searchMove ) {
+		// Left / Right
+		let x = cursor.x;
+
+		if ( cursor.isCentered && cursor.$centered[0] ) {
+			x = searchMove < 0 ? cursor.$centered[0].getBoundingClientRect().left + searchMove : cursor.$centered[0].getBoundingClientRect().right + searchMove;
+		}
+
+		let key;
+
+		for ( let i = x; ( searchMax > 0 ? i < x + searchMax : i > x + searchMax ) && i > 0; i += searchStep ) {
+			key = keyAt( i, cursor.y );
+
+			if ( key !== null ) {
+				cursor.centerOverElement( key );
+				break;
+			}
+		}
+	}
+
+	const dpv = function( searchMax, searchStep, searchMove ) {
+		// Up / Down
+		let y = cursor.y;
+
+		if ( cursor.isCentered && cursor.$centered[0] ) {
+			y = searchMove < 0 ? cursor.$centered[0].getBoundingClientRect().top + searchMove : cursor.$centered[0].getBoundingClientRect().bottom + searchMove;
+		}
+
+		let key;
+
+		for ( let i = y; ( searchMax > 0 ? i < y + searchMax : i > y + searchMax ) && i > 0; i += searchStep ) {
+			key = keyAt( cursor.x, i );
+
+			if ( key !== null ) {
+				cursor.centerOverElement( key );
+				break;
+			} 
+
+			for ( let x = cursor.x; x < cursor.x - 500; x -= Math.abs( searchMove ) ) {
+				key = keyAt( x, i );
+
+				if ( key !== null ) {
+					cursor.centerOverElement( key );
+					break;
+				}
+			}
+
+			if ( key !== null ) {
+				break;
+			} else {
+				for ( let x = cursor.x; x < cursor.x + 500; x += Math.abs( searchMove ) ) {
+					key = keyAt( x, i );
+
+					if ( key !== null ) {
+						cursor.centerOverElement( key );
+						break;
+					}
+				}
+
+				if ( key !== null ) {
+					break;
+				}
+			}
+		}
+	}
+
+	// Horiz Dpad
+	window.addEventListener( "dpadleftreleased", () => { dph( -200, -20, -10 ) } );
+	window.addEventListener( "dpadrightreleased", () => { dph( 200, 20, 10 ) } );
+
+	// Vert Dpad
+	window.addEventListener( "dpadupreleased", () => { dpv( -200, -20, -10 ) } );
+	window.addEventListener( "dpaddownreleased", () => { dpv( 200, 20, 10 ) } );
+
 	window.addEventListener( "selectbuttonreleased", () => oskText.value = "" );
 	window.addEventListener( "startbuttonreleased", sb );
 	window.addEventListener( "xbuttonreleased", xb );
 	window.addEventListener( "ybuttonreleased", yb );
 	window.addEventListener( "bbuttonreleased", bb );
+
+	cursor.centerOverElement( $( "#center-key" ) );
 }
 
 Keyboard.prototype.close = function() {
@@ -112,6 +189,11 @@ Keyboard.prototype.close = function() {
 	cursor.keyboard = null;
 	chrome.runtime.sendMessage( { eventType: "closekeyboard" } );
 	buttons.updateControllerScheme();
+}
+
+function keyAt( x, y ) {
+	let potn = $( document.elementFromPoint( x, y ) );
+	return potn.hasClass( "ccosk-key" ) ? potn : null;
 }
 
 window.addEventListener( "unload", () => chrome.runtime.sendMessage( { eventType: "closekeyboard" } ) );
