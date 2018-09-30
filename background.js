@@ -3,19 +3,19 @@ const ACTION_COOLDOWN_TIME = 200;
 var keyboardOpen = false;
 
 chrome.runtime.onMessage.addListener( function( message, sender, sendResponse ) {
-	if ( isValid( message, "righttriggerpressed" ) ) {
+	if ( isValid( message, "movetabright" ) ) {
 		moveTabBy( 1, sender.tab.windowId );
 	}
 
-	else if ( isValid( message, "lefttriggerpressed" ) ) {
+	else if ( isValid( message, "movetableft" ) ) {
 		moveTabBy( -1, sender.tab.windowId );
 	}
 
-	else if ( isValid( message, "startbuttonreleased" ) ) {
+	else if ( isValid( message, "opennewtab" ) ) {
 		openNewTab();
 	}
 
-	else if ( isValid( message, "selectbuttonreleased" ) ) {
+	else if ( isValid( message, "closecurrenttab" ) ) {
 		closeCurrentTab();
 	}
 

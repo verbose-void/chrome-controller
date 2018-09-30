@@ -38,6 +38,10 @@ function getClickable( x, y ) {
 }
 
 function dpadHoriz( e ) {
+	if ( actions.map.dpad !== "autoCursorSelect" ) {
+		return;
+	}
+
 	if ( $( "#ccosk-container" )[0] ) {
 		return;
 	}
@@ -63,6 +67,10 @@ function dpadHoriz( e ) {
 }
 
 function dpadVert( e ) {
+	if ( actions.map.dpad !== "autoCursorSelect" ) {
+		return;
+	}
+
 	if ( $( "#ccosk-container" )[0] ) {
 		return;
 	}

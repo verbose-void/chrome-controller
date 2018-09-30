@@ -19,7 +19,7 @@
 		{
       		"run_at": "document_start",
 			"matches": ["<all_urls>"],
-			"js": ["lib/jquery.min.js", "content_scripts/setup.js", "settings/script.js", "content_scripts/general_controls.js"]
+			"js": ["lib/jquery.min.js", "content_scripts/setup.js", "settings/script.js", "content_scripts/controls_setup.js"]
 		},
 		{
 			"run_at": "document_idle",
@@ -30,7 +30,7 @@
 		{
 			"run_at": "document_idle",
 			"matches": ["https://www.youtube.com/*"],
-			"js": ["lib/jquery.min.js", "cursor/script.js", "youtube/controls.js", "youtube/player_controls.js"]
+			"js": ["lib/jquery.min.js", "cursor/script.js", "youtube/dpad_selection.js"]
 		}
 	],
 	"icons": {

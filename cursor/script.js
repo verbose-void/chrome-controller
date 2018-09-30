@@ -1,6 +1,5 @@
 var cursor;
 var hud;
-var deltaTime;
 var prevFrame;
 
 function resize() {
@@ -18,17 +17,7 @@ function setup() {
 	cursor = new Cursor( windowWidth / 2, windowHeight / 2 );
 	hud = new Hud();
 	prevFrame = performance.now();
-	deltaTime = 0;
-
-	window.addEventListener( "leftanaloghorizontalpoll", e => {
-		deltaTime = prevFrame - performance.now();
-		prevFrame = performance.now();
-		cursor.updatePos( e.detail.current, 0, deltaTime );
-	}, true );
-
-	window.addEventListener( "leftanalogverticalpoll", e => cursor.updatePos( 0, e.detail.current, deltaTime ), true );
-	window.addEventListener( "abuttonreleased", () => { cursor.click() }, true );
-	window.addEventListener( "rightanalogverticalpoll", () => { cursor.maintainCenter() }, true );
+	cursorMoveDelta = 0;
 
 	buttons.load();
 }
