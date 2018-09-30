@@ -177,6 +177,35 @@
 
             <div class="carousel-item">
 
+                <template id="template-button">
+                    <option value="click">Click</option>
+                    <option value="newTab">New Tab</option>
+                    <option value="closeTab" value="click">Close Tab</option>
+                    <option value="historyBack">History-Back</option>
+                    <option value="historyForward">History-Forward</option>
+                    <option value="tabLeft">Tab-Left</option>
+                    <option value="tabRight">Tab-Right</option>
+                </template>
+
+                <template id="template-video">
+                    <option value="videoScreenSize">Video-Screen Size</option>
+                    <option value="videoPlayPause">Video-Play/Pause</option>
+                    <option value="videoDisplayTime">Video-Display Time</option>
+                </template>
+
+                <template id="template-axis">
+                    <option value="scroll">Scroll</option>
+                    <option value="moveCursor">Move Cursor</option>
+                </template>
+
+                <template id="template-dpad">
+                    <option value="autoCursorSelect">Auto-Cursor Select</option>
+                </template>
+
+                <template id="template-none">
+                    <option value="NONE">NONE</option>
+                </template>
+
                 <!-- Mapping Settings HTML -->
                 <div id="mappings-container" class="page">
                     <h1 style="margin-left: 8px;">CONTROLLER TYPE</h1>
@@ -206,25 +235,13 @@
                                 <tr>
                                     <td class="label" data-ps-alt="Left Stick" data-xb-alt="Left Stick" data-nl-alt="Axis 0/1">Left
                                         Stick</td>
-                                    <td class="map">
-                                        <select>
-                                            <option>Scroll</option>
-                                            <option>Move Cursor</option>
-                                            <option>NONE</option>
-                                        </select>
-                                    </td>
+                                    <td class="map" data-default="moveCursor" data-button-map="leftstick" data-mappings-type="axis,none"></td>
                                 </tr>
 
                                 <tr>
                                     <td class="label" data-ps-alt="Right Stick" data-xb-alt="Right Stick" data-nl-alt="Axis 2/3">Right
                                         Stick</td>
-                                    <td class="map">
-                                        <select>
-                                            <option>Move Cursor</option>
-                                            <option>Scroll</option>
-                                            <option>NONE</option>
-                                        </select>
-                                    </td>
+                                    <td class="map" data-default="scroll" data-button-map="rightstick" data-mappings-type="axis,none"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -236,122 +253,37 @@
 
                                 <tr>
                                     <td class="label" data-ps-alt="D-Pad" data-xb-alt="D-Pad" data-nl-alt="B12-B15">D-Pad</td>
-                                    <td class="map">
-                                        <select>
-                                            <option>Auto-Cursor Select</option>
-                                            <option>Move Cursor</option>
-                                            <option>Scroll</option>
-                                            <option>NONE</option>
-                                        </select>
-                                    </td>
+                                    <td class="map" data-default="autoCursorSelect" data-button-map="dpad" data-mappings-type="axis,dpad,none"></td>
                                 </tr>
 
                                 <tr>
                                     <td class="label" data-ps-alt="✕" data-xb-alt="A" data-nl-alt="B0">A</td>
-                                    <td class="map">
-                                        <select>
-                                            <option>Click</option>
-                                            <option>Video-Screen Size</option>
-                                            <option>Video-Play/Pause</option>
-                                            <option>Video-Display Time</option>
-                                            <option>History-Back</option>
-                                            <option>History-Forward</option>
-                                            <option>Tab-Left</option>
-                                            <option>Tab-Right</option>
-                                            <option>New Tab</option>
-                                            <option>Close Tab</option>
-                                            <option>NONE</option>
-                                        </select>
-                                    </td>
+                                    <td class="map" data-default="click" data-button-map="a" data-mappings-type="button,video,none"></td>
                                 </tr>
 
                                 <tr>
                                     <td class="label" data-ps-alt="𐩒" data-xb-alt="B" data-nl-alt="B1">B</td>
-                                    <td class="map">
-                                        <select>
-                                            <option>Video-Screen Size</option>
-                                            <option>Video-Play/Pause</option>
-                                            <option>Video-Display Time</option>
-                                            <option>Click</option>
-                                            <option>History-Back</option>
-                                            <option>History-Forward</option>
-                                            <option>Tab-Left</option>
-                                            <option>Tab-Right</option>
-                                            <option>New Tab</option>
-                                            <option>Close Tab</option>
-                                            <option>NONE</option>
-                                        </select>
-                                    </td>
+                                    <td class="map" data-default="videoScreenSize" data-button-map="b" data-mappings-type="button,video,none"></td>
                                 </tr>
 
                                 <tr>
                                     <td class="label" data-ps-alt="◻" data-xb-alt="X" data-nl-alt="B2">X</td>
-                                    <td class="map">
-                                        <select>
-                                            <option>Video-Play/Pause</option>
-                                            <option>Video-Screen Size</option>
-                                            <option>Video-Display Time</option>
-                                            <option>Click</option>
-                                            <option>History-Back</option>
-                                            <option>History-Forward</option>
-                                            <option>Tab-Left</option>
-                                            <option>Tab-Right</option>
-                                            <option>New Tab</option>
-                                            <option>Close Tab</option>
-                                            <option>NONE</option>
-                                        </select>
-                                    </td>
+                                    <td class="map" data-default="videoPlayPause" data-button-map="x" data-mappings-type="button,video,none"></td>
                                 </tr>
 
                                 <tr>
                                     <td class="label" data-ps-alt="△" data-xb-alt="Y" data-nl-alt="B3">Y</td>
-                                    <td class="map">
-                                        <select>
-                                            <option>Video-Display Time</option>
-                                            <option>Video-Play/Pause</option>
-                                            <option>Video-Screen Size</option>
-                                            <option>Click</option>
-                                            <option>History-Back</option>
-                                            <option>History-Forward</option>
-                                            <option>Tab-Left</option>
-                                            <option>Tab-Right</option>
-                                            <option>New Tab</option>
-                                            <option>Close Tab</option>
-                                            <option>NONE</option>
-                                        </select>
-                                    </td>
+                                    <td class="map" data-default="videoDisplayTime" data-button-map="y" data-mappings-type="button,video,none"></td>
                                 </tr>
 
                                 <tr>
                                     <td class="label" data-ps-alt="Option" data-xb-alt="Menu" data-nl-alt="B9">Menu</td>
-                                    <td class="map">
-                                        <select>
-                                            <option>New Tab</option>
-                                            <option>Close Tab</option>
-                                            <option>Click</option>
-                                            <option>History-Back</option>
-                                            <option>History-Forward</option>
-                                            <option>Tab-Left</option>
-                                            <option>Tab-Right</option>
-                                            <option>NONE</option>
-                                        </select>
-                                    </td>
+                                    <td class="map" data-default="newTab" data-button-map="menu" data-mappings-type="button,none"></td>
                                 </tr>
 
                                 <tr>
                                     <td class="label" data-ps-alt="Share" data-xb-alt="View" data-nl-alt="B8">View</td>
-                                    <td class="map">
-                                        <select>
-                                            <option>Close Tab</option>
-                                            <option>New Tab</option>
-                                            <option>Click</option>
-                                            <option>History-Back</option>
-                                            <option>History-Forward</option>
-                                            <option>Tab-Left</option>
-                                            <option>Tab-Right</option>
-                                            <option>NONE</option>
-                                        </select>
-                                    </td>
+                                    <td class="map" data-default="closeTab" data-button-map="view" data-mappings-type="button,none"></td>
                                 </tr>
 
                             </tbody>
@@ -363,66 +295,22 @@
                             <tbody>
                                 <tr>
                                     <td class="label" data-ps-alt="L1" data-xb-alt="LB" data-nl-alt="B4">LB</td>
-                                    <td class="map">
-                                        <select>
-                                            <option>History-Back</option>
-                                            <option>History-Forward</option>
-                                            <option>Close Tab</option>
-                                            <option>New Tab</option>
-                                            <option>Click</option>
-                                            <option>Tab-Left</option>
-                                            <option>Tab-Right</option>
-                                            <option>NONE</option>
-                                        </select>
-                                    </td>
+                                    <td class="map" data-default="historyBack" data-button-map="lb" data-mappings-type="button,none"></td>
                                 </tr>
 
                                 <tr>
                                     <td class="label" data-ps-alt="L2" data-xb-alt="LT" data-nl-alt="B6">LT</td>
-                                    <td class="map">
-                                        <select>
-                                            <option>Tab-Left</option>
-                                            <option>Tab-Right</option>
-                                            <option>History-Forward</option>
-                                            <option>History-Back</option>
-                                            <option>Close Tab</option>
-                                            <option>New Tab</option>
-                                            <option>Click</option>
-                                            <option>NONE</option>
-                                        </select>
-                                    </td>
+                                    <td class="map" data-default="tabLeft" data-button-map="lt" data-mappings-type="button,none"></td>
                                 </tr>
 
                                 <tr>
                                     <td class="label" data-ps-alt="R2" data-xb-alt="RT" data-nl-alt="B7">RT</td>
-                                    <td class="map">
-                                        <select>
-                                            <option>Tab-Left</option>
-                                            <option>Tab-Right</option>
-                                            <option>History-Forward</option>
-                                            <option>History-Back</option>
-                                            <option>Close Tab</option>
-                                            <option>New Tab</option>
-                                            <option>Click</option>
-                                            <option>NONE</option>
-                                        </select>
-                                    </td>
+                                    <td class="map" data-default="tabRight" data-button-map="rt" data-mappings-type="button,none"></td>
                                 </tr>
 
                                 <tr>
                                     <td class="label" data-ps-alt="R1" data-xb-alt="RB" data-nl-alt="B5">RB</td>
-                                    <td class="map">
-                                        <select>
-                                            <option>History-Forward</option>
-                                            <option>History-Back</option>
-                                            <option>Close Tab</option>
-                                            <option>New Tab</option>
-                                            <option>Click</option>
-                                            <option>Tab-Left</option>
-                                            <option>Tab-Right</option>
-                                            <option>NONE</option>
-                                        </select>
-                                    </td>
+                                    <td class="map" data-default="historyForward" data-button-map="rb" data-mappings-type="button,none"></td>
                                 </tr>
                             </tbody>
                         </table>

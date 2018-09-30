@@ -1,9 +1,25 @@
-var animInst;
+var settingModders;
+var mappingModders;
 
 $( function() {
+    // Add select tags to all data-mappings
+    $( "td[data-mappings-type]" ).each( function() {
+        let $this = $( this );
+        let $sel = $this.find( "select" );
+        let types = $this.attr( "data-mappings-type" ).split( "," );
+
+        if ( !$sel.length ) {
+            $sel = $this.append( "<select></select>" ).find( "select" );
+        }
+
+        types.forEach( type => {
+            $sel[0].appendChild( $( "#template-" + type )[0].content.cloneNode( true ) );
+        } );
+    } );
+
 	$( "#submit" ).click( () => { updateSettings(); window.close() } );
-	settingModders = Array.from( $( ".setting-modifier" ) );
-    
+    settingModders = Array.from( $( ".setting-modifier" ) );
+    mappingModders = $( "[data-button-map]" );
 
     const $dot = $( "#cursor-dot" );
     
@@ -59,7 +75,21 @@ function loadSettings() {
             
             updateSliderDisplay( sl );
 		} );
-	}
+    }
+    
+    mappingModders.each( function() {
+        let $this = $( this );
+
+        chrome.storage.sync.get( [$this.attr( "data-button-map" )], function( res ) {
+            let temp = res[$this.attr( "data-button-map" )];
+
+            if ( temp ) {
+                $this.find( "select" ).val( temp );
+            } else {
+                $this.find( "select" ).val( $this.attr( "data-default" ) );
+            }
+        } );
+    } );
 
 	chrome.storage.sync.get( ["cursor-color", "cursor-radius"], function( result ) {
 		const $dot = $( "#cursor-dot" );
@@ -81,7 +111,12 @@ function updateSettings() {
         }
         
 		settings[sl.getAttribute( "id" )] = val;
-	}
+    }
+    
+    mappingModders.each( function() {
+        let $this = $( this );
+        settings[$this.attr( "data-button-map" )] = $this.find( "select" ).val();
+    } );
 
 	chrome.storage.sync.set( settings, function() {
 		chrome.tabs.query( {}, function( tabs ) {

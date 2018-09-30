@@ -14,7 +14,7 @@ const actions = {
 		...defaultAction,
 
 		"run": function( e ) {
-			if ( e.detail.axis !== 1 && e.detail.axis !== 3 ) {
+			if ( e.detail.axis !== 1 && e.detail.axis !== 3 && e.detail.axis ) {
 				return;
 			}
 
@@ -34,8 +34,20 @@ const actions = {
 		...defaultAction,
 
 		"run": function( e ) {
+			if ( actions.eventToControlMap[e.type] === "dpad" ) {
+				cursorMoveDelta = prevFrame - performance.now();
+				prevFrame = performance.now();
+
+				cursor.updatePos( 
+					e.detail.controller.buttons[14].value <= 0 ? e.detail.controller.buttons[15].value : -e.detail.controller.buttons[14].value, 
+					e.detail.controller.buttons[12].value <= 0 ? e.detail.controller.buttons[13].value : -e.detail.controller.buttons[12].value, 
+					cursorMoveDelta );
+
+				return;
+			}
+
 			try {
-					if ( e.detail.axis === 1 || e.detail.axis === 3 ) { 
+				if ( e.detail.axis === 1 || e.detail.axis === 3 ) { 
 					// Delta only calculated once.
 					cursorMoveDelta = prevFrame - performance.now();
 					prevFrame = performance.now();
@@ -144,6 +156,10 @@ actions.eventToControlMap = {
 	"dpaduphold": "dpad",
 	"dpaddownpressed": "dpad",
 	"dpaddownhold": "dpad",
+	"dpadrightpressed": "dpad",
+	"dpadrighthold": "dpad",
+	"dpadleftpressed": "dpad",
+	"dpadlefthold": "dpad",
 	"lefttriggerreleased": "lt",
 	"righttriggerreleased": "rt",
 	"leftbumperreleased": "lb",
@@ -223,7 +239,27 @@ CCSettings.prototype.updateSettings = function( req ) {
                 // Hud
                 "hud-hidden",
                 "hud-size",
-                "hud-position"
+				"hud-position",
+				
+				// Mapping
+				/* Axis */
+				"rightstick",
+				"leftstick",
+
+				/* Buttons */
+				"dpad",
+				"a",
+				"b",
+				"x",
+				"y",
+				"menu",
+				"view",
+
+				/* Triggers */
+				"lb",
+				"rb",
+				"lt",
+				"rt"
 			], 
 
 			function( results ) {
@@ -242,6 +278,26 @@ CCSettings.prototype.updateSettings = function( req ) {
                 ccSettings.hud.hidden = results["hud-hidden"] !== undefined ? Boolean( results["hud-hidden"] ) : ccSettings.hud.hidden;
                 ccSettings.hud.size = results["hud-size"] !== undefined ? Number( results["hud-size"] ) : ccSettings.hud.size;
                 ccSettings.hud.position = results["hud-position"] !== undefined ? results["hud-position"] : ccSettings.hud.position;
+			
+				// Mapping
+				/* Axis */
+				actions.map.rightstick = results["rightstick"] !== undefined ? results["rightstick"] : actions.map.rightstick;
+				actions.map.leftstick = results["leftstick"] !== undefined ? results["leftstick"] : actions.map.leftstick;
+
+				/* Buttons */
+				actions.map.dpad = results["dpad"] !== undefined ? results["dpad"] : actions.map.dpad;
+				actions.map.a = results["a"] !== undefined ? results["a"] : actions.map.a;
+				actions.map.b = results["b"] !== undefined ? results["b"] : actions.map.b;
+				actions.map.x = results["x"] !== undefined ? results["x"] : actions.map.x;
+				actions.map.y = results["y"] !== undefined ? results["y"] : actions.map.y;
+				actions.map.menu = results["menu"] !== undefined ? results["menu"] : actions.map.menu;
+				actions.map.view = results["view"] !== undefined ? results["view"] : actions.map.view;
+
+				/* Triggers */
+				actions.map.lb = results["lb"] !== undefined ? results["lb"] : actions.map.lb;
+				actions.map.rb = results["rb"] !== undefined ? results["rb"] : actions.map.rb;
+				actions.map.lt = results["lt"] !== undefined ? results["lt"] : actions.map.lt;
+				actions.map.rt = results["rt"] !== undefined ? results["rt"] : actions.map.rt;
 			} );
 	}
 };
