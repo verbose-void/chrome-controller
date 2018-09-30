@@ -91,11 +91,13 @@ function loadSettings() {
         } );
     } );
 
-	chrome.storage.sync.get( ["cursor-color", "cursor-radius"], function( result ) {
+	chrome.storage.sync.get( ["cursor-color", "cursor-radius", "controllerPreference"], function( result ) {
 		const $dot = $( "#cursor-dot" );
         $dot.css( "background-color", result["cursor-color"] );
         $dot.css( "height", Number( result["cursor-radius"] ) * 2 );
         $dot.css( "width", Number( result["cursor-radius"] ) * 2 );
+
+        $( "." + result["controllerPreference"] ).click();
 	} );
 }
 
@@ -117,6 +119,10 @@ function updateSettings() {
         let $this = $( this );
         settings[$this.attr( "data-button-map" )] = $this.find( "select" ).val();
     } );
+
+    settings["controllerPreference"] = $( ".controller.active" ).attr( "class" ).split( " " ).filter( x => {
+        return x !== "active" && x !== "controller";
+    } )[0];
 
 	chrome.storage.sync.set( settings, function() {
 		chrome.tabs.query( {}, function( tabs ) {
