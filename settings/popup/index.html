@@ -1,151 +1,441 @@
 <html>
-    <head>
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <div id="title" class="text-center">
-            <h1 class="title-text">SETTINGS</h1>
-            <div id="rating-container" onclick="">
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-                <div class="star"></div>
-            </div>
+<head>
+    <meta charset="utf-8" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="controllers.css">
+</head>
+
+<body>
+    <div id="title" class="text-center">
+        <h1 class="title-text">SETTINGS</h1>
+        <div id="rating-container" onclick="">
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
+            <div class="star"></div>
         </div>
 
-        <div id="settings-container">
+        <div id="nav-buttons">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#pages" data-toggle="tab" data-slide-to="0" role="tab"
+                        aria-selected="true">General</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#pages" data-toggle="tab" data-slide-to="1" role="tab" aria-selected="false">Button
+                        Mapping</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
-            <div class="sec-div">
-                <div class="text-center">
-                    <h3 class="section-title">SCROLLING</h3>
-                </div>
 
-                <div class="row pr-5 pl-5">
-                    <div class="col">
-                        <form>
-                            <div class="form-group">
-                                <div>
-                                    <label class="setting-label">Speed</label>
-                                </div>
-                                <label class="range-display">--</label>
-                                <input id="scroll-sensitivity" format="%val%" step="1" type="range" min="1" max="25" value="13" class="slider setting-modifier">
-                            </div>
+    <div id="pages" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
 
-                            <div class="form-group">
-                                <div>
-                                    <label class="setting-label">Sprint Speed</label>
-                                </div>
-                                <label class="range-display">--</label>
-                                <input id="scroll-sprint" format="%val%x" step="0.1" type="range" min="1" max="5" value="2" class="slider setting-modifier">
-                            </div>
-                        </form>
-                    </div>
-                    <!--<div class="col">
-                        <form>
-                            <div class="form-group">
-                                <label for="formControlRange">Selection Duration</label>
-                                <input id="select-time" step="1" type="range" min="5" max="61" value="20" class="slider">
-                            </div>
-                        </form>
-                    </div>-->
-                </div>
-            </div>
+                <!-- General Settings HTML -->
+                <div id="settings-container" class="page">
 
-            <div class="sec-div">
-                <div class="text-center">
-                    <h3 class="section-title">CURSOR</h3>
-                </div>
-
-                <div class="row pr-5 pl-5">
-                    <div class="col">
-                        <form>
-                            <div class="form-group">
-                                <div id="cursor-dot"></div>
-                                <label class="setting-label">Color: </label>
-                                <input type="color" id="cursor-color" class="color-picker setting-modifier">
-                            </div>
-                            
-                            <div class="form-group">
-                                <div>
-                                    <label class="setting-label">Radius</label>
-                                </div>
-                                <label class="range-display">--</label>
-                                <input id="cursor-radius" format="%val% pixels" step="1" type="range" min="5" max="30" value="10" class="slider setting-modifier">
-                            </div>
-
-                            <div class="form-group">
-                                <div>
-                                    <label class="setting-label">Horizontal Speed</label>
-                                </div>
-                                <label class="range-display">--</label>
-                                <input id="horizontal-cursor-sensitivity" format="%val%" step="0.1" type="range" min="1" max="12" value="5" class="slider setting-modifier">
-                            </div>
-
-                            <div class="form-group">
-                                <div>
-                                    <label class="setting-label">Vertical Speed</label>
-                                </div>
-                                <label class="range-display">--</label>
-                                <input id="vertical-cursor-sensitivity" format="%val%" step="0.1" type="range" min="1" max="12" value="5" class="slider setting-modifier">
-                            </div>
-
-                            <div class="form-group">
-                                <div>
-                                    <label class="setting-label">Idle Hide Timer</label>
-                                </div>
-                                <label class="range-display">--</label>
-                                <input id="idle-cursor-timer" step="1" format="%val% seconds" format-mult="0.001" type="range" min="1000" max="15000" value="5000" class="slider setting-modifier">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="sec-div">
-                <div class="text-center">
-                    <h3 class="section-title">HUD</h3>
-                </div>
-
-                <div class="row pr-5 pl-5">
-                    <div class="col">
-                        <div class="form-check">
-                            <input class="form-check-input setting-modifier" type="checkbox" value="" id="hud-hidden">
-                            <label class="setting-label mb-2">Hidden</label>
+                    <div class="sec-div" style="margin-top: 0px">
+                        <div class="text-center">
+                            <h3 class="section-title">SCROLLING</h3>
                         </div>
-                        
-                        <form>
-                            <div class="form-group">
-                                <div>
-                                    <label class="setting-label">Size</label>
+
+                        <div class="row pr-5 pl-5">
+                            <div class="col">
+                                <form>
+                                    <div class="form-group">
+                                        <div>
+                                            <label class="setting-label">Speed</label>
+                                        </div>
+                                        <label class="range-display">--</label>
+                                        <input id="scroll-sensitivity" format="%val%" step="1" type="range" min="1" max="25"
+                                            value="13" class="slider setting-modifier">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div>
+                                            <label class="setting-label">Sprint Speed</label>
+                                        </div>
+                                        <label class="range-display">--</label>
+                                        <input id="scroll-sprint" format="%val%x" step="0.1" type="range" min="1" max="5"
+                                            value="2" class="slider setting-modifier">
+                                    </div>
+                                </form>
+                            </div>
+                            <!--<div class="col">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="formControlRange">Selection Duration</label>
+                                            <input id="select-time" step="1" type="range" min="5" max="61" value="20" class="slider">
+                                        </div>
+                                    </form>
+                                </div>-->
+                        </div>
+                    </div>
+
+                    <div class="sec-div">
+                        <div class="text-center">
+                            <h3 class="section-title">CURSOR</h3>
+                        </div>
+
+                        <div class="row pr-5 pl-5">
+                            <div class="col">
+                                <form>
+                                    <div class="form-group">
+                                        <div id="cursor-dot"></div>
+                                        <label class="setting-label">Color: </label>
+                                        <input type="color" id="cursor-color" class="color-picker setting-modifier">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div>
+                                            <label class="setting-label">Radius</label>
+                                        </div>
+                                        <label class="range-display">--</label>
+                                        <input id="cursor-radius" format="%val% pixels" step="1" type="range" min="5"
+                                            max="30" value="10" class="slider setting-modifier">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div>
+                                            <label class="setting-label">Horizontal Speed</label>
+                                        </div>
+                                        <label class="range-display">--</label>
+                                        <input id="horizontal-cursor-sensitivity" format="%val%" step="0.1" type="range"
+                                            min="1" max="12" value="5" class="slider setting-modifier">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div>
+                                            <label class="setting-label">Vertical Speed</label>
+                                        </div>
+                                        <label class="range-display">--</label>
+                                        <input id="vertical-cursor-sensitivity" format="%val%" step="0.1" type="range"
+                                            min="1" max="12" value="5" class="slider setting-modifier">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div>
+                                            <label class="setting-label">Idle Hide Timer</label>
+                                        </div>
+                                        <label class="range-display">--</label>
+                                        <input id="idle-cursor-timer" step="1" format="%val% seconds" format-mult="0.001"
+                                            type="range" min="1000" max="15000" value="5000" class="slider setting-modifier">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sec-div" style="margin-bottom: 0px">
+                        <div class="text-center">
+                            <h3 class="section-title">HUD</h3>
+                        </div>
+
+                        <div class="row pr-5 pl-5">
+                            <div class="col">
+                                <div class="form-check">
+                                    <input class="form-check-input setting-modifier" type="checkbox" value="" id="hud-hidden">
+                                    <label class="setting-label mb-2">Hidden</label>
                                 </div>
-                                <label class="range-display">--</label>
-                                <input id="hud-size" format="%val% pixels" step="4" type="range" min="32" max="128" value="64" class="slider setting-modifier">
+
+                                <form>
+                                    <div class="form-group">
+                                        <div>
+                                            <label class="setting-label">Size</label>
+                                        </div>
+                                        <label class="range-display">--</label>
+                                        <input id="hud-size" format="%val% pixels" step="4" type="range" min="32" max="128"
+                                            value="64" class="slider setting-modifier">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="setting-label">Position</label>
+                                        <select class="custom-select setting-modifier" id="hud-position">
+                                            <option selected>TOP</option>
+                                            <option>LEFT</option>
+                                            <option>RIGHT</option>
+                                            <option>BOTTOM</option>
+                                        </select>
+                                    </div>
+                                </form>
                             </div>
-                            
-                            <div class="form-group">
-                                <label class="setting-label">Position</label>
-                                <select class="custom-select setting-modifier" id="hud-position">
-                                    <option selected>TOP</option>
-                                    <option>LEFT</option>
-                                    <option>RIGHT</option>
-                                    <option>BOTTOM</option>
-                                </select>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
+
+            </div>
+
+            <div class="carousel-item">
+
+                <!-- Mapping Settings HTML -->
+                <div id="mappings-container" class="page">
+                    <h1 style="margin-left: 8px;">CONTROLLER TYPE</h1>
+                    <div class="row">
+                        <div class="col">
+                            <div class="controller xbox-controller active" data-controller-alt="data-xb-alt"></div>
+                        </div>
+
+                        <div class="col">
+                            <div class="controller ps-controller" data-controller-alt="data-ps-alt"></div>
+                        </div>
+
+                        <div class="col">
+                            <div class="controller not-listed" data-controller-alt="data-nl-alt"><a>Not Listed</a></div>
+                        </div>
+                    </div>
+
+                    <div class="hide" id="not-listed-disclaimer">
+                        <a>Find your controller's button numbering <a id="gamepad-api-button" href="#">here</a>.</a>
+                    </div>
+
+                    <div class="mapping-menu-global">
+                        <h1>AXIS</h1>
+
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="label" data-ps-alt="Left Stick" data-xb-alt="Left Stick" data-nl-alt="Axis 0/1">Left Stick</td>
+                                    <td class="map">
+                                        <select>
+                                            <option>Scroll</option>
+                                            <option>Move Cursor</option>
+                                            <option>NONE</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="Right Stick" data-xb-alt="Right Stick" data-nl-alt="Axis 2/3">Right Stick</td>
+                                    <td class="map">
+                                        <select>
+                                            <option>Move Cursor</option>
+                                            <option>Scroll</option>
+                                            <option>NONE</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h1>BUTTONS</h1>
+
+                        <table class="table">
+                            <tbody>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="D-Pad" data-xb-alt="D-Pad" data-nl-alt="B12-B15">D-Pad</td>
+                                    <td class="map">
+                                        <select>
+                                            <option>Auto-Cursor Select</option>
+                                            <option>Move Cursor</option>
+                                            <option>Scroll</option>
+                                            <option>NONE</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="✕" data-xb-alt="A" data-nl-alt="B0">A</td>
+                                    <td class="map">
+                                        <select>
+                                            <option>Click</option>
+                                            <option>History-Back</option>
+                                            <option>History-Forward</option>
+                                            <option>Tab-Left</option>
+                                            <option>Tab-Right</option>
+                                            <option>New Tab</option>
+                                            <option>Close Tab</option>
+                                            <option>NONE</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="𐩒" data-xb-alt="B" data-nl-alt="B1">B</td>
+                                    <td class="map">
+                                        <select>
+                                            <option>Video-Screen Size</option>
+                                            <option>Video-Play/Pause</option>
+                                            <option>Video-Display Time</option>
+                                            <option>Click</option>
+                                            <option>History-Back</option>
+                                            <option>History-Forward</option>
+                                            <option>Tab-Left</option>
+                                            <option>Tab-Right</option>
+                                            <option>New Tab</option>
+                                            <option>Close Tab</option>
+                                            <option>NONE</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="◻" data-xb-alt="X" data-nl-alt="B2">X</td>
+                                    <td class="map">
+                                        <select>
+                                            <option>Video-Play/Pause</option>
+                                            <option>Video-Screen Size</option>
+                                            <option>Video-Display Time</option>
+                                            <option>Click</option>
+                                            <option>History-Back</option>
+                                            <option>History-Forward</option>
+                                            <option>Tab-Left</option>
+                                            <option>Tab-Right</option>
+                                            <option>New Tab</option>
+                                            <option>Close Tab</option>
+                                            <option>NONE</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="△" data-xb-alt="Y" data-nl-alt="B3">Y</td>
+                                    <td class="map">
+                                        <select>
+                                            <option>Video-Display Time</option>
+                                            <option>Video-Play/Pause</option>
+                                            <option>Video-Screen Size</option>
+                                            <option>Click</option>
+                                            <option>History-Back</option>
+                                            <option>History-Forward</option>
+                                            <option>Tab-Left</option>
+                                            <option>Tab-Right</option>
+                                            <option>New Tab</option>
+                                            <option>Close Tab</option>
+                                            <option>NONE</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="Option" data-xb-alt="Menu" data-nl-alt="B9">Menu</td>
+                                    <td class="map">
+                                        <select>
+                                            <option>New Tab</option>
+                                            <option>Close Tab</option>
+                                            <option>Click</option>
+                                            <option>History-Back</option>
+                                            <option>History-Forward</option>
+                                            <option>Tab-Left</option>
+                                            <option>Tab-Right</option>
+                                            <option>NONE</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="Share" data-xb-alt="View" data-nl-alt="B8">View</td>
+                                    <td class="map">
+                                        <select>
+                                            <option>Close Tab</option>
+                                            <option>New Tab</option>
+                                            <option>Click</option>
+                                            <option>History-Back</option>
+                                            <option>History-Forward</option>
+                                            <option>Tab-Left</option>
+                                            <option>Tab-Right</option>
+                                            <option>NONE</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <h1>TRIGGERS</h1>
+
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="label" data-ps-alt="L1" data-xb-alt="LB" data-nl-alt="B4">LB</td>
+                                    <td class="map">
+                                        <select>
+                                            <option>History-Back</option>
+                                            <option>History-Forward</option>
+                                            <option>Close Tab</option>
+                                            <option>New Tab</option>
+                                            <option>Click</option>
+                                            <option>Tab-Left</option>
+                                            <option>Tab-Right</option>
+                                            <option>NONE</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="L2" data-xb-alt="LT" data-nl-alt="B6">LT</td>
+                                    <td class="map">
+                                        <select>
+                                            <option>Tab-Left</option>
+                                            <option>Tab-Right</option>
+                                            <option>History-Forward</option>
+                                            <option>History-Back</option>
+                                            <option>Close Tab</option>
+                                            <option>New Tab</option>
+                                            <option>Click</option>
+                                            <option>NONE</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="R2" data-xb-alt="RT" data-nl-alt="B7">RT</td>
+                                    <td class="map">
+                                        <select>
+                                            <option>Tab-Left</option>
+                                            <option>Tab-Right</option>
+                                            <option>History-Forward</option>
+                                            <option>History-Back</option>
+                                            <option>Close Tab</option>
+                                            <option>New Tab</option>
+                                            <option>Click</option>
+                                            <option>NONE</option>
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="R1" data-xb-alt="RB" data-nl-alt="B5">RB</td>
+                                    <td class="map">
+                                        <select>
+                                            <option>History-Forward</option>
+                                            <option>History-Back</option>
+                                            <option>Close Tab</option>
+                                            <option>New Tab</option>
+                                            <option>Click</option>
+                                            <option>Tab-Left</option>
+                                            <option>Tab-Right</option>
+                                            <option>NONE</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
         </div>
-        
-        <div id="bottom-container" class="text-center pt-2 mb-2">
-            <button id="submit" class="btn btn-dark">Submit</button>
-        </div>
-        
-        <script src="../../lib/jquery.min.js"></script>
-        <script src="script.js"></script>
-    </body>
+    </div>
+
+    <div id="bottom-container" class="text-center pt-2 mb-2">
+        <button id="submit" class="btn btn-dark">Submit</button>
+    </div>
+
+    <script src="../../lib/jquery.min.js"></script>
+    <script src="../../lib/bootstrapjs.min.js"></script>
+    <script src="script.js"></script>
+    <script src="mapping_script.js"></script>
+</body>
+
 </html>

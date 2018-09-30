@@ -14,6 +14,25 @@ body {
     display: inline-block;
 }
 
+li.nav-item {
+    width: 50%;
+    cursor: pointer;
+}
+
+.nav-link {
+    color: black;
+    transition: color 0.1s ease-in-out;
+}
+
+.nav-link:hover:not(.active) {
+    color: rgba( 0, 0, 0, 0.7 );
+    border: none;
+}
+
+#nav-buttons {
+    margin-top: 10px;
+}
+
 #submit {
     text-transform: uppercase;
     height: 50px;
@@ -39,8 +58,9 @@ input.color-picker {
     height: 26px;
 }
 
-#settings-container {
-	max-height: 430px;
+.page {
+    height: 390px;
+    padding: 15px;
 	overflow-y: auto;
 	overflow-x: none;
 }
@@ -52,7 +72,6 @@ input.color-picker {
 }
 
 #title {
-    padding-bottom: 10px;
     box-shadow: 0px 5px 5px rgba( 0, 0, 0, 0.1 );
 }
 
@@ -81,7 +100,8 @@ input.color-picker {
     text-align: center;
     border: solid 1px #e5e5e5;
     border-radius: 10px;
-    margin: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     padding: 10px;
     box-shadow: 0 0 5px rgba( 0, 0, 0, 0.2 );
 }
