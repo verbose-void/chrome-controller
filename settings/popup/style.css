@@ -14,6 +14,11 @@ body {
     display: inline-block;
 }
 
+.modal-title {
+    text-transform: uppercase;
+    font-weight: 100;
+}
+
 h1 a.sec-foot-note {
     font-size: 12px;
     display: block;
@@ -44,6 +49,10 @@ li.nav-item {
     height: 50px;
     width: 480px;
     transition: 0.5s ease-in-out;
+}
+
+#final-submit, #final-submit-rate {
+    width: 50%;
 }
 
 #bottom-container {

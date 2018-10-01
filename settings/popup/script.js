@@ -17,7 +17,16 @@ $( function() {
         } );
     } );
 
-	$( "#submit" ).click( () => { updateSettings(); window.close() } );
+	$( "#final-submit-rate" ).click( () => { 
+        updateSettings();
+        chrome.tabs.create( {
+                url: 'https://chrome.google.com/webstore/detail/chrome-controller/nilnjekagachinflbdkanmblmjpaimhl?hl=en-US'
+            }
+        );
+        window.close() 
+    } );
+
+	$( "#final-submit" ).click( () => { updateSettings(); window.close() } );
     settingModders = Array.from( $( ".setting-modifier" ) );
     mappingModders = $( "[data-button-map]" );
 
@@ -132,8 +141,6 @@ function updateSettings() {
 		    }
 		} );
 	} );
-
-	alert( "Settings Updated!\n\n\nIf your settings don't immediately update: try submitting again, or refresh the page!" );
 }
 
 var dotAnim = {
