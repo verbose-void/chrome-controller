@@ -3,12 +3,6 @@ function Keyboard( inp ) {
 		return;
 	}
 
-	if ( buttons.controllerType() === "PS" ) {
-		buttons.currentScheme = buttons.schemes.keyboard.ps;
-	} else {
-		buttons.currentScheme = buttons.schemes.keyboard.xbox;
-	}
-
 	chrome.runtime.sendMessage( { eventType: "openkeyboard" } );
 
 	this.$text = $( inp )[0];
@@ -167,13 +161,28 @@ function Keyboard( inp ) {
 		}
 	}
 
+	this.dpl = function() {
+		dph( -200, -10, -10 );
+	}
+
+	this.dpr = function() {
+		dph( 200, 10, 10 );
+	}
+
+	this.dpu = function() {
+		dpv( -200, -10, -10 );
+	}
+
+	this.dpd = function() {
+		dpv( 200, 10, 10 );
+	}
 	// Horiz Dpad
-	window.addEventListener( "dpadleftreleased", () => { dph( -200, -10, -10 ) } );
-	window.addEventListener( "dpadrightreleased", () => { dph( 200, 10, 10 ) } );
+	window.addEventListener( "dpadleftreleased", this.dpl );
+	window.addEventListener( "dpadrightreleased", this.dpr );
 
 	// Vert Dpad
-	window.addEventListener( "dpadupreleased", () => { dpv( -200, -10, -10 ) } );
-	window.addEventListener( "dpaddownreleased", () => { dpv( 200, 10, 10 ) } );
+	window.addEventListener( "dpadupreleased", this.dpu );
+	window.addEventListener( "dpaddownreleased", this.dpd );
 
 	/*window.addEventListener( "selectbuttonreleased", () => oskText.value = "" );
 	window.addEventListener( "startbuttonreleased", sb );
@@ -188,7 +197,12 @@ Keyboard.prototype.close = function() {
 	$( "#ccosk-container" ).remove();
 	cursor.keyboard = null;
 	chrome.runtime.sendMessage( { eventType: "closekeyboard" } );
-	buttons.updateControllerScheme();
+	buttons.updateCurrentScheme();
+
+	window.removeEventListener( "dpadleftreleased", this.dpl );
+	window.removeEventListener( "dpadrightreleased", this.dpr );
+	window.removeEventListener( "dpadupreleased", this.dpu );
+	window.removeEventListener( "dpaddownreleased", this.dpd );
 }
 
 function keyAt( x, y ) {

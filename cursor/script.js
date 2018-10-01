@@ -1,6 +1,5 @@
 var cursor;
 var hud;
-var prevFrame;
 
 function resize() {
 	resizeCanvas( windowWidth, windowHeight );
@@ -16,8 +15,6 @@ function setup() {
 
 	cursor = new Cursor( windowWidth / 2, windowHeight / 2 );
 	hud = new Hud();
-	prevFrame = performance.now();
-	cursorMoveDelta = 0;
 
 	buttons.load();
 }
@@ -30,7 +27,7 @@ function draw() {
 	}
 
 	if ( frameCount % 60 === 0 ) {
-		buttons.updateControllerScheme();
+		buttons.updateCurrentScheme();
 	}
 }
 
@@ -78,8 +75,8 @@ function hide( curs ) {
 
 Cursor.prototype.draw = function() {
 	noStroke();
-	ellipse( this.x, this.y, this.viewRadius );
 	fill( ccSettings.cursor.color[0], ccSettings.cursor.color[1], ccSettings.cursor.color[2], this.opacity );
+	ellipse( this.x, this.y, this.viewRadius );
 }
 
 Cursor.prototype.updatePos = function( x, y, dt ) {
@@ -163,6 +160,10 @@ Cursor.prototype.click = function() {
 
 	let $elem = $( document.elementFromPoint( this.x, this.y ) );
 
+	if ( this.keyboard && !$elem.is( ".ccosk-key" ) ) {
+		return;
+	}
+
 	// If text input, open keyboard
 	if ( $elem.is( "textarea, input[type=url], input[type=text], input#search" ) ) {
 		this.keyboard = new Keyboard( $elem );
@@ -191,6 +192,7 @@ chrome.runtime.onMessage.addListener( ( req ) => {
 function Hud( active ) {
 	this.maxOpacity = 180;
 	this.opacity = 0;
+
 	show( this );
 	this.initHide = setTimeout( () => hide( hud ), 4000 );
 	this.draw();
@@ -202,28 +204,57 @@ Hud.prototype.draw = function() {
 	}
 
 	const pos = ccSettings.hud.position;
+	const size = ccSettings.hud.size;
 	let cur;
 	let temp;
-	let len = buttons.currentScheme.length;
-	let x = windowWidth / 2 - ( len *( ccSettings.hud.size * 1.1 ) / 2 );
-	let y = ccSettings.hud.size / 2 * 1.1;
+	let temp2;
+	let scheme = buttons.currentScheme;
+	let len = scheme.length;
+	let x = windowWidth / 2 - ( len *( size * 1.1 ) / 2 );
+	let y = size / 2 * 1.1;
 
-	for ( let i in buttons.currentScheme ) {
-		cur = buttons.currentScheme[i];
+	let textHidden = ccSettings.hud.hideText;
 
-		if ( pos === "BOTTOM" ) {
-			y = windowHeight - ( ccSettings.hud.size / 2 + 5 );
-			image( cur, x, y, ccSettings.hud.size, ccSettings.hud.size );
-		} else if ( pos === "LEFT" ) {
-			image( cur, y, x - windowWidth / 2 + windowHeight / 2, ccSettings.hud.size, ccSettings.hud.size );
-		} else if ( pos === "RIGHT" ) {
-			image( cur, windowWidth - y, x - windowWidth / 2 + windowHeight / 2, ccSettings.hud.size, ccSettings.hud.size );
-		} else {
-			image( cur, x, y, ccSettings.hud.size, ccSettings.hud.size );
+	textSize( size / 5 );
+	textAlign( CENTER );
+	fill( ccSettings.hud.color[0], ccSettings.hud.color[1], ccSettings.hud.color[2],  this.opacity );
+	for ( let i in scheme ) {
+		cur = scheme[i];
+
+		// Only one item in this object at any given time.
+		for ( let actionName in cur ) {
+			let img = cur[actionName];
+
+			if ( pos === "BOTTOM" ) {
+				y = windowHeight - ( size / 2 + 5 );
+				image( img, x, y, size, size );
+				if ( !textHidden ) {
+					text( actionName, x - size / 4, y - size, size / 2, size );
+				}
+			} else if ( pos === "LEFT" ) {
+				temp = x - windowWidth / 2 + windowHeight / 2;
+				image( img, y, temp, size, size );
+				if ( !textHidden ) {
+					textAlign( LEFT );
+					text( actionName, y + size / 2 + 5, temp + 2 );
+				}
+			} else if ( pos === "RIGHT" ) {
+				temp = x - windowWidth / 2 + windowHeight / 2;
+				temp2 = windowWidth - y - size / 4;
+				image( img, temp2, temp, size, size );
+				if ( !textHidden ) {
+					textAlign( RIGHT );
+					text( actionName, temp2 - size / 2 - 5, temp + 2 );
+				}
+			} else {
+				if ( !textHidden ) {
+					image( img, x, y, size, size );
+					text( actionName, x - size / 4, y + size / 2, size / 2, size );
+				}
+			}
+
+			x += size * 1.1;
+			tint( 255, this.opacity );
 		}
-
-		tint( 255, this.opacity );
-
-		x += ccSettings.hud.size * 1.1;
 	}
 }

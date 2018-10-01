@@ -19,12 +19,12 @@
 		{
       		"run_at": "document_start",
 			"matches": ["<all_urls>"],
-			"js": ["lib/jquery.min.js", "content_scripts/setup.js", "settings/script.js", "content_scripts/controls_setup.js"]
+			"js": ["lib/jquery.min.js", "content_scripts/setup.js", "cursor/buttons.js", "settings/script.js", "content_scripts/controls_setup.js"]
 		},
 		{
 			"run_at": "document_idle",
 			"matches": ["<all_urls>"],
-			"js": ["lib/jquery.min.js", "lib/p5.min.js", "keyboard/script.js", "cursor/buttons.js", "cursor/script.js"],
+			"js": ["lib/jquery.min.js", "lib/p5.min.js", "keyboard/script.js", "cursor/script.js"],
 			"css": ["cursor/style.css", "keyboard/style.css"]
 		},
 		{

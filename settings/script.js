@@ -1,5 +1,6 @@
 const defaultAction = { "run": function() {}, "map": "" };
-var cursorMoveDelta;
+var cursorMoveDelta = performance.now();
+var prevFrame = performance.now();
 
 function press( sel ) {
 	let $s = $( sel );
@@ -14,7 +15,7 @@ const actions = {
 		...defaultAction,
 
 		"run": function( e ) {
-			if ( e.detail.axis !== 1 && e.detail.axis !== 3 && e.detail.axis ) {
+			if ( ( e.detail.axis !== 1 && e.detail.axis !== 3 && e.detail.axis ) || $( "#ccosk-container" )[0] ) {
 				return;
 			}
 
@@ -241,6 +242,8 @@ function CCSettings() {
     this.hud.hidden = false;
     this.hud.size = 64;
 	this.hud.position = "TOP";
+	this.hud.color = convertHex( "#000000" );
+	this.hud.hideText = false;
 	
 	// Control Mapping (Context of XBOX Controller)
 
@@ -292,6 +295,8 @@ CCSettings.prototype.updateSettings = function( req ) {
                 "hud-hidden",
                 "hud-size",
 				"hud-position",
+				"hud-color",
+				"hud-hide-text",
 				
 				// Mapping
 				/* Axis */
@@ -338,8 +343,10 @@ CCSettings.prototype.updateSettings = function( req ) {
             
                 // Hud
                 ccSettings.hud.hidden = results["hud-hidden"] !== undefined ? Boolean( results["hud-hidden"] ) : ccSettings.hud.hidden;
+                ccSettings.hud.hideText = results["hud-hide-text"] !== undefined ? Boolean( results["hud-hide-text"] ) : ccSettings.hud.hideText;
                 ccSettings.hud.size = results["hud-size"] !== undefined ? Number( results["hud-size"] ) : ccSettings.hud.size;
                 ccSettings.hud.position = results["hud-position"] !== undefined ? results["hud-position"] : ccSettings.hud.position;
+				ccSettings.hud.color = results["hud-color"] !== undefined ? convertHex( results["hud-color"] ) : ccSettings.hud.color;
 			
 				// Mapping
 				/* Axis */
@@ -371,6 +378,11 @@ CCSettings.prototype.updateSettings = function( req ) {
 				actions.map.kb_lb = results["kb_lb"] !== undefined ? results["kb_lb"] : actions.map.kb_lb;
 				actions.map.kb_rb = results["kb_rb"] !== undefined ? results["kb_rb"] : actions.map.kb_rb;
 			} );
+		
+		
+		if ( buttons && buttons.loaded ) {
+			buttons.updateCurrentScheme();
+		}
 	}
 };
 
