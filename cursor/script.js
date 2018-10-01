@@ -247,8 +247,8 @@ Hud.prototype.draw = function() {
 					text( actionName, temp2 - size / 2 - 5, temp + 2 );
 				}
 			} else {
+				image( img, x, y, size, size );
 				if ( !textHidden ) {
-					image( img, x, y, size, size );
 					text( actionName, x - size / 4, y + size / 2, size / 2, size );
 				}
 			}
