@@ -199,7 +199,7 @@ function Hud( active ) {
 }
 
 Hud.prototype.draw = function() {
-	if ( !buttons.loaded ) {
+	if ( !buttons.loaded || ccSettings.hud.hidden ) {
 		return;
 	}
 
