@@ -14,6 +14,12 @@ body {
     display: inline-block;
 }
 
+h1 a.sec-foot-note {
+    font-size: 12px;
+    display: block;
+    margin-left: 3px;
+}
+
 li.nav-item {
     width: 50%;
     cursor: pointer;
