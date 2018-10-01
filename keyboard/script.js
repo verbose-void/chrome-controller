@@ -38,11 +38,11 @@ function Keyboard( inp ) {
 		let txt = this.innerText.toLowerCase();
 
 		if ( txt == "backspace" ) {
-			this.xb();
+			cursor.keyboard.xb();
 		}
 
 		else if ( $( this ).hasClass( "space-key" ) ) {
-			this.yb();
+			cursor.keyboard.yb();
 		} 
 
 		else if ( txt == "clear" ) {
@@ -50,11 +50,11 @@ function Keyboard( inp ) {
 		}
 
 		else if ( txt == "close" ) {
-			this.bb();
+			cursor.keyboard.bb();
 		}
 
 		else if ( txt == "enter" ) {
-			this.sb();
+			cursor.keyboard.sb();
 		}
 
 		else if ( txt == "shift" ) {
