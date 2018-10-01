@@ -3,7 +3,7 @@
 	"name": "Chrome Controller",
 	"short_name": "ChromeCtrler",
 	"description": "Chrome Controller allows you to bing the relaxation of the console environment straight to your Mac/PC using your controller.",
-	"version": "0.8.7",
+	"version": "0.8.7.1",
 	"permissions": [
         "tabs",
 		"storage"
