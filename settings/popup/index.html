@@ -202,8 +202,16 @@
                     <option value="autoCursorSelect">Auto-Cursor Select</option>
                 </template>
 
+                <template id="template-keyboard">
+                    <option value="space">Space</option>
+                    <option value="backspace">Backspace</option>
+                    <option value="enter">Enter</option>
+                    <option value="clear">Clear</option>
+                    <option value="close">Close</option>
+                </template>
+
                 <template id="template-none">
-                    <option value="NONE">NONE</option>
+                    <option value="none">NONE</option>
                 </template>
 
                 <!-- Mapping Settings HTML -->
@@ -235,13 +243,15 @@
                                 <tr>
                                     <td class="label" data-ps-alt="Left Stick" data-xb-alt="Left Stick" data-nl-alt="Axis 0/1">Left
                                         Stick</td>
-                                    <td class="map" data-default="moveCursor" data-button-map="leftstick" data-mappings-type="axis,none"></td>
+                                    <td class="map" data-default="moveCursor" data-button-map="leftstick"
+                                        data-mappings-type="axis,none"></td>
                                 </tr>
 
                                 <tr>
                                     <td class="label" data-ps-alt="Right Stick" data-xb-alt="Right Stick" data-nl-alt="Axis 2/3">Right
                                         Stick</td>
-                                    <td class="map" data-default="scroll" data-button-map="rightstick" data-mappings-type="axis,none"></td>
+                                    <td class="map" data-default="scroll" data-button-map="rightstick"
+                                        data-mappings-type="axis,none"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -253,7 +263,8 @@
 
                                 <tr>
                                     <td class="label" data-ps-alt="D-Pad" data-xb-alt="D-Pad" data-nl-alt="B12-B15">D-Pad</td>
-                                    <td class="map" data-default="autoCursorSelect" data-button-map="dpad" data-mappings-type="axis,dpad,none"></td>
+                                    <td class="map" data-default="autoCursorSelect" data-button-map="dpad"
+                                        data-mappings-type="axis,dpad,none"></td>
                                 </tr>
 
                                 <tr>
@@ -263,17 +274,20 @@
 
                                 <tr>
                                     <td class="label" data-ps-alt="𐩒" data-xb-alt="B" data-nl-alt="B1">B</td>
-                                    <td class="map" data-default="videoScreenSize" data-button-map="b" data-mappings-type="button,video,none"></td>
+                                    <td class="map" data-default="videoScreenSize" data-button-map="b"
+                                        data-mappings-type="button,video,none"></td>
                                 </tr>
 
                                 <tr>
                                     <td class="label" data-ps-alt="◻" data-xb-alt="X" data-nl-alt="B2">X</td>
-                                    <td class="map" data-default="videoPlayPause" data-button-map="x" data-mappings-type="button,video,none"></td>
+                                    <td class="map" data-default="videoPlayPause" data-button-map="x"
+                                        data-mappings-type="button,video,none"></td>
                                 </tr>
 
                                 <tr>
                                     <td class="label" data-ps-alt="△" data-xb-alt="Y" data-nl-alt="B3">Y</td>
-                                    <td class="map" data-default="videoDisplayTime" data-button-map="y" data-mappings-type="button,video,none"></td>
+                                    <td class="map" data-default="videoDisplayTime" data-button-map="y"
+                                        data-mappings-type="button,video,none"></td>
                                 </tr>
 
                                 <tr>
@@ -310,10 +324,58 @@
 
                                 <tr>
                                     <td class="label" data-ps-alt="R1" data-xb-alt="RB" data-nl-alt="B5">RB</td>
-                                    <td class="map" data-default="historyForward" data-button-map="rb" data-mappings-type="button,none"></td>
+                                    <td class="map" data-default="historyForward" data-button-map="rb"
+                                        data-mappings-type="button,none"></td>
                                 </tr>
                             </tbody>
                         </table>
+
+                        <h1>KEYBOARD</h1>
+
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="label" data-ps-alt="✕" data-xb-alt="A" data-nl-alt="B0">A</td>
+                                    <td class="map" data-default="none" data-button-map="kb_a" data-mappings-type="keyboard,none"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="𐩒" data-xb-alt="B" data-nl-alt="B1">B</td>
+                                    <td class="map" data-default="close" data-button-map="kb_b" data-mappings-type="keyboard,none"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="◻" data-xb-alt="X" data-nl-alt="B2">X</td>
+                                    <td class="map" data-default="backspace" data-button-map="kb_x" data-mappings-type="keyboard,none"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="△" data-xb-alt="Y" data-nl-alt="B3">Y</td>
+                                    <td class="map" data-default="space" data-button-map="kb_y" data-mappings-type="keyboard,none"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="Share" data-xb-alt="View" data-nl-alt="B8">View</td>
+                                    <td class="map" data-default="clear" data-button-map="kb_view" data-mappings-type="keyboard,none"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="Option" data-xb-alt="Menu" data-nl-alt="B9">Menu</td>
+                                    <td class="map" data-default="enter" data-button-map="kb_menu" data-mappings-type="keyboard,none"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="L1" data-xb-alt="LB" data-nl-alt="B4">LB</td>
+                                    <td class="map" data-default="none" data-button-map="kb_lb" data-mappings-type="keyboard,none"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="label" data-ps-alt="R1" data-xb-alt="RB" data-nl-alt="B5">RB</td>
+                                    <td class="map" data-default="none" data-button-map="kb_rb" data-mappings-type="keyboard,none"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
 

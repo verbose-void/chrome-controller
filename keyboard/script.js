@@ -38,11 +38,11 @@ function Keyboard( inp ) {
 		let txt = this.innerText.toLowerCase();
 
 		if ( txt == "backspace" ) {
-			xb();
+			this.xb();
 		}
 
 		else if ( $( this ).hasClass( "space-key" ) ) {
-			yb();
+			this.yb();
 		} 
 
 		else if ( txt == "clear" ) {
@@ -50,11 +50,11 @@ function Keyboard( inp ) {
 		}
 
 		else if ( txt == "close" ) {
-			bb();
+			this.bb();
 		}
 
 		else if ( txt == "enter" ) {
-			sb();
+			this.sb();
 		}
 
 		else if ( txt == "shift" ) {
@@ -79,21 +79,21 @@ function Keyboard( inp ) {
 		}
 	} );
 
-	const xb = function() {
+	this.xb = function() {
 		oskText.value = oskText.value.substring( 0, oskText.value.length - 1 );
 	}
 
-	const yb = function() {
+	this.yb = function() {
 		oskText.value = oskText.value + " ";
 	}
 
-	const bb = function() {
+	this.bb = function() {
 		_this.$text.value = oskText.value;
 		_this.close();
 	}
 
-	const sb = function( e ) {
-		bb();
+	this.sb = function( e ) {
+		this.bb();
 		$( _this.$text ).closest( "form" ).submit();
 		if ( e ) {
 			return false;
@@ -168,18 +168,18 @@ function Keyboard( inp ) {
 	}
 
 	// Horiz Dpad
-	window.addEventListener( "dpadleftreleased", () => { dph( -200, -20, -10 ) } );
-	window.addEventListener( "dpadrightreleased", () => { dph( 200, 20, 10 ) } );
+	window.addEventListener( "dpadleftreleased", () => { dph( -200, -10, -10 ) } );
+	window.addEventListener( "dpadrightreleased", () => { dph( 200, 10, 10 ) } );
 
 	// Vert Dpad
-	window.addEventListener( "dpadupreleased", () => { dpv( -200, -20, -10 ) } );
-	window.addEventListener( "dpaddownreleased", () => { dpv( 200, 20, 10 ) } );
+	window.addEventListener( "dpadupreleased", () => { dpv( -200, -10, -10 ) } );
+	window.addEventListener( "dpaddownreleased", () => { dpv( 200, 10, 10 ) } );
 
-	window.addEventListener( "selectbuttonreleased", () => oskText.value = "" );
+	/*window.addEventListener( "selectbuttonreleased", () => oskText.value = "" );
 	window.addEventListener( "startbuttonreleased", sb );
 	window.addEventListener( "xbuttonreleased", xb );
 	window.addEventListener( "ybuttonreleased", yb );
-	window.addEventListener( "bbuttonreleased", bb );
+	window.addEventListener( "bbuttonreleased", bb );*/
 
 	cursor.centerOverElement( $( "#center-key" ) );
 }

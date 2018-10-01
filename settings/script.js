@@ -144,6 +144,48 @@ const actions = {
 		}
 	},
 
+	// Keyboard Actions
+
+	"close": {
+		...defaultAction,
+
+		"run": function() {
+			cursor.keyboard.bb();
+		}
+	},
+
+	"backspace": {
+		...defaultAction,
+
+		"run": function() {
+			cursor.keyboard.xb();
+		}
+	},
+
+	"space": {
+		...defaultAction,
+
+		"run": function() {
+			cursor.keyboard.yb();
+		}
+	},
+
+	"clear": {
+		...defaultAction,
+
+		"run": function() {
+			$( "#ccosk-text" )[0].value = "";
+		}
+	},
+
+	"enter": {
+		...defaultAction,
+
+		"run": function() {
+			cursor.keyboard.sb();
+		}
+	},
+
 	"map": {}
 };
 
@@ -220,6 +262,16 @@ function CCSettings() {
 	actions.map.rb = "historyForward";
 	actions.map.lt = "tabLeft";
 	actions.map.rt = "tabRight";
+
+	/* Keyboard */
+	actions.map.kb_a = "none";
+	actions.map.kb_b = "close";
+	actions.map.kb_x = "backspace";
+	actions.map.kb_y = "space";
+	actions.map.kb_view = "clear";
+	actions.map.kb_menu = "enter";
+	actions.map.kb_lb = "none";
+	actions.map.kb_rb = "none";
 }
 
 CCSettings.prototype.updateSettings = function( req ) {
@@ -259,7 +311,17 @@ CCSettings.prototype.updateSettings = function( req ) {
 				"lb",
 				"rb",
 				"lt",
-				"rt"
+				"rt",
+
+				/* Keyboard */
+				"kb_a",
+				"kb_b",
+				"kb_x",
+				"kb_y",
+				"kb_view",
+				"kb_menu",
+				"kb_lb",
+				"kb_rb"
 			], 
 
 			function( results ) {
@@ -298,6 +360,16 @@ CCSettings.prototype.updateSettings = function( req ) {
 				actions.map.rb = results["rb"] !== undefined ? results["rb"] : actions.map.rb;
 				actions.map.lt = results["lt"] !== undefined ? results["lt"] : actions.map.lt;
 				actions.map.rt = results["rt"] !== undefined ? results["rt"] : actions.map.rt;
+
+				/* Keyboard */
+				actions.map.kb_a = results["kb_a"] !== undefined ? results["kb_a"] : actions.map.kb_a;
+				actions.map.kb_b = results["kb_b"] !== undefined ? results["kb_b"] : actions.map.kb_b;
+				actions.map.kb_x = results["kb_x"] !== undefined ? results["kb_x"] : actions.map.kb_x;
+				actions.map.kb_y = results["kb_y"] !== undefined ? results["kb_y"] : actions.map.kb_y;
+				actions.map.kb_view = results["kb_view"] !== undefined ? results["kb_view"] : actions.map.kb_view;
+				actions.map.kb_menu = results["kb_menu"] !== undefined ? results["kb_menu"] : actions.map.kb_menu;
+				actions.map.kb_lb = results["kb_lb"] !== undefined ? results["kb_lb"] : actions.map.kb_lb;
+				actions.map.kb_rb = results["kb_rb"] !== undefined ? results["kb_rb"] : actions.map.kb_rb;
 			} );
 	}
 };

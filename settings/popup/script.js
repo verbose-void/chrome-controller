@@ -120,6 +120,7 @@ function updateSettings() {
         settings[$this.attr( "data-button-map" )] = $this.find( "select" ).val();
     } );
 
+    // Set preference controller
     settings["controllerPreference"] = $( ".controller.active" ).attr( "class" ).split( " " ).filter( x => {
         return x !== "active" && x !== "controller";
     } )[0];
