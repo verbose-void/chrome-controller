@@ -1,38 +1,38 @@
 {
-    "manifest_version": 2,
-    "name": "Chrome Controller",
-    "short_name": "ChromeCtrler",
-    "description": "Chrome Controller allows you to bing the relaxation of the console environment straight to your Mac/PC using your controller.",
-    "version": "0.8.7.4",
-    "permissions": [
-        "tabs",
-        "storage"
-    ],
-    "browser_action": {
-        "default_popup": "settings/popup/index.html",
-        "default_title": "Chrome Controller Settings"
-    },
-    "background": {
-        "scripts": [ "background.js" ]
-    },
-    "content_scripts": [ {
-            "run_at": "document_start",
-            "matches": [ "<all_urls>" ],
-            "js": [ "lib/jquery.min.js", "content_scripts/setup.js", "cursor/buttons.js", "settings/script.js", "content_scripts/controls_setup.js" ]
-        },
-        {
-            "run_at": "document_idle",
-            "matches": [ "<all_urls>" ],
-            "js": [ "lib/jquery.min.js", "lib/p5.min.js", "keyboard/script.js", "cursor/script.js" ],
-            "css": [ "cursor/style.css", "keyboard/style.css" ]
-        },
-        {
-            "run_at": "document_idle",
-            "matches": [ "https://www.youtube.com/*" ],
-            "js": [ "lib/jquery.min.js", "cursor/script.js", "youtube/dpad_selection.js" ]
-        }
-    ],
-    "icons": {
-        "128": "assets/cc-128.png"
-    }
+	"manifest_version": 2,
+	"name": "Chrome Controller",
+	"short_name": "ChromeCtrler",
+	"description": "Chrome Controller allows you to bing the relaxation of the console environment straight to your Mac/PC using your controller.",
+	"version": "0.8.7.5",
+	"permissions": [
+		"tabs",
+		"storage"
+	],
+	"browser_action": {
+		"default_popup": "settings/popup/index.html",
+		"default_title": "Chrome Controller Settings"
+	},
+	"background": {
+		"scripts": ["background.js"]
+	},
+	"content_scripts": [{
+			"run_at": "document_start",
+			"matches": ["<all_urls>"],
+			"js": ["lib/jquery.min.js", "content_scripts/setup.js", "cursor/buttons.js", "settings/script.js", "content_scripts/controls_setup.js"]
+		},
+		{
+			"run_at": "document_idle",
+			"matches": ["<all_urls>"],
+			"js": ["lib/jquery.min.js", "lib/p5.min.js", "keyboard/script.js", "cursor/script.js"],
+			"css": ["cursor/style.css", "keyboard/style.css"]
+		},
+		{
+			"run_at": "document_idle",
+			"matches": ["https://www.youtube.com/*"],
+			"js": ["lib/jquery.min.js", "cursor/script.js", "youtube/dpad_selection.js"]
+		}
+	],
+	"icons": {
+		"128": "assets/cc-128.png"
+	}
 }
