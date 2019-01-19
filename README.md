@@ -1,7 +1,8 @@
 # Chrome Controller
 ##### An open source project that will allow you to control Google Chrome from your bed, couch, floor: really anywhere that isn't your desk using your Xbox / PlayStation ( and many other ) controllers!
 
- 
+### Check out the [KickStarter](https://www.kickstarter.com/projects/1247505515/chrome-controller-xbox-ps4-controller-support-for)!
+
 ![](https://lh3.googleusercontent.com/6Bg3wIPEiUO8Yi-j0EHxwHqQtgpLlptSw2JHr1zO3xMh5TDFCYVdQTU1V91VTj1ahGamdWKelQ=w640-h400-e365)
 
 ![](https://lh3.googleusercontent.com/3bWw_SA08t-MqNivKMA3NlkuY3f4B4dXQswKVrEfnjxKJoJrv406UOE_FHe9nmtnzaFrdTtAjQ=w640-h400-e365)
@@ -13,6 +14,7 @@
 ![](https://ksr-ugc.imgix.net/assets/022/661/690/1644e7b7f269bff9c7914090e25156d0_original.jpg?ixlib=rb-1.1.0&w=680&fit=max&v=1537817903&auto=format&gif-q=50&q=92&s=0d4cc9259698dd2808976df64e9d5707)
  
 Currently available in beta [here](https://chrome.google.com/webstore/detail/chrome-controller/nilnjekagachinflbdkanmblmjpaimhl?hl=en-US).
+
 Chrome Controller is currently an open source Chrome Extension that adds gamepad functionality to your browsing experience. No longer is your Xbox/PlayStation controller going to collect dust sitting on top of your unused console ( assuming you've ascended to the PC master race, or MAC :) ). 
 
 Just connect to your computer via Bluetooth (or wired if you have the USB connector), add the extension to chrome, and browse away!
