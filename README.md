@@ -21,10 +21,11 @@ Just connect to your computer via Bluetooth (or wired if you have the USB connec
 Equipped with an on-screen keyboard, Heads-Up-Display showing listening controls, & special website functionality for YouTube, Netflix, and more to come, you will be able to watch videos, or really do whatever you want from the comfort of your bed, couch, recliner chair, floor, or whatever you have available to relax in.
 
 ## Setup Instructions:
-- Mac Bluetooth Setup
-- Windows 7 Bluetooth Setup
-- Windows 10 Bluetooth Setup
-- Linux Bluetooth Setup
+- [Mac Bluetooth Setup](https://support.apple.com/guide/mac-help/connect-a-bluetooth-device-blth1004/mac)
+- [Windows 7 Bluetooth Setup](https://support.microsoft.com/en-us/help/15290/windows-connect-bluetooth-device)
+- [Windows 10 Bluetooth Setup](https://www.windowscentral.com/how-and-why-use-bluetooth-on-windows-10)
+- [Linux Bluetooth Setup](https://www.addictivetips.com/ubuntu-linux-tips/pair-and-use-bluetooth-devices-on-linux/)
+- [Chrome Book Bluetooth Setup](https://support.google.com/chromebook/answer/2587653?hl=en)
 
 ## For Wired Installations:
 - All you have to do is plug your controller in via USB to where your computer can recognize it, and install Chrome Controller!
