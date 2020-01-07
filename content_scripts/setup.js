@@ -181,10 +181,6 @@ function scangamepads() {
 	var gamepads = navigator.getGamepads();
 	for (var i = 0; i < gamepads.length; i++) {
 		if (gamepads[i]) {
-			if (gamepads[i].axes.length < 4 || gamepads[i].buttons.length < 17) {
-				continue;
-			}
-
 			controllers[gamepads[i].index] = gamepads[i];
 		}
 	}
