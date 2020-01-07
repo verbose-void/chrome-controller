@@ -49,23 +49,7 @@ function pollEvents() {
 		scangamepads();
 
 		for (let k in controllers) {
-			// ************************* MUST BE FIRST ************************* //
 			let controller = controllers[k];
-
-			if (!controller.previousAxes) {
-				controller.previousAxes = [];
-			}
-
-			if (!controller.previousPressedButtons) {
-				controller.previousPressedButtons = [];
-			}
-
-			if (!controller.previousLeftTrigger) {
-				controller.previousLeftTrigger = 0;
-				controller.previousRightTrigger = 0;
-			}
-			// **************************************************************** //
-
 
 			// Check for button usage
 			for (let i = 0; i < controller.buttons.length; i++) {
@@ -78,7 +62,7 @@ function pollEvents() {
 					cur = eventName === "dpadup" ? -1 : 1;
 				}
 
-				if (controller.buttons[i].pressed && controller.previousPressedButtons[i]) {
+				if (controller.buttons[i].pressed && controller.previous.pressedButtons[i]) {
 					// dispatch hold
 					// TODO add hold duration
 					event = new CustomEvent(eventName + "hold", {
@@ -87,7 +71,7 @@ function pollEvents() {
 							current: cur
 						}
 					});
-				} else if (!controller.buttons[i].pressed && controller.previousPressedButtons[i]) {
+				} else if (!controller.buttons[i].pressed && controller.previous.pressedButtons[i]) {
 					// dispatch released
 					event = new CustomEvent(eventName + "released", {
 						detail: {
@@ -95,7 +79,7 @@ function pollEvents() {
 							controller: controller
 						}
 					});
-				} else if (controller.buttons[i].pressed && !controller.previousPressedButtons[i]) {
+				} else if (controller.buttons[i].pressed && !controller.previous.pressedButtons[i]) {
 					// dispatch pressed
 					event = new CustomEvent(eventName + "pressed", {
 						detail: {
@@ -120,13 +104,13 @@ function pollEvents() {
 
 			// Check for analog stick movement
 			for (let i = 0; i < controller.axes.length; i++) {
-				if (Math.abs(controller.previousAxes[i] - controller.axes[i]) >= 0.01) {
+				if (Math.abs(controller.previous.axes[i] - controller.axes[i]) >= 0.01) {
 					let maxE;
 					if (controller.axes[i] >= 1 || controller.axes[i] <= -1) {
 						maxE = new CustomEvent(controls.axisEventNames[i] + "max", {
 							detail: {
 								axis: i,
-								previous: controller.previousAxes[i],
+								previous: controller.previous.axes[i],
 								current: controller.axes[i],
 								controller: controller
 							}
@@ -136,7 +120,7 @@ function pollEvents() {
 					let event = new CustomEvent(controls.axisEventNames[i], {
 						detail: {
 							axis: i,
-							previous: controller.previousAxes[i],
+							previous: controller.previous.axes[i],
 							current: controller.axes[i],
 							controller: controller
 						}
@@ -151,7 +135,7 @@ function pollEvents() {
 				let poll = new CustomEvent(controls.axisEventNames[i] + "poll", {
 					detail: {
 						axis: i,
-						previous: controller.previousAxes[i],
+						previous: controller.previous.axes[i],
 						current: controller.axes[i],
 						controller: controller
 					}
@@ -163,13 +147,13 @@ function pollEvents() {
 
 			// ************************* MUST BE LAST ************************* //
 			for (let i = 0; i < controller.axes.length; i++) {
-				controller.previousAxes[i] = controller.axes[i];
+				controller.previous.axes[i] = controller.axes[i];
 			}
 			for (let i = 0; i < controller.buttons.length; i++) {
-				controller.previousPressedButtons[i] = controller.buttons[i].pressed;
+				controller.previous.pressedButtons[i] = controller.buttons[i].pressed;
 			}
-			controller.previousLeftTrigger = controller.buttons[6].value;
-			controller.previousRightTrigger = controller.buttons[7].value;
+			controller.previous.leftTrigger = controller.buttons[6].value;
+			controller.previous.rightTrigger = controller.buttons[7].value;
 			// **************************************************************** //
 		}
 	}
@@ -181,7 +165,22 @@ function scangamepads() {
 	var gamepads = navigator.getGamepads();
 	for (var i = 0; i < gamepads.length; i++) {
 		if (gamepads[i]) {
-			controllers[gamepads[i].index] = gamepads[i];
+			if (controllers[gamepads[i].index] && controllers[gamepads[i].index].previous) {
+				// Existing controller with existing state, so we need to save the previous state.
+				let previous = controllers[gamepads[i].index].previous;
+				controllers[gamepads[i].index] = gamepads[i];
+				controllers[gamepads[i].index].previous = previous;
+			} else {
+				// New controller, so we need to create the empty previous state.
+				controllers[gamepads[i].index] = gamepads[i];
+
+				let controller = controllers[gamepads[i].index];
+				controller.previous = {};
+				controller.previous.axes = [];
+				controller.previous.pressedButtons = [];
+				controller.previous.leftTrigger = 0;
+				controller.previous.rightTrigger = 0;
+			}
 		}
 	}
 }
