@@ -1,6 +1,11 @@
 # Chrome Controller
 ##### An open source project that will allow you to control Google Chrome from your bed, couch, floor: really anywhere that isn't your desk using your Xbox / PlayStation ( and many other ) controllers!
 
+# Developers wanted! 
+Email mccreary@dyllan.ai for more info.
+For contribution information, click [here](#developers).
+
+
 ### Check out the [KickStarter](https://www.kickstarter.com/projects/1247505515/chrome-controller-xbox-ps4-controller-support-for)!
 
 ![](https://lh3.googleusercontent.com/6Bg3wIPEiUO8Yi-j0EHxwHqQtgpLlptSw2JHr1zO3xMh5TDFCYVdQTU1V91VTj1ahGamdWKelQ=w640-h400-e365)
@@ -37,4 +42,12 @@ Equipped with an on-screen keyboard, Heads-Up-Display showing listening controls
 #### Add to your browser [here](https://chrome.google.com/webstore/detail/chrome-controller/nilnjekagachinflbdkanmblmjpaimhl?hl=en-US&gl=US "Chrome Extension Page").
 #### Have an idea / bug to report? Create an issue [here](https://github.com/McCrearyD/Chrome_Controller/issues/new "Create a New Issue").
 
+ ## Developers:
+ 
+ ### Setting up your development environment: 
+ 1. Clone this repository.
+ 2. Make sure you have Google Chrome installed.
+ 3. In the google chrome address bar, type `chrome://extensions`. In the top left corner, click `load unpacked`. This will ask for a folder, navigate to where you cloned the repository.
+ 4. Bang! You now can reload your webpages and make source code modifications.
+ 5. Deploying your build can be done by zipping up the contents of your source code version and creating a pull request with that zip file as an attachment. Make sure you update the `manifest.json` with an updated version number. 
  
