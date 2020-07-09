@@ -1,13 +1,16 @@
-# Chrome Controller
+# Chrome Controller (Browser Extension)
 
-### A browser extension that lets you surf the web using any Gamepad API compatible game controller (Xbox/PlayStation supported). If you enjoy the extension, consider [buying me a coffee](buymeacoff.ee/mccrearyd) :)
+**If you enjoy the extension, consider [buying me a coffee](buymeacoff.ee/mccrearyd) :)**
 
-Download from the Google Web Store [here](https://chrome.google.com/webstore/detail/chrome-controller/nilnjekagachinflbdkanmblmjpaimhl?hl=en-US&gl=US "Chrome Extension Page")!
+Equipped with a secondary mouse cursor for your controller and on screen keyboard, you can browse in leisure from a distance! Supports any [Gamepad API compatible controller](https://html5gamepad.com/controllers/) via bluetooth & wired connections. Supported controllers include but are not limited to: Xbox 360/1 and PlayStation 3/4.
 
+**Note**: Chrome Controller is **currently in beta**. Version 1 official release is scheduled for July 2020 with tons of bug fixes, performance increase, and hopefully new features! Please report any issues by email to support@chromecontroller.com
 
-Just connect to your computer via Bluetooth (or wired if you have the USB connector), add the extension to chrome, and browse away!
+### Not sure if your controller will work?
+- Documented controllers supported: https://html5gamepad.com/controllers/
+- Doesn't show up or not convinced? Test your controller here with no download necessary: https://html5gamepad.com/
 
-Equipped with an on-screen keyboard, Heads-Up-Display showing listening controls, & special website functionality for YouTube, Netflix, and more to come, you will be able to watch videos, or really do whatever you want from the comfort of your bed, couch, recliner chair, floor, or whatever you have available to relax in.
+Download from the Google Web Store [here](https://chrome.google.com/webstore/detail/chrome-controller/nilnjekagachinflbdkanmblmjpaimhl?hl=en-US&gl=US "Chrome Extension Page")! Just connect to your computer via Bluetooth (or wired if you have the USB connector), add the extension to chrome, and browse away!
 
 ![](https://lh3.googleusercontent.com/6Bg3wIPEiUO8Yi-j0EHxwHqQtgpLlptSw2JHr1zO3xMh5TDFCYVdQTU1V91VTj1ahGamdWKelQ=w640-h400-e365)
 
