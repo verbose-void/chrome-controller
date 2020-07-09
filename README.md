@@ -2,15 +2,21 @@
 
 **If you enjoy the extension, consider [becoming a patron](https://www.patreon.com/user?u=38566705) or [buying me a coffee](buymeacoff.ee/mccrearyd) :)**
 
-Equipped with a secondary mouse cursor for your controller and on screen keyboard, you can browse in leisure from a distance! Supports any [Gamepad API compatible controller](https://html5gamepad.com/controllers/) via bluetooth & wired connections. Supported controllers include but are not limited to: Xbox 360/1 and PlayStation 3/4.
+My name is Dyllan McCreary and I'm the original developer of Chrome Controller. It started as a fun high school project to let me relax even harder while on my computer all day. From my bed! Now it's gained some traction and I've hired another engineer to take care of the project. Currently it's very buggy and in beta, but this month (July 2020) I'm shooting for an official version 1 release with more stability & performance + features!
+
+But it's very expensive to maintain a project like this. With artwork, maintenance, hosting, etc. So I'm asking for your [help](https://www.patreon.com/user?u=38566705). :)
+
+## What is Chrome Controller?
+- Equipped with a secondary mouse cursor for your controller and on screen keyboard, you can browse in leisure from a distance! Supports any Gamepad API compatible controller via bluetooth & wired connections. Supported controllers include but are not limited to: Xbox 360/1 and PlayStation 3/4.
+- Just connect to your computer via Bluetooth (or wired if you have the USB connector), add the extension to chrome, and browse away!
+
+Download from the Google Web Store [here](https://chrome.google.com/webstore/detail/chrome-controller/nilnjekagachinflbdkanmblmjpaimhl?hl=en-US&gl=US "Chrome Extension Page")!
 
 **Note**: Chrome Controller is **currently in beta**. Version 1 official release is scheduled for July 2020 with tons of bug fixes, performance increase, and hopefully new features! Please report any issues by email to support@chromecontroller.com
 
-### Not sure if your controller will work?
+## Not sure if your controller will work?
 - Documented controllers supported: https://html5gamepad.com/controllers/
 - Doesn't show up or not convinced? Test your controller here with no download necessary: https://html5gamepad.com/
-
-Download from the Google Web Store [here](https://chrome.google.com/webstore/detail/chrome-controller/nilnjekagachinflbdkanmblmjpaimhl?hl=en-US&gl=US "Chrome Extension Page")! Just connect to your computer via Bluetooth (or wired if you have the USB connector), add the extension to chrome, and browse away!
 
 ![](https://lh3.googleusercontent.com/6Bg3wIPEiUO8Yi-j0EHxwHqQtgpLlptSw2JHr1zO3xMh5TDFCYVdQTU1V91VTj1ahGamdWKelQ=w640-h400-e365)
 
