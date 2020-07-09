@@ -2,7 +2,7 @@
 
 Download from the Google Web Store [here](https://chrome.google.com/webstore/detail/chrome-controller/nilnjekagachinflbdkanmblmjpaimhl?hl=en-US&gl=US "Chrome Extension Page")!
 
-##### Control any Chromium based browser from a distance using a Gamepad API compatible game controller (Xbox/PlayStation supported).
+##### A browser extension that lets you surf the web using any Gamepad API compatible game controller (Xbox/PlayStation supported).
 
 ![](https://lh3.googleusercontent.com/6Bg3wIPEiUO8Yi-j0EHxwHqQtgpLlptSw2JHr1zO3xMh5TDFCYVdQTU1V91VTj1ahGamdWKelQ=w640-h400-e365)
 
