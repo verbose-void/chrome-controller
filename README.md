@@ -4,6 +4,10 @@ Download from the Google Web Store [here](https://chrome.google.com/webstore/det
 
 ##### A browser extension that lets you surf the web using any Gamepad API compatible game controller (Xbox/PlayStation supported).
 
+Just connect to your computer via Bluetooth (or wired if you have the USB connector), add the extension to chrome, and browse away!
+
+Equipped with an on-screen keyboard, Heads-Up-Display showing listening controls, & special website functionality for YouTube, Netflix, and more to come, you will be able to watch videos, or really do whatever you want from the comfort of your bed, couch, recliner chair, floor, or whatever you have available to relax in.
+
 ![](https://lh3.googleusercontent.com/6Bg3wIPEiUO8Yi-j0EHxwHqQtgpLlptSw2JHr1zO3xMh5TDFCYVdQTU1V91VTj1ahGamdWKelQ=w640-h400-e365)
 
 ![](https://lh3.googleusercontent.com/3bWw_SA08t-MqNivKMA3NlkuY3f4B4dXQswKVrEfnjxKJoJrv406UOE_FHe9nmtnzaFrdTtAjQ=w640-h400-e365)
@@ -13,13 +17,6 @@ Download from the Google Web Store [here](https://chrome.google.com/webstore/det
 ![](https://lh3.googleusercontent.com/7LJTC79XDJlT4CimSDkSFfoIUMZ2DFagzZWswM7f7zz2sy5IcIzbpgloztJ-TLMEGWOEwcivRbw=w640-h400-e365)
 
 ![](https://ksr-ugc.imgix.net/assets/022/661/690/1644e7b7f269bff9c7914090e25156d0_original.jpg?ixlib=rb-1.1.0&w=680&fit=max&v=1537817903&auto=format&gif-q=50&q=92&s=0d4cc9259698dd2808976df64e9d5707)
- 
-Currently available in beta [here](https://chrome.google.com/webstore/detail/chrome-controller/nilnjekagachinflbdkanmblmjpaimhl?hl=en-US).
-
-Chrome Controller is currently an open source Chrome Extension that adds gamepad functionality to your browsing experience. No longer is your Xbox/PlayStation controller going to collect dust sitting on top of your unused console ( assuming you've ascended to the PC master race, or MAC :) ). 
-
-Just connect to your computer via Bluetooth (or wired if you have the USB connector), add the extension to chrome, and browse away!
-Equipped with an on-screen keyboard, Heads-Up-Display showing listening controls, & special website functionality for YouTube, Netflix, and more to come, you will be able to watch videos, or really do whatever you want from the comfort of your bed, couch, recliner chair, floor, or whatever you have available to relax in.
 
 ## Controller Setup:
 - All you have to do is plug your controller in via USB to where your computer can recognize it, and install Chrome Controller!
