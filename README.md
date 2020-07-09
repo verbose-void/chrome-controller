@@ -44,9 +44,11 @@ Download from the Google Web Store [here](https://chrome.google.com/webstore/det
 
  ## Developers:
  
- ### Setting up your development environment: 
- 1. Clone this repository.
- 2. Make sure you have Google Chrome installed.
- 3. In the google chrome address bar, type `chrome://extensions`. In the top left corner, click `load unpacked`. This will ask for a folder, navigate to where you cloned the repository.
- 4. Bang! You now can reload your webpages and make source code modifications.
- 5. Deploying your build can be done by zipping up the contents of your source code version and creating a pull request with that zip file as an attachment. Make sure you update the `manifest.json` with an updated version number.
+This is the front-end repository. If you would like to make contributions to our backend, please reach out to development@chromecontroller.com.
+ 
+### Setting up your development environment: 
+1. Clone this repository.
+2. Make sure you have Google Chrome installed.
+3. In the google chrome address bar, type `chrome://extensions`. In the top left corner, click `load unpacked`. This will ask for a folder, navigate to where you cloned the repository.
+4. Bang! You now can reload your webpages and make source code modifications.
+5. Deploying your build can be done by zipping up the contents of your source code version and creating a pull request with that zip file as an attachment. Make sure you update the `manifest.json` with an updated version number.
