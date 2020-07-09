@@ -1,10 +1,10 @@
 # Chrome Controller (Browser Extension)
 
-**If you enjoy the extension, consider [becoming a patron](https://www.patreon.com/user?u=38566705) or [buying me a coffee](buymeacoff.ee/mccrearyd) :)**
+**If you enjoy the extension, consider [becoming a patron](https://www.patreon.com/chromecontroller) or [buying me a coffee](buymeacoff.ee/mccrearyd) :)**
 
 My name is Dyllan McCreary and I'm the original developer of Chrome Controller. It started as a fun high school project to let me relax even harder while on my computer all day. From my bed! Now it's gained some traction and I've hired another engineer to take care of the project. Currently it's very buggy and in beta, but this month (July 2020) I'm shooting for an official version 1 release with more stability & performance + features!
 
-But it's very expensive to maintain a project like this. With artwork, maintenance, hosting, etc. So I'm asking for your [help](https://www.patreon.com/user?u=38566705). :)
+But it's very expensive to maintain a project like this. With artwork, maintenance, hosting, etc. So I'm asking for your [help](https://www.patreon.com/chromecontroller). :)
 
 ## What is Chrome Controller?
 - Equipped with a secondary mouse cursor for your controller and on screen keyboard, you can browse in leisure from a distance! Supports any Gamepad API compatible controller via bluetooth & wired connections. Supported controllers include but are not limited to: Xbox 360/1 and PlayStation 3/4.
