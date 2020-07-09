@@ -1,6 +1,6 @@
 # Chrome Controller (Browser Extension)
 
-**If you enjoy the extension, consider [becoming a patron](https://www.patreon.com/chromecontroller) or [buying me a coffee](buymeacoff.ee/mccrearyd) :)**
+**If you enjoy the extension, consider [becoming a patron](https://www.patreon.com/chromecontroller) or [buying me a coffee](https://buymeacoff.ee/mccrearyd) :)**
 
 My name is Dyllan McCreary and I'm the original developer of Chrome Controller. It started as a fun high school project to let me relax even harder while on my computer all day. From my bed! Now it's gained some traction and I've hired another engineer to take care of the project. Currently it's very buggy and in beta, but this month (July 2020) I'm shooting for an official version 1 release with more stability & performance + features!
 
