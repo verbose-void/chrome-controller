@@ -1,6 +1,6 @@
 # Chrome Controller (Browser Extension)
 
-**If you enjoy the extension, consider [buying me a coffee](buymeacoff.ee/mccrearyd) :)**
+**If you enjoy the extension, consider [becoming a patron](https://www.patreon.com/user?u=38566705) or [buying me a coffee](buymeacoff.ee/mccrearyd) :)**
 
 Equipped with a secondary mouse cursor for your controller and on screen keyboard, you can browse in leisure from a distance! Supports any [Gamepad API compatible controller](https://html5gamepad.com/controllers/) via bluetooth & wired connections. Supported controllers include but are not limited to: Xbox 360/1 and PlayStation 3/4.
 
