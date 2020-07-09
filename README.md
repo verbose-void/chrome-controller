@@ -18,16 +18,6 @@ Download from the Google Web Store [here](https://chrome.google.com/webstore/det
 - Documented controllers supported: https://html5gamepad.com/controllers/
 - Doesn't show up or not convinced? Test your controller here with no download necessary: https://html5gamepad.com/
 
-![](https://lh3.googleusercontent.com/6Bg3wIPEiUO8Yi-j0EHxwHqQtgpLlptSw2JHr1zO3xMh5TDFCYVdQTU1V91VTj1ahGamdWKelQ=w640-h400-e365)
-
-![](https://lh3.googleusercontent.com/3bWw_SA08t-MqNivKMA3NlkuY3f4B4dXQswKVrEfnjxKJoJrv406UOE_FHe9nmtnzaFrdTtAjQ=w640-h400-e365)
-
-![](https://lh3.googleusercontent.com/5KN3UmbYwZbJKQ3miTTWx-x0Xd5NtDmPfs6UUdsRbsUXWUCQuMzzVaan5U6gHCLO2fACjhakGDw=w640-h400-e365)
-
-![](https://lh3.googleusercontent.com/7LJTC79XDJlT4CimSDkSFfoIUMZ2DFagzZWswM7f7zz2sy5IcIzbpgloztJ-TLMEGWOEwcivRbw=w640-h400-e365)
-
-![](https://ksr-ugc.imgix.net/assets/022/661/690/1644e7b7f269bff9c7914090e25156d0_original.jpg?ixlib=rb-1.1.0&w=680&fit=max&v=1537817903&auto=format&gif-q=50&q=92&s=0d4cc9259698dd2808976df64e9d5707)
-
 ## Controller Setup:
 - All you have to do is plug your controller in via USB to where your computer can recognize it, and install Chrome Controller!
 - The rest gets taken care of by Chrome Controller!
@@ -39,8 +29,18 @@ Download from the Google Web Store [here](https://chrome.google.com/webstore/det
 - [Linux Bluetooth Setup](https://www.addictivetips.com/ubuntu-linux-tips/pair-and-use-bluetooth-devices-on-linux/)
 - [Chrome Book Bluetooth Setup](https://support.google.com/chromebook/answer/2587653?hl=en)
 
-## Check out the Promo Video!
+## Artwork
 [![Promo Video](https://img.youtube.com/vi/gWI6-R53KII/0.jpg)](https://www.youtube.com/watch?v=gWI6-R53KII)
+
+![](https://lh3.googleusercontent.com/6Bg3wIPEiUO8Yi-j0EHxwHqQtgpLlptSw2JHr1zO3xMh5TDFCYVdQTU1V91VTj1ahGamdWKelQ=w640-h400-e365)
+
+![](https://lh3.googleusercontent.com/3bWw_SA08t-MqNivKMA3NlkuY3f4B4dXQswKVrEfnjxKJoJrv406UOE_FHe9nmtnzaFrdTtAjQ=w640-h400-e365)
+
+![](https://lh3.googleusercontent.com/5KN3UmbYwZbJKQ3miTTWx-x0Xd5NtDmPfs6UUdsRbsUXWUCQuMzzVaan5U6gHCLO2fACjhakGDw=w640-h400-e365)
+
+![](https://lh3.googleusercontent.com/7LJTC79XDJlT4CimSDkSFfoIUMZ2DFagzZWswM7f7zz2sy5IcIzbpgloztJ-TLMEGWOEwcivRbw=w640-h400-e365)
+
+![](https://ksr-ugc.imgix.net/assets/022/661/690/1644e7b7f269bff9c7914090e25156d0_original.jpg?ixlib=rb-1.1.0&w=680&fit=max&v=1537817903&auto=format&gif-q=50&q=92&s=0d4cc9259698dd2808976df64e9d5707)
 
  ## Developers:
  
