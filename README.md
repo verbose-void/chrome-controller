@@ -1,8 +1,9 @@
 # Chrome Controller
 
+### A browser extension that lets you surf the web using any Gamepad API compatible game controller (Xbox/PlayStation supported). If you enjoy the extension, consider [buying me a coffee](buymeacoff.ee/mccrearyd) :)
+
 Download from the Google Web Store [here](https://chrome.google.com/webstore/detail/chrome-controller/nilnjekagachinflbdkanmblmjpaimhl?hl=en-US&gl=US "Chrome Extension Page")!
 
-##### A browser extension that lets you surf the web using any Gamepad API compatible game controller (Xbox/PlayStation supported).
 
 Just connect to your computer via Bluetooth (or wired if you have the USB connector), add the extension to chrome, and browse away!
 
