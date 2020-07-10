@@ -50,6 +50,15 @@ sass:
   sass_dir:         _sass
   style:            compressed
 
+asciidoc: {}
+asciidoctor:
+  base_dir: :docdir
+  safe: unsafe
+  attributes:
+    - idseparator=_
+    - source-highlighter=coderay
+    - icons=font
+
 # Gems
 gems:
   - jekyll-mentions
