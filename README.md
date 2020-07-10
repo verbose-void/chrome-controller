@@ -1,3 +1,5 @@
+![Build and deploy Jekyll site to GitHub Pages](https://github.com/McCrearyD/chrome-controller/workflows/Build%20and%20deploy%20Jekyll%20site%20to%20GitHub%20Pages/badge.svg)
+
 # Chrome Controller (Browser Extension)
 
 **If you enjoy the extension, consider [becoming a patron](https://www.patreon.com/chromecontroller) or [buying me a coffee](https://buymeacoff.ee/mccrearyd) :)**
