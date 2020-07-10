@@ -4,3 +4,4 @@ _site/
 .sass-cache
 *.swp
 */.jekyll-cache
+Gemfile.lock
