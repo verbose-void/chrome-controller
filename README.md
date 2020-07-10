@@ -42,7 +42,7 @@ Download from the Google Web Store [here](https://chrome.google.com/webstore/det
 
 ![](https://ksr-ugc.imgix.net/assets/022/661/690/1644e7b7f269bff9c7914090e25156d0_original.jpg?ixlib=rb-1.1.0&w=680&fit=max&v=1537817903&auto=format&gif-q=50&q=92&s=0d4cc9259698dd2808976df64e9d5707)
 
- ## Developers:
+## Developers:
  
 This is the front-end repository. If you would like to make contributions to our backend, please reach out to development@chromecontroller.com.
  
