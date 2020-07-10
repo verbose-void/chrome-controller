@@ -1,2 +1,4 @@
-js/jquery.js
+_site
+_site/
 .DS_Store
+.sass-cache
