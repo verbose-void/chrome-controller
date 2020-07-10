@@ -1,25 +1,30 @@
 # Site
-title:              Massively
-bio:                'Jekyll version of the Massively theme by HTML5UP'
-description:        "Jekyll version of the Massively theme by HTML5UP"
+title:              Chrome Controller
+bio:                ''
+description:        ''
 locale:             en_US
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://mccrearyd.github.io/chrome-controller/" # the base hostname & protocol for your site
+url: "" # the base hostname & protocol for your site
+
+# Urls
+webstore_download_url: "https://chrome.google.com/webstore/detail/chrome-controller/nilnjekagachinflbdkanmblmjpaimhl"
+repository_url: "https://github.com/McCrearyD/chrome-controller"
+supported_controllers_url: "https://html5gamepad.com/controllers/"
 
 # Comments
 disqus_shortname:   default
 
 # Social
-analytics-id:       "default"
-twitter:            default
-facebook:           default
-instagram:          default
-github:             default
+analytics-id:       "UA-172247453-1"
+twitter:            dyllan_ai
+# facebook:           default
+# instagram:          default
+github:             mccrearyd
 
 # personal
-location:           Los Angeles, CA
-phone:              310-318-5555
-email:              info@default.com # change this to your email to receive free emails for your contact submissions via Slapform.com
+location:           CA
+phone:              # 310-318-5555
+email:              support@chromecontroller.com # change this to your email to receive free emails for your contact submissions via Slapform.com
 
 # Other
 background_image:   /images/bg.jpg
@@ -33,7 +38,7 @@ defaults:
   values:
     permalink: "/blog/:title/"
     layout: post
-    author:
+    author: Dyllan McCreary
 
 # Jekyll
 permalink:          /blog/:title/
@@ -65,6 +70,8 @@ gems:
   - jekyll-sitemap
   - jekyll-feed
   - jekyll-gist
+
+plugins:
   - jekyll-paginate
 
 paginate: 6
