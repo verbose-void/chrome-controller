@@ -4,7 +4,7 @@ bio:                ''
 description:        ''
 locale:             en_US
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site
+# url: "" # the base hostname & protocol for your site
 
 # Urls
 webstore_download_url: "https://chrome.google.com/webstore/detail/chrome-controller/nilnjekagachinflbdkanmblmjpaimhl"
