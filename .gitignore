@@ -3,3 +3,5 @@ _site/
 .DS_Store
 .sass-cache
 *.swp
+*/.jekyll-cache
+Gemfile.lock
