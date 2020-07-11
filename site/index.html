@@ -1,10 +1,10 @@
 ---
 layout: null
-title: Chrome Controller
+title: Chrome Controller -- Home
 description: Control your web browser from a leisurely distance by equipping your controller with the ability to browse the web for you! Supports 1,000+ game controllers!
 sitemap:
     priority: 1.0
-    lastmod: 2017-11-02
+    lastmod: 2020-7-11
     changefreq: weekly
 ---
 <!DOCTYPE HTML>
@@ -62,43 +62,15 @@ sitemap:
 								<p>Just connect to your computer via Bluetooth (or wired if you have the USB connector), add the extension to chrome, and browse away!</p>
 							</article>
 
-						<!-- Posts -->
-							<section class="posts">
-                {% for post in site.posts limit:3 %}
-                {% assign mod3 = forloop.index | modulo: 3 %}
-  								<article>
-  									<header>
-  										<span class="date">{{ post.date | date_to_string }}</span>
-  										<h2><a href="{{ post.url | absolute_url }}">{{ post.title }}</a></h2>
-  									</header>
-  									<a href="{{ post.url | absolute_url }}" class="image fit"><img src="{{ post.image | absolute_url }}" alt="" /></a>
-  									<p>{{ post.excerpt }}</p>
-  									<ul class="actions">
-  										<li><a href="{{ post.url | absolute_url }}" class="button">Full Story</a></li>
-  									</ul>
-  								</article>
-                  {% if mod3 == 0 %}
-                  <article>
-  									<header>
-  										<h2><a href="#">Sponsored</a></h2>
-  									</header>
+							{% include posts-showcase.html %}
 
-  								</article>
-                  {% endif %}
-                {% endfor %}
-
-							</section>
-
-						<!-- Footer -->
-							<footer>
-                <ul class="actions">
-                  <li><a href="{{ "/blog/" | absolute_url }}" class="button">Our Blog</a></li>
-                </ul>
-							</footer>
 
 					</div>
 
+					
+
 				<!-- Footer -->
+
         {% include foot.html %}
 
 			</div>

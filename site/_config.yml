@@ -12,6 +12,7 @@ repository_url: "https://github.com/McCrearyD/chrome-controller"
 patreon_url: "https://www.patreon.com/chromecontroller"
 supported_controllers_url: "https://html5gamepad.com/controllers/"
 test_controllers_url: "https://html5gamepad.com/"
+developer_guide_url: "https://github.com/McCrearyD/chrome-controller#developers"
 
 # Comments
 disqus_shortname:   default
