@@ -18,3 +18,17 @@ sitemap:
 2. Before adding Chrome Controller to your browser, <b>test that your controller is detected by the Gamepad API <a target="_blank" rel="noopener noreferrer" href="{{ site.test_controllers_url | absolute_url }}">here</a></b> with no download/installation required.
 
 3. <b><a target="_blank" rel="noopener noreferrer" href="{{ site.webstore_download_url | absolute_url }}">Add Chrome Controller to your browser</a></b>, sit back and relax!
+
+<br />
+
+## Having Trouble Setting Up Bluetooth?
+- [Chrome Book Bluetooth Setup](https://support.google.com/chromebook/answer/2587653?hl=en)
+- [Windows 10 Bluetooth Setup](https://www.windowscentral.com/how-and-why-use-bluetooth-on-windows-10)
+- [Windows 7 Bluetooth Setup](https://support.microsoft.com/en-us/help/15290/windows-connect-bluetooth-device)
+- [Mac Bluetooth Setup](https://support.apple.com/guide/mac-help/connect-a-bluetooth-device-blth1004/mac)
+- [Linux Bluetooth Setup](https://www.addictivetips.com/ubuntu-linux-tips/pair-and-use-bluetooth-devices-on-linux/)
+
+<br />
+
+**Still having issues? Reach out to [support@chromecontroller.com](mailto:support@chromecontroller.com).**
+**Alternatively if you believe it's an issue within Chrome Controller, [create an issue on GitHub](https://github.com/McCrearyD/chrome-controller/issues).**
