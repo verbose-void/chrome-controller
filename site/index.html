@@ -1,10 +1,10 @@
 ---
 layout: null
-title: Jekyll Theme - Home Page - Massively
-description: Every great website starts with a great homepage. The homepage tells your viewers what your site is all about and gives your viewers a place to come back to.
+title: Chrome Controller -- Home
+description: Control your web browser from a leisurely distance by equipping your controller with the ability to browse the web for you! Supports 1,000+ game controllers!
 sitemap:
     priority: 1.0
-    lastmod: 2017-11-02
+    lastmod: 2020-7-11
     changefreq: weekly
 ---
 <!DOCTYPE HTML>
@@ -27,10 +27,10 @@ sitemap:
 
 				<!-- Intro -->
 					<div id="intro">
-            <h1>{{site.title}}</h1>
-						<h2>The Jekyll Theme Version</h2>
-						<p>Massively is an HTML5 website theme designed by <a href="https://twitter.com/ajlkn">@ajlkn</a> for <a href="https://html5up.net">HTML5 UP</a><br />
-						and released for free under the <a href="https://html5up.net/license">Creative Commons license</a>. Jekyll integration by <a href="https://somiibo.com">Somiibo</a></p>
+            					<h1>{{site.title}}</h1>
+						<h2>Browse in leisure from a distance</h2>
+						<p>Equip your browser with a secondary mouse cursor and on-screen keyboard connected to your game controller so you can sit back and relax!<br /></p>
+						<a target="_blank" rel="noopener noreferrer" href="{{ site.webstore_download_url | absolute_url }}" class="button">Add to Your Browser</a> <br />
 						<ul class="actions">
 							<li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
 						</ul>
@@ -53,60 +53,24 @@ sitemap:
 						<!-- Featured Post -->
 							<article class="post featured">
 								<header class="major">
-									<h2><a href="#">Massively is a versatile Jekyll theme</a></h2>
-									<p>With only a few edits, you can have a stunningly beautiful website <br />
-                    nearly out of the box. Of course... you can always take it further <br />
-                    and make it something even more amazing!</p>
+									<h2><a href="#">Making Browsing the Web Leisurely-er</a></h2>
+									<p>Chrome Controller is a web browser extension equipped with a secondary mouse cursor for your controller and on-screen keyboard connected to your game controller so you can browse in leisure from a distance! Supports any <a target="_blank" rel="noopener noreferrer" href="{{ site.supported_controllers_url | absolute_url }}">Gamepad API compatible controller</a> via bluetooth & wired connections.</p>
 								</header>
-								<a href="#" class="image main"><img src="{{ "/images/pic01.jpg" | absolute_url }}" alt="" /></a>
-                <p>Regardless of your website's function, the homepage is what brings the user in.
-                  If it's anything short of intriguing, captivating, or just plain cool, you're out of luck and you might deter some visitors.</p>
-                <p>Your homepage must clearly describe what your site is about.
-									Having engaging content will in this manner enable you to offer and it will make your customers more inclined to purchase from you. Content is a way to position your organization in the correct place for your clients to discover you.
-								</p>
-								<p>
-									In this manner, content in itself is a standout amongst the best promoting apparatuses in your whole advertising toolbox! Rather than making your content around your promoting technique, it's limitlessly more productive to fabricate your showcasing around your content.
-								 </p>
-
+								<iframe width="560" height="600" src="https://www.youtube.com/embed/gWI6-R53KII" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" class="image main" allowfullscreen></iframe>
+								<!-- <a href="{{site.webstore_download_url}}" target="_blank" rel="noopener noreferrer" class="image main"><img src="{{ "/images/pic01.jpg" | absolute_url }}" alt="" /></a> -->
+								<p>Chrome Controller supports <b>over 1,000 controller types</b> via bluetooth & wired connections. This includes Xbox 360/1 and PlayStation 3/4 controllers. View an exhaustive list <a target="_blank" rel="noopener noreferrer" href="{{ site.supported_controllers_url | absolute_url }}">here</a> or <b>test functionality without downloading anything <a target="_blank" rel="noopener noreferrer" href="{{ site.test_controllers_url | absolute_url }}">here</a>.</b></p>
+								<p>Just connect to your computer via Bluetooth (or wired if you have the USB connector), add the extension to chrome, and browse away!</p>
 							</article>
 
-						<!-- Posts -->
-							<section class="posts">
-                {% for post in site.posts limit:3 %}
-                {% assign mod3 = forloop.index | modulo: 3 %}
-  								<article>
-  									<header>
-  										<span class="date">{{ post.date | date_to_string }}</span>
-  										<h2><a href="{{ post.url | absolute_url }}">{{ post.title }}</a></h2>
-  									</header>
-  									<a href="{{ post.url | absolute_url }}" class="image fit"><img src="{{ post.image | absolute_url }}" alt="" /></a>
-  									<p>{{ post.excerpt }}</p>
-  									<ul class="actions">
-  										<li><a href="{{ post.url | absolute_url }}" class="button">Full Story</a></li>
-  									</ul>
-  								</article>
-                  {% if mod3 == 0 %}
-                  <article>
-  									<header>
-  										<h2><a href="#">Sponsored</a></h2>
-  									</header>
+							{% include posts-showcase.html %}
 
-  								</article>
-                  {% endif %}
-                {% endfor %}
-
-							</section>
-
-						<!-- Footer -->
-							<footer>
-                <ul class="actions">
-                  <li><a href="{{ "/blog/" | absolute_url }}" class="button">Our Blog</a></li>
-                </ul>
-							</footer>
 
 					</div>
 
+					
+
 				<!-- Footer -->
+
         {% include foot.html %}
 
 			</div>
