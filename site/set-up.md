@@ -30,5 +30,5 @@ sitemap:
 
 <br />
 
-**Still having issues? Reach out to [support@chromecontroller.com](mailto:support@chromecontroller.com).**
-**Alternatively if you believe it's an issue within Chrome Controller, [create an issue on GitHub](https://github.com/McCrearyD/chrome-controller/issues).**
+**Still having problems? Reach out to [support@chromecontroller.com](mailto:support@chromecontroller.com).**
+**Alternatively if you are experiencing a bug within Chrome Controller, [create an issue on GitHub](https://github.com/McCrearyD/chrome-controller/issues).**

@@ -14,3 +14,5 @@ But it's very expensive to maintain a project like this. With artwork, maintenan
 ## What Will Your Contribution Fund?
 
 Your generous contributions will help fund future versions of Chrome Controller to improve stability, performance and add new features. It will also help support the backend (currently in development) namely by aggregating user settings and log user events and bug reports more effectively.
+
+Click here to become a Patron: <a href="{{site.patreon_url}}" target="_blank" rel="noopener noreferrer" class="icon fa-heart" style="color: #f970b5;" rel="nofollow"><span class="label">Patreon</span></a> :) Thank you for your support!
