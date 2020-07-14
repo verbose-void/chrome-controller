@@ -1,0 +1,55 @@
+{
+  "name": "chrome-controller",
+  "version": "2.0.0",
+  "description": "Chrome Controller allows you to bring the relaxation of the console environment straight to your Mac/PC using your controller.",
+  "main": "src/App.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "webpack --mode production",
+    "watch": "webpack --watch",
+    "dev": "webpack-dev-server --open",
+    "start": "webpack --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/McCrearyD/ChromeController.git"
+  },
+  "keywords": [
+    "chrome-extension"
+  ],
+  "author": "Dyllan McCreary",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/McCrearyD/ChromeController/issues"
+  },
+  "homepage": "https://github.com/McCrearyD/ChromeController#readme",
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.0.1",
+    "css-loader": "^3.5.3",
+    "file-loader": "^6.0.0",
+    "html-webpack-plugin": "^4.3.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-extension-manifest-plugin": "^0.5.0"
+  },
+  "dependencies": {
+    "@types/bootstrap": "^4.5.0",
+    "bootstrap": "^4.5.0",
+    "jquery": "^3.5.1",
+    "p5": "^1.0.0",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
+    "react-combine-reducers": "^1.0.3",
+    "react-dom": "^16.13.1"
+  }
+}

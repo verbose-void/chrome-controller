@@ -1,0 +1,77 @@
+.controller {
+    width: 120px;
+    height: 120px;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+}
+#notListed.controller {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#not-listed-disclaimer {
+    margin-top: 5px;
+    transition: 0.2s ease-in-out;
+    padding: 10px;
+    opacity: 1;
+    transform: scale( 1 );
+}
+
+.label {
+    width: 40%;
+}
+
+#not-listed-disclaimer.hide {
+    transform: scale( 0 );
+    opacity: 0;
+}
+
+.controller:hover {
+    border-color: rgba( 0, 0, 0, 0.2 );
+}
+
+.controller.active {
+    border-color: rgba( 0, 0, 0, 0.3 );
+}
+/* 
+.xbox-controller {
+    background-image: url( '../img/xbox-controller.jpeg' );
+}
+
+.ps-controller {
+    background-image: url( '../img/ps4-controller.jpg' );
+} */
+.controller img {
+    width: 120px;
+    height: 100%;
+}
+
+.mapping-menu, .mapping-menu-global {
+    padding: 8px;
+}
+
+.mapping-menu {
+    display: none;
+}
+
+.mapping-menu.show {
+    display: block;
+}
+
+.map {
+    text-align: right;
+}
+
+.map select {
+    width: 100%;
+}
+
+.controller a {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    max-width: 120px;
+    font-size: 20px;
+    overflow-wrap: unset;
+    transform: translate( -50%, -50% );
+}
