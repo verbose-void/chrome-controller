@@ -48,7 +48,7 @@ Equipped with an on-screen keyboard, Heads-Up-Display showing listening controls
  1. Clone this repository.
  2. Make sure [npm](https://nodejs.org/en/ "node.js download") is installed on your machine.
  3. `npm install`
- 4. `npm run watch` -- make sure it creates a `dist` folder.
+ 4. `npm start` -- make sure it creates a `dist` folder.
  5. Make sure you have Google Chrome installed.
  6. In the google chrome address bar, type `chrome://extensions`. In the top left corner, click `load unpacked`. This will ask for a folder, navigate to where you cloned the repository. Select the `dist` folder.
  7. Bang! You now can reload your webpages and make source code modifications.
