@@ -18,9 +18,7 @@ const StarDisplay = () => (
 );
 
 const Popup = (props) => {
-    const [state, dispatch] = useReducer(reducer, initialState);
-    // if new user, load setting defaults
-    // if (!props.currentSettings) props.updateSettings(state);
+    const [state, dispatch] = useReducer(reducer, props.currentSettings);
 
     const { modalIsVisible } = state.popup;
     const toggleModalIsVisible = (payload) =>
@@ -29,9 +27,9 @@ const Popup = (props) => {
             payload,
         });
 
-    const onSave = () => {
-        toggleModalIsVisible(false);
+    const onSave = async () => {
         props.updateSettings(state);
+        toggleModalIsVisible(false);
     };
 
     return (

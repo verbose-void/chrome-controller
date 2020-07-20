@@ -4,7 +4,6 @@ import { Slider, ColorPicker, SettingSection } from "../GeneralTab";
 import { consoleLog } from "../../utils/debuggingFuncs";
 
 export const CursorSettings = (props) => {
-    consoleLog(props.state);
     return (
         <React.Fragment>
             <div className="text-center">

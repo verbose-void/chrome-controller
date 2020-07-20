@@ -5,10 +5,7 @@ import sleep from "../utils/sleep";
 const { consoleLog } = require("../utils/debuggingFuncs");
 
 const CustomCursor = async ({ settings }) => {
-    // let ref = document.querySelector("#cursor");
-    await sleep(1);
-    const currentSettings = settings.currentSettings;
-    const { cursor } = currentSettings.generalTab;
+    const { cursor } = settings.generalTab;
     const color = cursor.color;
     const horizontalSpeed = cursor.horizontalSpeed;
     const idleHideTimer = cursor.idleHideTimer;

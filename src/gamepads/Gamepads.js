@@ -2,13 +2,11 @@ import { consoleLog } from "../utils/debuggingFuncs";
 import { axisDefaults } from "../defaultSettings";
 import sleep from "../utils/sleep";
 
-const Gamepads = async ({ settings, eventsService, debugging }) => {
+const Gamepads = ({ settings, eventsService, debugging }) => {
     let activeGamepads = {};
     let keyboardIsOpen = false;
     let joyStickMarginOfError = 0.09;
-    await sleep(100);
 
-    const currentSettings = settings.currentSettings;
     const isDpad = (key) => [12, 13, 14, 15].includes(key);
 
     const joyStickIsPushed = (axes) =>
@@ -30,7 +28,7 @@ const Gamepads = async ({ settings, eventsService, debugging }) => {
                 keyboard,
                 triggers,
                 axis,
-            } = currentSettings.data.mappingTab;
+            } = settings.mappingTab;
 
             const indexForButtonPressed = ev.buttons.findIndex(
                 (b) => b.pressed && b.touched

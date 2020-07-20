@@ -35,7 +35,7 @@ const ConfModal = (props) => {
                 </Button>
                 <Button
                     id="final-submit"
-                    onClick={() => props.onSave()}
+                    onClick={async () => await props.onSave()}
                     variant="dark"
                 >
                     Submit changes

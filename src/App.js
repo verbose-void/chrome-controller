@@ -10,30 +10,29 @@ import EventsService from './EventsService';
 import CustomCursor from './cursor';
 import Canvas from './documentCanvas';
 
-import { Settings } from './settings/Settings';
+import { Settings } from './settings/SettingsManager';
 import { consoleLog } from './utils/debuggingFuncs';
 import APIClient from './APIClient';
+import { getToken } from './APIServices/auth';
 
 const runningLocally = false;
 const debugging = true;
 
-const getAppInstances = async () => {
-  const settings = await Settings({ debugging, runningLocally });
-  const eventsService = await EventsService();
-  const gamepadsController = await Gamepads({
+const getAppInstances = ({settings}) => {
+  const eventsService = EventsService();
+  const gamepadsController = Gamepads({
     debugging,
     settings,
     eventsService,
   });
-  const cursor = await CustomCursor({ settings });
-  const canvas = await Canvas({
+  const cursor = CustomCursor({ settings });
+  const canvas = Canvas({
     runningLocally,
     gamepadsController,
     cursor,
   });
 
   return {
-    settings,
     eventsService,
     gamepadsController,
     cursor,
@@ -42,31 +41,63 @@ const getAppInstances = async () => {
 };
 
 const App = () => {
-  const [instances, setInstances] = useState({});
+  const [jwt, setJwt] = useState(undefined);
+  const [userId, setUserId] = useState(undefined);
   const [appSettings, defineSettings] = useState(undefined);
-  consoleLog('appsettings', appSettings);
+
+  const settingsManager = Settings({jwt});
+
   useEffect(() => {
-    (async () => {
-      const { settings, cursor, canvas } = await getAppInstances();
-      setInstances({ settings, cursor, canvas });
-    })();
-  }, []);
+    chrome.storage.sync.get(['userId'], async res => {
+        if (!jwt) {   
+            const token = await getToken(res.userId);
+            if (token) {
+                chrome.storage.sync.set({ userId: token.userId });
+                setJwt(token);
+                setUserId(token.userId)
+            }
+        }
+    });
+  }, [jwt]);
 
-  if (!instances.settings) return <p>Loading...</p>;
+  if (jwt && userId && !appSettings) {
+    settingsManager.currentSettings(userId).then(settings=>{
+        if (!settings || Object.keys(settings).length === 0) {
+            settingsManager
+                .initDefaultSettings(userId)
+                .then(settings=>defineSettings(settings));
+        } else defineSettings(settings)
+    })
+  }
+  
+  if (!appSettings) return <p>Loading...</p>;
 
-  const { settings, cursor, canvas } = instances;
-  const storeProps = {
-    currentSettings: appSettings ? appSettings : settings.currentSettings,
-    updateSettings: (_state) => {
-      settings.updateSettings(_state);
-      defineSettings(settings.currentSettings);
-      cursor.refreshCursor();
-    },
-  };
+  const {
+    eventsService,
+    gamepadsController,
+    cursor,
+    canvas,
+  } = getAppInstances({settings: appSettings});
+  
 
   if (canvas) canvas.startEventPolling();
 
-  return <Popup {...storeProps} />;
+  return (
+    <Popup
+        currentSettings={appSettings}
+        updateSettings={async (_state) => {
+            const newSettings = await settingsManager.updateSettings(userId, {
+                ..._state,
+                popup: {
+                    modalIsVisible: false
+                }
+            });
+            
+            defineSettings(newSettings);
+            cursor.refreshCursor();
+        }}
+    />
+  );
 };
 
 ReactDOM.render(<App />, document.getElementById('app'));

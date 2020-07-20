@@ -1,28 +1,43 @@
-const APIClient = ({ production }) => {
-  const url = production
-    ? 'https://chrome-controller-api.herokuapp.com/'
-    : '127.0.0.1:5000';
+import globals from "./globals";
+import { consoleLog } from "./utils/debuggingFuncs";
 
-  const JWT = localStorage.getItem('jwt');
+const APIClient = async (endpoint, opts) => {
+  const defaultHeaders = {
+    'x-access-token': null,
+  }
 
-  return async (endpoint, opts) => {
-    const defaultOpts = {
-      method: 'GET',
-      headers: {
-        'x-access-token': JWT,
-      },
-    };
-    const options = {
-      ...defaultOpts,
-      ...opts,
-    };
-
-    const res = await fetch(
-      `${url}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`,
-      options
-    );
-    return res.json();
+  const defaultopts = {
+    method: 'GET',
+    headers: defaultHeaders
   };
+
+  const options = {
+    ...defaultopts,
+    ...opts,
+    headers: new Headers({
+      'content-type': 'application/json',
+      ...opts.headers
+    })
+  };
+
+  if (options.method === 'POST') {
+    options.body = JSON.stringify(options.body);
+  }
+
+  const res = await fetch(
+    `${globals.apiUrl}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`,
+    {
+      ...options
+    }
+  );
+
+  if (res.status === 200) return res.json()
+  
+  return {
+    error: `There was a problem making this API request, status code ${res.status}`,
+    status: res.status
+  }
 };
+
 
 export default APIClient;

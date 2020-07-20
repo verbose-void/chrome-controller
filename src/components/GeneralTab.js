@@ -48,7 +48,6 @@ export const SettingSection = (props) => {
 };
 
 const GeneralTab = (props) => {
-    console.log("generaltab", props.state.cursor);
     return (
         <div id="settings-container" className="page">
             <Form>
