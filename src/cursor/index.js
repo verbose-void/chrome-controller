@@ -4,7 +4,15 @@ import sleep from "../utils/sleep";
 
 const { consoleLog } = require("../utils/debuggingFuncs");
 
-const CustomCursor = async ({ settings }) => {
+export const dismountCursor = () => {
+    runScript(`
+        if (document.querySelector("#cursor")) {
+            document.querySelector('body').removeChild(document.querySelector("#cursor"))
+        }
+    `);
+}
+
+const CustomCursor = ({ settings }) => {
     const { cursor } = settings.generalTab;
     const color = cursor.color;
     const horizontalSpeed = cursor.horizontalSpeed;
@@ -29,20 +37,18 @@ const CustomCursor = async ({ settings }) => {
                 background-color: ${color};
                 height: ${radius * 2}px;
                 width: ${radius * 2}px;
+                transition: left .2s ease-in-out;
             }
         `);
     };
 
-    const dismount = async () => {
-        runScript(`
-            const cursor = document.querySelector("#cursor")
-            document.querySelector('body').removeChild(cursor)
-        `);
-    };
 
     return {
-        mount: () => setTimeout(() => mount(), 1),
-        dismount: () => setTimeout(() => dismount(), 1),
+        mount: () => {
+            consoleLog('called')
+            setTimeout(() => mount(), 1)
+        },
+        dismount: () => dismountCursor(),
         refreshCursor: () =>
             setTimeout(() => {
                 dismount().then(() => mount());

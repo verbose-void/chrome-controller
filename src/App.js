@@ -7,7 +7,7 @@ import Popup from './components/Popup';
 
 import Gamepads from './gamepads/Gamepads';
 import EventsService from './EventsService';
-import CustomCursor from './cursor';
+import CustomCursor, { dismountCursor } from './cursor';
 import Canvas from './documentCanvas';
 
 import { Settings } from './settings/SettingsManager';
@@ -48,7 +48,11 @@ const App = () => {
   const settingsManager = Settings({jwt});
 
   useEffect(() => {
+    dismountCursor();
     chrome.storage.sync.get(['userId'], async res => {
+        window.removeEventListener('gamepaddisconnected', () => {
+          consoleLog('event listener removed')
+        });
         if (!jwt) {   
             const token = await getToken(res.userId);
             if (token) {
@@ -58,7 +62,7 @@ const App = () => {
             }
         }
     });
-  }, [jwt]);
+  }, [jwt, appSettings]);
 
   if (jwt && userId && !appSettings) {
     settingsManager.currentSettings(userId).then(settings=>{
@@ -66,20 +70,14 @@ const App = () => {
             settingsManager
                 .initDefaultSettings(userId)
                 .then(settings=>defineSettings(settings));
-        } else defineSettings(settings)
+        } else {
+          defineSettings(settings);
+        }
     })
   }
   
   if (!appSettings) return <p>Loading...</p>;
-
-  const {
-    eventsService,
-    gamepadsController,
-    cursor,
-    canvas,
-  } = getAppInstances({settings: appSettings});
-  
-
+  const { canvas } = getAppInstances({settings: appSettings});
   if (canvas) canvas.startEventPolling();
 
   return (
@@ -92,9 +90,7 @@ const App = () => {
                     modalIsVisible: false
                 }
             });
-            
             defineSettings(newSettings);
-            cursor.refreshCursor();
         }}
     />
   );

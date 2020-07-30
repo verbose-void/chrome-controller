@@ -48,6 +48,7 @@ const Gamepads = ({ settings, eventsService, debugging }) => {
                         x: packageJoyStickAxis(ev.axes[2]),
                         y: packageJoyStickAxis(ev.axes[3]),
                     },
+                    settings: settings.generalTab,
                 });
 
             if (indexForButtonPressed === -1) return;

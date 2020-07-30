@@ -65,8 +65,15 @@ export const scroll = (x, y) => {
     chrome.tabs.executeScript(null, { code }, handleRuntimeError);
 }
 
-export const moveCursor = (x, y) => {
+export const moveCursor = (x, y, settings) => {
+    const {verticalSpeed, horizontalSpeed} = settings.cursor;
+    const cursor = `document.querySelector('#cursor')`;
+    const leftCoord = `window.scrollX + ${cursor}.getBoundingClientRect().left`;
+    const rightCoord = `window.scrollY + ${cursor}.getBoundingClientRect().top`;
     runScript(`
-        document.querySelector('#cursor').style.left = "300px"
+        if (${cursor}) {
+            ${cursor}.style.left = ${leftCoord} ? '' + (${leftCoord} + ${x.coord} * ${horizontalSpeed}) + 'px' : '${x.coord}px';
+            ${cursor}.style.top = ${rightCoord} ? '' + (${rightCoord} + ${y.coord} * ${verticalSpeed}) + 'px' : '${y.coord}px';
+        }
     `)
 }

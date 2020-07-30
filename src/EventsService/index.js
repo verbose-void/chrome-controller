@@ -56,22 +56,35 @@ export default () => {
             action: (x, y) => browserActions.scroll(x, y)
         },
         moveCursor: {
-            action: (x, y) => browserActions.moveCursor(x, y)
+            action: (x, y, settings) => browserActions.moveCursor(x, y, settings)
         }
     }
 
     return ({
         handleJoyStick: ({
             leftStick,
-            rightStick
+            rightStick,
+            settings,
         }) => {
-            if (leftStick.isActive)
-                keysToActions[leftStick.actionName]
-                    .action(leftStick.x, leftStick.y)
+            if (leftStick.isActive) {
+                if (leftStick.actionName === 'moveCursor') {
+                    keysToActions[leftStick.actionName]
+                        .action(leftStick.x, leftStick.y, settings)
+                } else {
+                    keysToActions[leftStick.actionName]
+                        .action(leftStick.x, leftStick.y, settings)
+                }
+            }
 
-            if (rightStick.isActive)
-                keysToActions[rightStick.actionName]
-                    .action(rightStick.x, rightStick.y)
+            if (rightStick.isActive) {
+                if (rightStick.actionName === 'moveCursor') {
+                    keysToActions[rightStick.actionName]
+                        .action(rightStick.x, rightStick.y, settings)
+                } else {
+                    keysToActions[rightStick.actionName]
+                        .action(rightStick.x, rightStick.y)
+                }
+            }
         },
         interpretEventByKey: ({ actionName, index }) => {
             if (!keysToActions[actionName]) return

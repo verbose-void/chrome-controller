@@ -2,12 +2,10 @@ import { parseUID } from '../utils/controllerUtils'
 import CustomCursor from '../cursor';
 
 export default ({
-    runningLocally,
     gamepadsController,
     cursor
 }) => {
-    if (!runningLocally) chrome.runtime.getBackgroundPage(()=>{})
-
+    console.log(cursor)
     let poll;
     const props = { pollingFrequency: 100 }
 
@@ -21,15 +19,17 @@ export default ({
             .connectController(parseUID(e))
             .then(()=>cursor.mount())
     })
-
+    
     return ({
         startEventPolling: () => {
             poll = setInterval(()=>{
                 for (let i of navigator.getGamepads())
-                    if (i) gamepadsController.execEvent(i)
-                
+                    if (i) gamepadsController.execEvent(i);
             }, props.pollingFrequency)
         },
-        stopEventPolling: () => clearInterval(poll)
+        stopEventPolling: () => {
+            window.removeEventListener('gamepaddisconnected');
+            clearInterval(poll);
+        }
     })
 }
