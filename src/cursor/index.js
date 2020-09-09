@@ -45,7 +45,6 @@ const CustomCursor = ({ settings }) => {
 
     return {
         mount: () => {
-            consoleLog('called')
             setTimeout(() => mount(), 1)
         },
         dismount: () => dismountCursor(),

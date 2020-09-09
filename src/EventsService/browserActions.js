@@ -70,10 +70,12 @@ export const moveCursor = (x, y, settings) => {
     const cursor = `document.querySelector('#cursor')`;
     const leftCoord = `window.scrollX + ${cursor}.getBoundingClientRect().left`;
     const rightCoord = `window.scrollY + ${cursor}.getBoundingClientRect().top`;
+
     runScript(`
         if (${cursor}) {
-            ${cursor}.style.left = ${leftCoord} ? '' + (${leftCoord} + ${x.coord} * ${horizontalSpeed}) + 'px' : '${x.coord}px';
-            ${cursor}.style.top = ${rightCoord} ? '' + (${rightCoord} + ${y.coord} * ${verticalSpeed}) + 'px' : '${y.coord}px';
+            const xValue = ${leftCoord} ? (${leftCoord} + ${x.coord} * ${horizontalSpeed}) : ${x.coord};
+            const yValue = ${rightCoord} ? (${rightCoord} + ${y.coord} * ${verticalSpeed}) : ${y.coord};
+            ${cursor}.style.transform = 'translate3d(' + xValue + 'px,' + yValue + 'px, 0)'; 
         }
     `)
 }
