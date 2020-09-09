@@ -25,7 +25,7 @@ const CustomCursor = ({ settings }) => {
                 background-color: ${color};
                 height: ${radius * 2}px;
                 width: ${radius * 2}px;
-                transition: left .2s ease-in-out;
+                transition: transform .2s ease-in-out;
             }
         `);
     };
