@@ -4,33 +4,21 @@ import sleep from "../utils/sleep";
 
 const { consoleLog } = require("../utils/debuggingFuncs");
 
-export const dismountCursor = () => {
-    runScript(`
-        if (document.querySelector("#cursor")) {
-            document.querySelector('body').removeChild(document.querySelector("#cursor"))
-        }
-    `);
-}
-
 const CustomCursor = ({ settings }) => {
     const { cursor } = settings.generalTab;
     const color = cursor.color;
-    const horizontalSpeed = cursor.horizontalSpeed;
-    const idleHideTimer = cursor.idleHideTimer;
     const radius = cursor.radius;
-    const verticalSpeed = cursor.verticalSpeed;
 
     const mount = () => {
         runScript(`
-            const el = document.createElement('div')
-            el.id = "cursor"
-            const { style } = el
-            document.querySelector('body').appendChild(el)
+            document.cursor = document.createElement('div');
+            document.cursor.id = "cursor"
+            document.querySelector('body').appendChild(document.cursor)
         `);
         insertCSS(`
             #cursor {
                 position: absolute;
-                z-index: 5000;
+                z-index: 10000;
                 top: 0;
                 left: 0;
                 border-radius: 50%;
@@ -42,16 +30,39 @@ const CustomCursor = ({ settings }) => {
         `);
     };
 
+    const dismount = () => {
+        runScript(`
+            if (document.querySelector("#cursor")) {
+                delete document.cursor;
+                document.querySelector('body').removeChild(document.querySelector("#cursor"))
+            }
+        `);
+    }
+
+    const refreshCursor = () => {
+        dismount();
+        setTimeout(() => {
+            mount();
+        }, 0)
+    }
+
+    chrome.tabs.onUpdated.addListener((_, changeInfo, __) => {
+        if (changeInfo.status == 'complete') {
+            refreshCursor()
+        }
+    });
+    
+    chrome.tabs.onActivated.addListener(() => {
+        refreshCursor();
+    });
+
 
     return {
         mount: () => {
             setTimeout(() => mount(), 1)
         },
-        dismount: () => dismountCursor(),
-        refreshCursor: () =>
-            setTimeout(() => {
-                dismount().then(() => mount());
-            }, 10),
+        dismount,
+        refreshCursor,
     };
 };
 

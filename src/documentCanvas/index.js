@@ -5,20 +5,19 @@ export default ({
     gamepadsController,
     cursor
 }) => {
-    console.log(cursor)
-    let poll;
-    const props = { pollingFrequency: 100 }
-
     window.addEventListener('gamepaddisconnected', (e)=>{
         gamepadsController
             .disconnectController(parseUID(e))
             .then(()=>cursor.dismount())
-    })
+    });
     window.addEventListener('gamepadconnected', (e)=>{
         gamepadsController
             .connectController(parseUID(e))
             .then(()=>cursor.mount())
-    })
+    });
+
+    let poll;
+    const props = { pollingFrequency: 100 }
     
     return ({
         startEventPolling: () => {

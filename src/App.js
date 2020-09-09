@@ -7,7 +7,7 @@ import Popup from './components/Popup';
 
 import Gamepads from './gamepads/Gamepads';
 import EventsService from './EventsService';
-import CustomCursor, { dismountCursor } from './cursor';
+import CustomCursor from './cursor';
 import Canvas from './documentCanvas';
 
 import { Settings } from './settings/SettingsManager';
@@ -19,13 +19,13 @@ const runningLocally = false;
 const debugging = true;
 
 const getAppInstances = ({settings}) => {
-  const eventsService = EventsService();
+  const cursor = CustomCursor({ settings });
+  const eventsService = EventsService({ cursor });
   const gamepadsController = Gamepads({
     debugging,
     settings,
     eventsService,
   });
-  const cursor = CustomCursor({ settings });
   const canvas = Canvas({
     runningLocally,
     gamepadsController,
@@ -48,7 +48,6 @@ const App = () => {
   const settingsManager = Settings({jwt});
 
   useEffect(() => {
-    dismountCursor();
     chrome.storage.sync.get(['userId'], async res => {
         window.removeEventListener('gamepaddisconnected', () => {
           consoleLog('event listener removed')

@@ -73,9 +73,21 @@ export const moveCursor = (x, y, settings) => {
 
     runScript(`
         if (${cursor}) {
-            const xValue = ${leftCoord} ? (${leftCoord} + ${x.coord} * ${horizontalSpeed}) : ${x.coord};
-            const yValue = ${rightCoord} ? (${rightCoord} + ${y.coord} * ${verticalSpeed}) : ${y.coord};
+            const xValue = ${leftCoord} ? (${leftCoord} + ${x.coord} * (${horizontalSpeed} * 2)) : ${x.coord};
+            const yValue = ${rightCoord} ? (${rightCoord} + ${y.coord} * (${verticalSpeed} * 2)) : ${y.coord};
             ${cursor}.style.transform = 'translate3d(' + xValue + 'px,' + yValue + 'px, 0)'; 
         }
+    `)
+}
+
+export const clickFromPoint = () => {
+    const cursor = `document.querySelector('#cursor')`;
+    const leftCoord = `window.scrollX + ${cursor}.getBoundingClientRect().left`;
+    const rightCoord = `window.scrollY + ${cursor}.getBoundingClientRect().top`;
+    runScript(`
+        document.elementFromPoint(
+            ${leftCoord},
+            ${rightCoord}
+        ).click();
     `)
 }

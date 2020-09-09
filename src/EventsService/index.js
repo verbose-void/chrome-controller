@@ -1,32 +1,32 @@
 import { consoleLog } from "../utils/debuggingFuncs"
 import * as browserActions from './browserActions'
+import runScript from "../utils/runScript"
 
-export default () => {
+export default ({ cursor }) => {
     const keysToActions = {
         autoCursorSelect: {
             action: () => consoleLog('autoCursorSelect'),
         },
         click: {
-            action: () => consoleLog('click'),
-            // document.elementFromPoint(x, y).click();
+            action: browserActions.clickFromPoint,
         },
         newTab: {
-            action: () => browserActions.newTab(),
+            action: browserActions.newTab,
         },
         closeTab: {
-            action: () => browserActions.closeTab(),
+            action: browserActions.closeTab,
         },
         historyBack: {
-            action: () => browserActions.historyBack(),
+            action: browserActions.historyBack,
         },
         historyForward: {
-            action: () => browserActions.historyForward(),
+            action: browserActions.historyForward,
         },
         tabLeft: {
-            action: () => browserActions.tabLeft(),
+            action: browserActions.tabLeft,
         },
         tabRight: {
-            action: () => browserActions.tabRight(),
+            action: browserActions.tabRight,
         },
         videoScreenSize: {
             action: () => consoleLog('videoScreenSize'),
