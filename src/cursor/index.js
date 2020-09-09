@@ -11,9 +11,9 @@ const CustomCursor = ({ settings }) => {
 
     const mount = () => {
         runScript(`
-            document.cursor = document.createElement('div');
-            document.cursor.id = "cursor"
-            document.querySelector('body').appendChild(document.cursor)
+            document.querySelector('body').innerHTML =
+                document.querySelector('body').innerHTML +=
+                    '<div id="cursor"></div>'
         `);
         insertCSS(`
             #cursor {

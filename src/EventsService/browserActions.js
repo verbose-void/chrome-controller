@@ -56,13 +56,12 @@ export const tabRight = () => {
 
 // ? x & y shapes: { coord: number, directionActive: boolean }
 export const scroll = (x, y) => {
-    const {top, left} = parseJoyStickSpeed(x, y)
-    const code = `scrollBy({
+    const {top, left} = parseJoyStickSpeed(x, y);
+    runScript(`scrollBy({
         top: ${top},
         left: ${left},
         behavior: 'smooth'
-    })`
-    chrome.tabs.executeScript(null, { code }, handleRuntimeError);
+    })`);
 }
 
 export const moveCursor = (x, y, settings) => {
@@ -73,9 +72,32 @@ export const moveCursor = (x, y, settings) => {
 
     runScript(`
         if (${cursor}) {
-            const xValue = ${leftCoord} ? (${leftCoord} + ${x.coord} * (${horizontalSpeed} * 2)) : ${x.coord};
-            const yValue = ${rightCoord} ? (${rightCoord} + ${y.coord} * (${verticalSpeed} * 2)) : ${y.coord};
-            ${cursor}.style.transform = 'translate3d(' + xValue + 'px,' + yValue + 'px, 0)'; 
+            const xValue = ${leftCoord}
+                ? (
+                    ${leftCoord} +
+                    ${x.coord} *
+                    (${horizontalSpeed} * 2)
+                )
+                : ${x.coord};
+            const yValue = ${rightCoord}
+                ? (
+                    ${rightCoord} +
+                    ${y.coord} *
+                    (${verticalSpeed} * 2)
+                )
+                : ${y.coord};
+
+            ${cursor}.style.transform = 'translate3d(' +
+                xValue +
+                'px,' +
+                (yValue < window.pageYOffset
+                    ? window.pageYOffset
+                    : yValue > (window.pageYOffset + window.innerHeight)
+                        ? (window.pageYOffset + window.innerHeight)
+                        : yValue
+                ) +
+                'px, 0)'; 
+            
         }
     `)
 }
