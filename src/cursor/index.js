@@ -11,9 +11,11 @@ const CustomCursor = ({ settings }) => {
 
     const mount = () => {
         runScript(`
-            document.querySelector('body').innerHTML =
-                document.querySelector('body').innerHTML +=
-                    '<div id="cursor"></div>'
+            if (!document.querySelector('#cursor')) {
+                document.querySelector('body').innerHTML =
+                    document.querySelector('body').innerHTML +=
+                        '<div id="cursor"></div>'
+            }
         `);
         insertCSS(`
             #cursor {
@@ -25,7 +27,7 @@ const CustomCursor = ({ settings }) => {
                 background-color: ${color};
                 height: ${radius * 2}px;
                 width: ${radius * 2}px;
-                transition: transform .2s ease-in-out;
+                transition: transform .2s ease-out;
             }
         `);
     };
@@ -34,7 +36,7 @@ const CustomCursor = ({ settings }) => {
         runScript(`
             if (document.querySelector("#cursor")) {
                 delete document.cursor;
-                document.querySelector('body').removeChild(document.querySelector("#cursor"))
+                document.querySelector('body').removeChild(document.querySelector('#cursor'))
             }
         `);
     }

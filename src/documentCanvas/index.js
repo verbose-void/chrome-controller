@@ -5,15 +5,15 @@ export default ({
     gamepadsController,
     cursor
 }) => {
-    window.addEventListener('gamepaddisconnected', (e)=>{
+    window.addEventListener('gamepaddisconnected', (e) => {
         gamepadsController
             .disconnectController(parseUID(e))
-            .then(()=>cursor.dismount())
+            .then(() => cursor.dismount())
     });
-    window.addEventListener('gamepadconnected', (e)=>{
+    window.addEventListener('gamepadconnected', (e) => {
         gamepadsController
             .connectController(parseUID(e))
-            .then(()=>cursor.mount())
+            .then(() => cursor.mount())
     });
 
     let poll;

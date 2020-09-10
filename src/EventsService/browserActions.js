@@ -69,21 +69,21 @@ export const moveCursor = (x, y, settings) => {
     const cursor = `document.querySelector('#cursor')`;
     const leftCoord = `window.scrollX + ${cursor}.getBoundingClientRect().left`;
     const rightCoord = `window.scrollY + ${cursor}.getBoundingClientRect().top`;
-
+    const multiplier = 10;
     runScript(`
         if (${cursor}) {
             const xValue = ${leftCoord}
                 ? (
                     ${leftCoord} +
                     ${x.coord} *
-                    (${horizontalSpeed} * 2)
+                    (${horizontalSpeed} * ${multiplier})
                 )
                 : ${x.coord};
             const yValue = ${rightCoord}
                 ? (
                     ${rightCoord} +
                     ${y.coord} *
-                    (${verticalSpeed} * 2)
+                    (${verticalSpeed} * ${multiplier})
                 )
                 : ${y.coord};
 
@@ -104,8 +104,8 @@ export const moveCursor = (x, y, settings) => {
 
 export const clickFromPoint = () => {
     const cursor = `document.querySelector('#cursor')`;
-    const leftCoord = `window.scrollX + ${cursor}.getBoundingClientRect().left`;
-    const rightCoord = `window.scrollY + ${cursor}.getBoundingClientRect().top`;
+    const leftCoord = `${cursor}.getBoundingClientRect().left`;
+    const rightCoord = `${cursor}.getBoundingClientRect().top`;
     runScript(`
         document.elementFromPoint(
             ${leftCoord},

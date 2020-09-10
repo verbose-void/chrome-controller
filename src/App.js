@@ -14,6 +14,7 @@ import { Settings } from './settings/SettingsManager';
 import { consoleLog } from './utils/debuggingFuncs';
 import APIClient from './APIClient';
 import { getToken } from './APIServices/auth';
+import { useMemo } from 'react';
 
 const runningLocally = false;
 const debugging = true;
@@ -74,22 +75,33 @@ const App = () => {
         }
     })
   }
+
+  const { canvas, cursor } = useMemo(() => {
+    if (appSettings) {
+      const { canvas, cursor } = getAppInstances({settings: appSettings});
+      return {
+        canvas, cursor
+      }
+    }
+
+    return {};
+  }, [appSettings]);
   
   if (!appSettings) return <p>Loading...</p>;
-  const { canvas } = getAppInstances({settings: appSettings});
   if (canvas) canvas.startEventPolling();
+  if (cursor) cursor.refreshCursor();
 
   return (
     <Popup
         currentSettings={appSettings}
         updateSettings={async (_state) => {
-            const newSettings = await settingsManager.updateSettings(userId, {
+            await settingsManager.updateSettings(userId, {
                 ..._state,
                 popup: {
                     modalIsVisible: false
                 }
             });
-            defineSettings(newSettings);
+            defineSettings(_state);
         }}
     />
   );
