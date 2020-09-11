@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { Slider, ColorPicker, SettingSection } from "../GeneralTab";
-import { consoleLog } from "../../utils/debuggingFuncs";
+import { consoleLog } from "../../../utils/debuggingFuncs";
 
 export const CursorSettings = (props) => {
     return (

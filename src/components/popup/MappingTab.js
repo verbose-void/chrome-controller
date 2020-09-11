@@ -1,8 +1,8 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import "../assets/styles/controllers.css";
-import controllers from "../assets/data/controllersList";
-import { consoleLog } from "../utils/debuggingFuncs";
+import "../../assets/styles/controllers.css";
+import controllers from "../../assets/data/controllersList";
+import { consoleLog } from "../../utils/debuggingFuncs";
 
 const Option = (props) => {
     return (

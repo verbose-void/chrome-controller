@@ -9,6 +9,7 @@ const config = {
   devtool: "cheap-module-source-map",
   entry: {
     app: path.join(__dirname, "./src/App.js"),
+    content_scripts: path.join(__dirname, "./src/components/injected_components/index.js")
   },
   output: {
     path: path.resolve(__dirname, "./dist"),
@@ -31,9 +32,9 @@ const config = {
       hash: true
     }),
     new CopyPlugin({
-        patterns: [
-            { from: "./src/assets/img", to: "assets" }
-        ]
+      patterns: [
+        { from: "./src/assets/img", to: "assets" }
+      ]
     }),
     new WebpackExtensionManifestPlugin({
       config: {
@@ -67,3 +68,17 @@ const config = {
   }
 };
 module.exports = config;
+
+
+
+	// "content_scripts": [
+	// 	{
+	// 		"matches": [
+	// 			"http://*/*",
+	// 			"https://*/*"
+	// 		],
+	// 		"js": [
+	// 			"content_scripts.js"
+	// 		]
+	// 	}
+	// ],

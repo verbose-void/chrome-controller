@@ -4,8 +4,8 @@ import { Tab, Tabs } from "react-bootstrap";
 import ConfModal from "./ConfModal";
 import GeneralTab from "./GeneralTab";
 import MappingTab from "./MappingTab";
-import { reducer, initialState } from "../reducers/Reducers";
-import { consoleLog } from "../utils/debuggingFuncs";
+import { reducer, initialState } from "../../reducers/Reducers";
+import { consoleLog } from "../../utils/debuggingFuncs";
 
 const StarDisplay = () => (
     <div id="rating-container">

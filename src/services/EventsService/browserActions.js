@@ -1,7 +1,6 @@
-import { consoleLog } from "../utils/debuggingFuncs"
-import handleRuntimeError from "../utils/handleRuntimeError"
-import { parseJoyStickSpeed } from "../gamepads/joyStickUtils"
-import runScript from "../utils/runScript"
+import handleRuntimeError from "../../utils/handleRuntimeError"
+import { parseJoyStickSpeed } from "../../controllers/gamepads/joyStickUtils"
+import runScript from "../../utils/runScript"
 
 const defaultParams = [
     null,
@@ -25,9 +24,9 @@ export const historyForward = () => {
 }
 
 export const tabLeft = () => {
-    chrome.tabs.query({}, tabs=>{
+    chrome.tabs.query({}, tabs => {
         if (tabs.length === 1) return
-        const activeTab = tabs.findIndex(tab=>tab.active === true)
+        const activeTab = tabs.findIndex(tab => tab.active === true)
 
         let tabToLeftOfActive = (
             activeTab === 0
@@ -35,14 +34,14 @@ export const tabLeft = () => {
                 : activeTab - 1
         )
 
-        chrome.tabs.highlight({tabs: tabToLeftOfActive}, handleRuntimeError)
+        chrome.tabs.highlight({ tabs: tabToLeftOfActive }, handleRuntimeError)
     })
 }
 
 export const tabRight = () => {
-    chrome.tabs.query({}, tabs=>{
+    chrome.tabs.query({}, tabs => {
         if (tabs.length === 1) return
-        const activeTab = tabs.findIndex(tab=>tab.active === true)
+        const activeTab = tabs.findIndex(tab => tab.active === true)
 
         let tabToRightOfActive = (
             activeTab === (tabs.length - 1)
@@ -50,13 +49,13 @@ export const tabRight = () => {
                 : activeTab + 1
         )
 
-        chrome.tabs.highlight({tabs: tabToRightOfActive}, handleRuntimeError)
+        chrome.tabs.highlight({ tabs: tabToRightOfActive }, handleRuntimeError)
     })
 }
 
 // ? x & y shapes: { coord: number, directionActive: boolean }
 export const scroll = (x, y) => {
-    const {top, left} = parseJoyStickSpeed(x, y);
+    const { top, left } = parseJoyStickSpeed(x, y);
     runScript(`scrollBy({
         top: ${top},
         left: ${left},
@@ -65,7 +64,7 @@ export const scroll = (x, y) => {
 }
 
 export const moveCursor = (x, y, settings) => {
-    const {verticalSpeed, horizontalSpeed} = settings.cursor;
+    const { verticalSpeed, horizontalSpeed } = settings.cursor;
     const cursor = `document.querySelector('#cursor')`;
     const leftCoord = `window.scrollX + ${cursor}.getBoundingClientRect().left`;
     const rightCoord = `window.scrollY + ${cursor}.getBoundingClientRect().top`;

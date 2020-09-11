@@ -1,8 +1,6 @@
-import { consoleLog } from "../utils/debuggingFuncs"
-
 const parseJoyStickSpeed = (x, y) => {
     const multiplier = 100
-    const {xCoord, yCoord} = {
+    const { xCoord, yCoord } = {
         xCoord: x.coord,
         yCoord: Math.abs(y.coord) * multiplier
     }

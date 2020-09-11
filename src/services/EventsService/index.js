@@ -1,6 +1,5 @@
-import { consoleLog } from "../utils/debuggingFuncs"
+import { consoleLog } from "../../utils/debuggingFuncs"
 import * as browserActions from './browserActions'
-import runScript from "../utils/runScript"
 
 export default ({ cursor }) => {
     const keysToActions = {

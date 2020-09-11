@@ -1,9 +1,9 @@
-import { consoleLog } from '../utils/debuggingFuncs';
-import sleep from '../utils/sleep';
-import APIClient from '../APIClient';
-import { initialState } from "../reducers/Reducers";
+import { consoleLog } from '../../utils/debuggingFuncs';
+import sleep from '../../utils/sleep';
+import APIClient from '../../APIClient';
+import { initialState } from "../../reducers/Reducers";
 
-export const Settings = ({jwt}) => {
+export const Settings = ({ jwt }) => {
   return {
     updateSettings: async (userId, settings) => {
       const res = await APIClient(
@@ -46,7 +46,6 @@ export const Settings = ({jwt}) => {
           }
         }
       )
-      consoleLog(res)
       return res
     },
   };

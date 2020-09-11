@@ -1,8 +1,6 @@
-import runScript from "../utils/runScript";
-import insertCSS from "../utils/insertCSS";
-import sleep from "../utils/sleep";
-
-const { consoleLog } = require("../utils/debuggingFuncs");
+import runScript from "../../utils/runScript";
+import insertCSS from "../../utils/insertCSS";
+import { consoleLog } from "../../utils/debuggingFuncs";
 
 const CustomCursor = ({ settings }) => {
     const { cursor } = settings.generalTab;
@@ -48,12 +46,17 @@ const CustomCursor = ({ settings }) => {
         }, 0)
     }
 
-    chrome.tabs.onUpdated.addListener((_, changeInfo, __) => {
-        if (changeInfo.status == 'complete') {
-            refreshCursor()
+    chrome.tabs.onUpdated.addListener((tabId, changeInfo, __) => {
+        if (changeInfo.status === 'complete') {
+            chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+                const currTab = tabs[0];
+                if (currTab && currTab.id !== tabId) {
+                    refreshCursor();
+                }
+            });
         }
     });
-    
+
     chrome.tabs.onActivated.addListener(() => {
         refreshCursor();
     });

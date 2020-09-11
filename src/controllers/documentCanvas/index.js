@@ -1,5 +1,4 @@
-import { parseUID } from '../utils/controllerUtils'
-import CustomCursor from '../cursor';
+import { parseUID } from '../../utils/controllerUtils'
 
 export default ({
     gamepadsController,
@@ -18,10 +17,10 @@ export default ({
 
     let poll;
     const props = { pollingFrequency: 100 }
-    
+
     return ({
         startEventPolling: () => {
-            poll = setInterval(()=>{
+            poll = setInterval(() => {
                 for (let i of navigator.getGamepads())
                     if (i) gamepadsController.execEvent(i);
             }, props.pollingFrequency)

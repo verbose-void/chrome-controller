@@ -1,7 +1,3 @@
-import { consoleLog } from "../utils/debuggingFuncs";
-import { axisDefaults } from "../defaultSettings";
-import sleep from "../utils/sleep";
-
 const Gamepads = ({ settings, eventsService, debugging }) => {
     let activeGamepads = {};
     let keyboardIsOpen = false;
@@ -56,18 +52,18 @@ const Gamepads = ({ settings, eventsService, debugging }) => {
             eventsService.interpretEventByKey(
                 isDpad(indexForButtonPressed)
                     ? {
-                          index: indexForButtonPressed,
-                          actionName: { ...buttons }.dPad,
-                      }
+                        index: indexForButtonPressed,
+                        actionName: { ...buttons }.dPad,
+                    }
                     : {
-                          index: indexForButtonPressed,
-                          actionName: keyboardIsOpen
-                              ? keyboard[indexForButtonPressed]
-                              : {
-                                    ...buttons,
-                                    ...triggers,
-                                }[indexForButtonPressed],
-                      }
+                        index: indexForButtonPressed,
+                        actionName: keyboardIsOpen
+                            ? keyboard[indexForButtonPressed]
+                            : {
+                                ...buttons,
+                                ...triggers,
+                            }[indexForButtonPressed],
+                    }
             );
         },
         disconnectController: async (controllerId) => {
