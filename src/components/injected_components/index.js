@@ -31,7 +31,7 @@ const InjectedApp = () => {
             })
         }
     }, [toggleKeyboardIsOpen])
-
+    console.log('hello world')
     return (
         <React.Fragment>
             {keyboardIsOpen && (
