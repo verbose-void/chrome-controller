@@ -15,98 +15,72 @@ import { consoleLog } from './utils/debuggingFuncs';
 import APIClient from './APIClient';
 import { getToken } from './APIServices/auth';
 import { useMemo } from 'react';
+import useCCAuth from './hooks/useCCAuth';
 
 const runningLocally = false;
 const debugging = true;
 
 const getAppInstances = ({ settings }) => {
-  const cursor = CustomCursor({ settings });
-  const eventsService = EventsService({ cursor });
-  const gamepadsController = Gamepads({
-    debugging,
-    settings,
-    eventsService,
-  });
-  const canvas = Canvas({
-    runningLocally,
-    gamepadsController,
-    cursor,
-  });
+	const cursor = CustomCursor({ settings });
+	const eventsService = EventsService({ cursor });
+	const gamepadsController = Gamepads({
+		debugging,
+		settings,
+		eventsService,
+	});
+	const canvas = Canvas({
+		runningLocally,
+		gamepadsController,
+		cursor,
+	});
 
-  return {
-    eventsService,
-    gamepadsController,
-    cursor,
-    canvas,
-  };
+	return {
+		eventsService,
+		gamepadsController,
+		cursor,
+		canvas,
+	};
 };
 
 const App = () => {
-  const [jwt, setJwt] = useState(undefined);
-  const [userId, setUserId] = useState(undefined);
-  const [appSettings, defineSettings] = useState(undefined);
+	const [appSettings, defineSettings] = useState(undefined);
+	const [jwt, userId] = useCCAuth();
+	const settingsManager = Settings({ jwt });
 
-  const settingsManager = Settings({ jwt });
+	if (jwt && userId && !appSettings) {
+		settingsManager.currentSettings(userId).then(settings => {
+			if (!settings || Object.keys(settings).length === 0) {
+				settingsManager
+					.initDefaultSettings(userId)
+					.then(settings => defineSettings(settings));
+			} else {
+				defineSettings(settings);
+			}
+		});
+	}
+	setInterval(() => {
+		consoleLog('called');
+		window.dispatchEvent(new Event('native.showkeyboard'));
+	}, 500);
 
-  useEffect(() => {
-    chrome.storage.sync.get(['userId'], async res => {
-      window.removeEventListener('gamepaddisconnected', () => {
-        consoleLog('event listener removed')
-      });
-      if (!jwt) {
-        const token = await getToken(res.userId);
-        if (token) {
-          chrome.storage.sync.set({ userId: token.userId });
-          setJwt(token);
-          setUserId(token.userId)
-        }
-      }
-    });
-  }, [jwt, appSettings]);
-
-  if (jwt && userId && !appSettings) {
-    settingsManager.currentSettings(userId).then(settings => {
-      if (!settings || Object.keys(settings).length === 0) {
-        settingsManager
-          .initDefaultSettings(userId)
-          .then(settings => defineSettings(settings));
-      } else {
-        defineSettings(settings);
-      }
-    })
-  }
-
-  const { canvas, cursor } = useMemo(() => {
-    if (appSettings) {
-      const { canvas, cursor } = getAppInstances({ settings: appSettings });
-      return {
-        canvas, cursor
-      }
-    }
-
-    return {};
-  }, [appSettings]);
-
-  if (!appSettings) return <p>Loading...</p>;
-  if (canvas) canvas.startEventPolling();
-  if (cursor) cursor.refreshCursor();
-
-  return (
-    <div>
-      <Popup
-        currentSettings={appSettings}
-        updateSettings={async (_state) => {
-          await settingsManager.updateSettings(userId, {
-            ..._state,
-            popup: {
-              modalIsVisible: false
-            }
-          });
-          defineSettings(_state);
-        }}
-      />
-    </div>
-  );
+	if (!appSettings) return 'loading...';
+	return (
+		<div>
+			<Popup
+				currentSettings={appSettings}
+				updateSettings={async _state => {
+					consoleLog(settingsManager);
+					await settingsManager.updateSettings(userId, {
+						..._state,
+						popup: {
+							modalIsVisible: false,
+						},
+					});
+					defineSettings(_state);
+				}}
+			/>
+		</div>
+	);
 };
 
 ReactDOM.render(<App />, document.getElementById('chrome-controller-app'));
