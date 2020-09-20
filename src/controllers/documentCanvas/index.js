@@ -1,33 +1,28 @@
-import { parseUID } from '../../utils/controllerUtils'
+import { parseUID } from '../../utils/controllerUtils';
 
-export default ({
-    gamepadsController,
-    cursor
-}) => {
-    window.addEventListener('gamepaddisconnected', (e) => {
-        gamepadsController
-            .disconnectController(parseUID(e))
-            .then(() => cursor.dismount())
-    });
-    window.addEventListener('gamepadconnected', (e) => {
-        gamepadsController
-            .connectController(parseUID(e))
-            .then(() => cursor.mount())
-    });
+export default ({ gamepadsController }) => {
+	window.addEventListener('gamepaddisconnected', e => {
+		gamepadsController.disconnectController(parseUID(e));
+		// .then(() => cursor.dismount())
+	});
+	window.addEventListener('gamepadconnected', e => {
+		gamepadsController.connectController(parseUID(e));
+		// .then(() => cursor.mount())
+	});
 
-    let poll;
-    const props = { pollingFrequency: 100 }
+	let poll;
+	const props = { pollingFrequency: 100 };
 
-    return ({
-        startEventPolling: () => {
-            poll = setInterval(() => {
-                for (let i of navigator.getGamepads())
-                    if (i) gamepadsController.execEvent(i);
-            }, props.pollingFrequency)
-        },
-        stopEventPolling: () => {
-            window.removeEventListener('gamepaddisconnected');
-            clearInterval(poll);
-        }
-    })
-}
+	return {
+		startEventPolling: () => {
+			poll = setInterval(() => {
+				for (let i of navigator.getGamepads())
+					if (i) gamepadsController.execEvent(i);
+			}, props.pollingFrequency);
+		},
+		stopEventPolling: () => {
+			window.removeEventListener('gamepaddisconnected');
+			clearInterval(poll);
+		},
+	};
+};

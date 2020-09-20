@@ -17,11 +17,10 @@ import { getToken } from './APIServices/auth';
 import { useMemo } from 'react';
 import useCCAuth from './hooks/useCCAuth';
 
-const runningLocally = false;
 const debugging = true;
+const runningLocally = true;
 
 const getAppInstances = ({ settings }) => {
-	const cursor = CustomCursor({ settings });
 	const eventsService = EventsService({ cursor });
 	const gamepadsController = Gamepads({
 		debugging,
@@ -58,18 +57,27 @@ const App = () => {
 			}
 		});
 	}
-	setInterval(() => {
-		consoleLog('called');
-		window.dispatchEvent(new Event('native.showkeyboard'));
-	}, 500);
+
+	const { canvas } = useMemo(() => {
+		if (appSettings) {
+			const { canvas, cursor } = getAppInstances({ settings: appSettings });
+			return {
+				canvas,
+				cursor,
+			};
+		}
+		return {};
+	}, [appSettings]);
 
 	if (!appSettings) return 'loading...';
+	chrome.storage.local.set({ settings: appSettings });
+	// if (canvas) canvas.startEventPolling();
+
 	return (
 		<div>
 			<Popup
 				currentSettings={appSettings}
 				updateSettings={async _state => {
-					consoleLog(settingsManager);
 					await settingsManager.updateSettings(userId, {
 						..._state,
 						popup: {
