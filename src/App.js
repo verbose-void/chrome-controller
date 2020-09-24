@@ -32,15 +32,14 @@ const App = () => {
 
 	chrome.storage.local.set({ settings: appSettings });
 	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-		// todo fix me
-		queueRef.current = uniqBy([...queueRef.current, request.type]);
-		try {
-			injectionInterface(request.type).exec();
-			queueRef.current = queueRef.current.filter(x => x !== request.type);
-			sendResponse({ success: true });
-		} catch (e) {
-			sendResponse({ success: false });
-			consoleLog(e);
+		if (sender.tab.active) {
+			try {
+				injectionInterface(request.type).exec();
+				sendResponse({ success: true });
+			} catch (e) {
+				sendResponse({ success: false });
+				consoleLog(e);
+			}
 		}
 	});
 
