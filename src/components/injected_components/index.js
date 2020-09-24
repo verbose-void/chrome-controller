@@ -1,86 +1,52 @@
 import ReactDOM from 'react-dom';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Keyboard from './keyboard';
 import Cursor from './cursor';
-import Gamepads from '../../controllers/gamepads/Gamepads';
+import { Gamepads } from '../../controllers';
 import EventsService from '../../services/EventsService';
-import Canvas from '../../controllers/documentCanvas';
+import useKeyboardState from '../../hooks/useKeyboardState';
+import useChromeSettings from '../../hooks/useChromeSettings';
+import useGamepadsInitializer from '../../hooks/useGamepadsInitializer';
 
-const initSettings = (appSettings, defineSettings) => {
-	chrome.storage.local.get('settings', settings => {
-		if (!appSettings && settings && settings.settings) {
-			defineSettings(settings.settings);
-		}
-	});
-};
+const InjectedApp = () => {
+	const [appSettings, defineSettings] = useChromeSettings();
+	const [keyboardIsOpen, toggleKeyboardIsOpen] = useKeyboardState();
+	const [cursorIsMounted, mountCursor] = useState(false);
 
-const getAppInstances = ({ settings }) => {
-	console.log(settings);
 	const eventsService = EventsService();
 	const gamepadsController = Gamepads({
 		debugging: true,
-		settings,
+		settings: appSettings,
 		eventsService,
 	});
-	const canvas = Canvas({
-		gamepadsController,
-	});
+	useGamepadsInitializer(gamepadsController, mountCursor);
 
-	return {
-		eventsService,
-		gamepadsController,
-		canvas,
-	};
-};
+	const poll = useMemo(() => {
+		if (appSettings) {
+			const pollingFrequency = 100;
+			return setInterval(() => {
+				for (let i of navigator.getGamepads())
+					if (i) gamepadsController.execEvent(i);
+			}, pollingFrequency);
+		}
+	}, [cursorIsMounted]);
 
-const InjectedApp = () => {
-	const [keyboardIsOpen, toggleKeyboardIsOpen] = useState(false);
-	const [appSettings, defineSettings] = useState(undefined);
-	initSettings(appSettings, defineSettings);
-
-	useEffect(() => {
-		const elsToListenTo = ['textarea', 'input'];
-		elsToListenTo.forEach(el => {
-			document.querySelectorAll(el).forEach(element => {
-				// element.classList.add('daisywheel');
-				element.addEventListener('focus', e => {
-					toggleKeyboardIsOpen(true);
-				});
-				element.addEventListener('blur', e => {
-					toggleKeyboardIsOpen(false);
-				});
-			});
-		});
-
-		return () => {
-			elsToListenTo.forEach(el => {
-				element.classList.add('remove');
-				document.querySelectorAll(el).forEach(element => {
-					element.removeEventListener('focus', e => {
-						toggleKeyboardIsOpen(true);
-					});
-					element.removeEventListener('blur', e => {
-						toggleKeyboardIsOpen(false);
-					});
-				});
-			});
-		};
-	}, [toggleKeyboardIsOpen]);
+	if (!cursorIsMounted) {
+		clearInterval(poll);
+	}
 
 	if (!appSettings) return <></>;
-
-	// const { canvas } = getAppInstances({ settings: appSettings });
-	// if (canvas) canvas.startEventPolling();
-
 	return (
 		<React.Fragment>
 			{keyboardIsOpen && (
 				<Keyboard color={appSettings.generalTab.cursor.color} />
 			)}
-			<Cursor
-				color={appSettings.generalTab.cursor.color}
-				radius={appSettings.generalTab.cursor.radius}
-			/>
+			{cursorIsMounted && (
+				<Cursor
+					color={appSettings.generalTab.cursor.color}
+					radius={appSettings.generalTab.cursor.radius}
+				/>
+			)}
 		</React.Fragment>
 	);
 };

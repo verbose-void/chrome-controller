@@ -2,48 +2,18 @@ import 'jquery/dist/jquery.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/styles/style.css';
 import ReactDOM from 'react-dom';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import Popup from './components/popup/Popup';
-
-import Gamepads from './controllers/gamepads/Gamepads';
-import EventsService from './services/EventsService';
-import CustomCursor from './controllers/cursor';
-import Canvas from './controllers/documentCanvas';
-
 import { Settings } from './services/settings/SettingsManager';
 import { consoleLog } from './utils/debuggingFuncs';
-import APIClient from './APIClient';
-import { getToken } from './APIServices/auth';
-import { useMemo } from 'react';
 import useCCAuth from './hooks/useCCAuth';
-
-const debugging = true;
-const runningLocally = true;
-
-const getAppInstances = ({ settings }) => {
-	const eventsService = EventsService({ cursor });
-	const gamepadsController = Gamepads({
-		debugging,
-		settings,
-		eventsService,
-	});
-	const canvas = Canvas({
-		runningLocally,
-		gamepadsController,
-		cursor,
-	});
-
-	return {
-		eventsService,
-		gamepadsController,
-		cursor,
-		canvas,
-	};
-};
+import { injectionInterface } from './controllers';
+import uniqBy from 'lodash/uniqBy';
 
 const App = () => {
 	const [appSettings, defineSettings] = useState(undefined);
 	const [jwt, userId] = useCCAuth();
+	const queueRef = useRef([]);
 	const settingsManager = Settings({ jwt });
 
 	if (jwt && userId && !appSettings) {
@@ -58,20 +28,21 @@ const App = () => {
 		});
 	}
 
-	const { canvas } = useMemo(() => {
-		if (appSettings) {
-			const { canvas, cursor } = getAppInstances({ settings: appSettings });
-			return {
-				canvas,
-				cursor,
-			};
-		}
-		return {};
-	}, [appSettings]);
-
 	if (!appSettings) return 'loading...';
+
 	chrome.storage.local.set({ settings: appSettings });
-	// if (canvas) canvas.startEventPolling();
+	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+		// todo fix me
+		queueRef.current = uniqBy([...queueRef.current, request.type]);
+		try {
+			injectionInterface(request.type).exec();
+			queueRef.current = queueRef.current.filter(x => x !== request.type);
+			sendResponse({ success: true });
+		} catch (e) {
+			sendResponse({ success: false });
+			consoleLog(e);
+		}
+	});
 
 	return (
 		<div>

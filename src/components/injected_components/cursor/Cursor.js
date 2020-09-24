@@ -14,7 +14,7 @@ const CursorContainer = styled.div`
 `;
 
 const Cursor = ({ color, radius }) => {
-	return <CursorContainer color={color} radius={radius} />;
+	return <CursorContainer id='cursor' color={color} radius={radius} />;
 };
 
 export default Cursor;
