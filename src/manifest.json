@@ -4,30 +4,20 @@
 	"short_name": "ChromeCtrler",
 	"description": "Chrome Controller allows you to bring the relaxation of the console environment straight to your Mac/PC using your controller.",
 	"version": "0.8.7.8",
-	"permissions": [
-		"tabs",
-		"storage",
-		"https://*/*",
-		"http://*/*"
-	],
+	"permissions": ["tabs", "storage", "*://*/*"],
 	"browser_action": {
 		"default_popup": "index.html",
 		"default_title": "Chrome Controller"
 	},
 	"content_scripts": [
 		{
-			"matches": [
-				"http://*/*",
-				"https://*/*"
-			],
-			"js": [
-				"content_scripts.js"
-			]
+			"matches": ["<all_urls>"],
+			"js": ["content_scripts.js"]
 		}
 	],
 	"background": {
 		"page": "index.html",
-		"persistent": false
+		"persistent": true
 	},
 	"icons": {
 		"128": "assets/cc-128.png"
