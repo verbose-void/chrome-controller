@@ -18,7 +18,7 @@ port.onMessage.addListener(msg => {
 
 const InjectedApp = () => {
 	const [appSettings, defineSettings] = useChromeSettings();
-	const [keyboardIsOpen] = useKeyboardState();
+	const keyboardState = useKeyboardState();
 	const [cursorIsMounted, mountCursor] = useState(false);
 
 	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -56,8 +56,8 @@ const InjectedApp = () => {
 	if (!appSettings) return <></>;
 	return (
 		<React.Fragment>
-			{keyboardIsOpen && (
-				<Keyboard color={appSettings.generalTab.cursor.color} />
+			{keyboardState.keyboardIsOpen && (
+				<Keyboard keyboardState={keyboardState} />
 			)}
 			{cursorIsMounted && (
 				<Cursor
