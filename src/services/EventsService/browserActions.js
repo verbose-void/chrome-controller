@@ -1,3 +1,4 @@
+import { port } from '../../components/injected_components';
 import { parseJoyStickSpeed } from '../../controllers/gamepads/joyStickUtils';
 
 export const newTab = () => {
@@ -17,15 +18,11 @@ export const historyForward = () => {
 };
 
 export const tabLeft = () => {
-	chrome.runtime.sendMessage({ type: 'TAB_LEFT' }, response => {
-		if (response.success) return;
-	});
+	port.postMessage({ type: 'TAB_LEFT', action: true });
 };
 
 export const tabRight = () => {
-	chrome.runtime.sendMessage({ type: 'TAB_RIGHT' }, response => {
-		if (response.success) return;
-	});
+	port.postMessage({ type: 'TAB_RIGHT', action: true });
 };
 
 // ? x & y shapes: { coord: number, directionActive: boolean }
@@ -51,6 +48,7 @@ export const moveCursor = (x, y, settings) => {
 		const yValue = rightCoord
 			? rightCoord + y.coord * (verticalSpeed * multiplier)
 			: y.coord;
+
 		cursor.style.transform = `translate3d(${xValue}px, ${
 			yValue < window.pageYOffset
 				? window.pageYOffset

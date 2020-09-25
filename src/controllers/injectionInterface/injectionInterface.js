@@ -3,20 +3,19 @@ import handleRuntimeError from '../../utils/handleRuntimeError';
 
 const injectionInterface = type => {
 	return {
-		exec: () => {
+		exec: async () => {
 			switch (type) {
 				case 'TAB_LEFT':
 					chrome.tabs.query({}, tabs => {
 						if (tabs.length === 1) return;
 						const activeTab = tabs.findIndex(tab => tab.active === true);
-						const tabIndexToLeftOfActive =
+						const tabToLeftOfActive =
 							activeTab === 0 ? tabs.length - 1 : activeTab - 1;
-						const tabIdToLeftOfActive = tabs[tabIndexToLeftOfActive].id;
-						chrome.tabs.update(
-							tabIdToLeftOfActive,
-							{ active: true, selected: true },
-							handleRuntimeError
-						);
+
+						chrome.tabs.highlight({
+							tabs: tabToLeftOfActive,
+						});
+						return true;
 					});
 					break;
 				case 'TAB_RIGHT':

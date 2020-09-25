@@ -8,10 +8,28 @@ import useKeyboardState from '../../hooks/useKeyboardState';
 import useChromeSettings from '../../hooks/useChromeSettings';
 import useGamepadsInitializer from '../../hooks/useGamepadsInitializer';
 
+export const port = chrome.runtime.connect({
+	name: 'chrome-controller-injection',
+});
+
+port.onMessage.addListener(msg => {
+	// console.log(msg.success === true);
+});
+
 const InjectedApp = () => {
 	const [appSettings, defineSettings] = useChromeSettings();
-	const [keyboardIsOpen, toggleKeyboardIsOpen] = useKeyboardState();
+	const [keyboardIsOpen] = useKeyboardState();
 	const [cursorIsMounted, mountCursor] = useState(false);
+
+	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+		if (request.type === 'SETTINGS_UPDATED') {
+			chrome.storage.local.get('settings', settings => {
+				if (!appSettings && settings && settings.settings) {
+					defineSettings(settings.settings);
+				}
+			});
+		}
+	});
 
 	const eventsService = EventsService();
 	const gamepadsController = Gamepads({

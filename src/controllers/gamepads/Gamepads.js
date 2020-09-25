@@ -2,7 +2,6 @@ const Gamepads = ({ settings, eventsService, debugging }) => {
 	let activeGamepads = {};
 	let keyboardIsOpen = false;
 	let joyStickMarginOfError = 0.09;
-	const triggerMarginOfError = 0.8;
 
 	const isDpad = key => [12, 13, 14, 15].includes(key);
 	const isTrigger = key => ({
@@ -19,6 +18,8 @@ const Gamepads = ({ settings, eventsService, debugging }) => {
 		coord,
 		directionActive: Math.abs(coord) > joyStickMarginOfError,
 	});
+
+	const queue = [];
 
 	return {
 		get activeGamepads() {
