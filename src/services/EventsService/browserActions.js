@@ -2,7 +2,7 @@ import { port } from '../../components/injected_components';
 import { parseJoyStickSpeed } from '../../controllers/gamepads/joyStickUtils';
 
 export const newTab = () => {
-	window.open();
+	window.open('https://google.com');
 };
 
 export const closeTab = () => {

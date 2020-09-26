@@ -4,7 +4,6 @@ import Keyboard from './keyboard';
 import Cursor from './cursor';
 import { Gamepads } from '../../controllers';
 import EventsService from '../../services/EventsService';
-import useKeyboardState from '../../hooks/useKeyboardState';
 import useChromeSettings from '../../hooks/useChromeSettings';
 import useGamepadsInitializer from '../../hooks/useGamepadsInitializer';
 
@@ -18,7 +17,6 @@ port.onMessage.addListener(msg => {
 
 const InjectedApp = () => {
 	const [appSettings, defineSettings] = useChromeSettings();
-	const keyboardState = useKeyboardState();
 	const [cursorIsMounted, mountCursor] = useState(false);
 
 	chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
@@ -41,7 +39,7 @@ const InjectedApp = () => {
 
 	const poll = useMemo(() => {
 		if (appSettings) {
-			const pollingFrequency = 100;
+			const pollingFrequency = 75;
 			return setInterval(() => {
 				for (let i of navigator.getGamepads())
 					if (i) gamepadsController.execEvent(i);
@@ -56,14 +54,14 @@ const InjectedApp = () => {
 	if (!appSettings) return <></>;
 	return (
 		<React.Fragment>
-			{keyboardState.keyboardIsOpen && (
-				<Keyboard keyboardState={keyboardState} />
-			)}
 			{cursorIsMounted && (
-				<Cursor
-					color={appSettings.generalTab.cursor.color}
-					radius={appSettings.generalTab.cursor.radius}
-				/>
+				<React.Fragment>
+					<Cursor
+						color={appSettings.generalTab.cursor.color}
+						radius={appSettings.generalTab.cursor.radius}
+					/>
+					<Keyboard />
+				</React.Fragment>
 			)}
 		</React.Fragment>
 	);

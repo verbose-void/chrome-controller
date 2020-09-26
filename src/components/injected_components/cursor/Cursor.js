@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const CursorContainer = styled.div`
 	position: absolute;
-	z-index: 10000;
+	z-index: 100000001;
 	top: 0;
 	left: 0;
 	border-radius: 50%;

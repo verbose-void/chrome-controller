@@ -1,7 +1,10 @@
+import throttle from 'lodash/throttle';
+
 const Gamepads = ({ settings, eventsService, debugging }) => {
 	let activeGamepads = {};
 	let keyboardIsOpen = false;
 	let joyStickMarginOfError = 0.09;
+	const triggerMarginOfError = 0.9;
 
 	const isDpad = key => [12, 13, 14, 15].includes(key);
 	const isTrigger = key => ({
@@ -57,22 +60,31 @@ const Gamepads = ({ settings, eventsService, debugging }) => {
 				return;
 			}
 
-			eventsService.interpretEventByKey(
-				isDpad(indexForButtonPressed)
-					? {
-							index: indexForButtonPressed,
-							actionName: { ...buttons }.dPad,
-					  }
-					: {
-							index: indexForButtonPressed,
-							actionName: keyboardIsOpen
-								? keyboard[indexForButtonPressed]
-								: {
-										...buttons,
-										...triggers,
-								  }[indexForButtonPressed],
-					  }
+			const exec = throttle(
+				() =>
+					eventsService.interpretEventByKey(
+						isDpad(indexForButtonPressed)
+							? {
+									index: indexForButtonPressed,
+									actionName: { ...buttons }.dPad,
+							  }
+							: {
+									index: indexForButtonPressed,
+									actionName: keyboardIsOpen
+										? keyboard[indexForButtonPressed]
+										: {
+												...buttons,
+												...triggers,
+										  }[indexForButtonPressed],
+							  }
+					),
+				1000,
+				{
+					trailing: false,
+				}
 			);
+
+			exec();
 		},
 		disconnectController: async controllerId => {
 			const { [controllerId]: value, ...allOtherControllers } = activeGamepads;

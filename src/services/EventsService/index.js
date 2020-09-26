@@ -1,4 +1,5 @@
 import { consoleLog } from '../../utils/debuggingFuncs';
+import sleep from '../../utils/sleep';
 import * as browserActions from './browserActions';
 
 export default () => {
@@ -92,7 +93,7 @@ export default () => {
 				}
 			}
 		},
-		interpretEventByKey: ({ actionName, index }) => {
+		interpretEventByKey: async ({ actionName, index }) => {
 			if (!keysToActions[actionName]) return;
 			keysToActions[actionName].action();
 		},
